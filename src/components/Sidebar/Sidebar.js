@@ -4,7 +4,7 @@ import { SidebarData } from "./SidebarData";
 import SubMenu from "./SubNav";
 
 const SidebarNav = styled.nav`
-  background-color: whitesmoke;
+  background-color: #f8f9fa!important;
   width: 225px;
   height: 100vh;
   display: flex;
@@ -21,7 +21,7 @@ const SidebarWrap = styled.div`
 `;
 
 const Sidebar = () => {
-  const [sidebar, setSidebar] = useState(false);
+  const [sidebar, setSidebar] = useState(true);
   const showSidebar = () => setSidebar(!sidebar);
 
   return (

@@ -1,6 +1,6 @@
 
 const defaultState = {
-    appName: 'Fabric Management',
+    appName: 'Quản lí vải nhuộm',
     token: null,
 };
 
