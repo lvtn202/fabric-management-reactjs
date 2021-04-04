@@ -1,9 +1,10 @@
 import superagentPromise from 'superagent-promise';
 import _superagent from 'superagent';
+import axios from 'axios';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
-const API_ROOT = 'https://conduit.productionready.io/api';
+const API_ROOT = 'http://localhost:3000';
 
 const responseBody = res => res.body;
 
@@ -33,8 +34,14 @@ const Auth = {
   register: (username, email, password) =>
     requests.post('/users', { user: { username, email, password } })
 };
+
+const DyePlant = {
+  list: () => requests.get('/dyePlant')
+}
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   Auth,
+  DyePlant,
   setToken: _token => { token = _token; }
 };

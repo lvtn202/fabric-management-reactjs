@@ -6,7 +6,8 @@ import { connect } from 'react-redux';
 import {
   UPDATE_FIELD_AUTH,
   LOGIN,
-  LOGIN_PAGE_UNLOADED
+  LOGIN_PAGE_UNLOADED,
+  OPEN_SIDEBAR,
 } from '../constants/actionTypes';
 
 const mapStateToProps = state => ({ ...state.auth });
@@ -19,7 +20,8 @@ const mapDispatchToProps = dispatch => ({
   onSubmit: (email, password) =>
     dispatch({ type: LOGIN, payload: agent.Auth.login(email, password) }),
   onUnload: () =>
-    dispatch({ type: LOGIN_PAGE_UNLOADED })
+    dispatch({ type: LOGIN_PAGE_UNLOADED }),
+  onOpenSidebar: () => dispatch({ type: OPEN_SIDEBAR }),
 });
 
 class Login extends React.Component {
@@ -29,7 +31,10 @@ class Login extends React.Component {
     this.changePassword = ev => this.props.onChangePassword(ev.target.value);
     this.submitForm = (email, password) => ev => {
       ev.preventDefault();
-      this.props.onSubmit(email, password);
+      // this.props.onSubmit(email, password);
+      var {history} = this.props;
+      this.props.onOpenSidebar();
+      history.push("/dye-plant");
     };
   }
 
@@ -47,11 +52,6 @@ class Login extends React.Component {
 
             <div className="col-md-6 offset-md-3 col-xs-12">
               <h1 className="text-xs-center">Sign In</h1>
-              <p className="text-xs-center">
-                <Link to="/register">
-                  Need an account?
-                </Link>
-              </p>
 
               <ListErrors errors={this.props.errors} />
 

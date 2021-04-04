@@ -9,9 +9,12 @@ const mapDispatchToProps = dispatch => ({
 });
 
 class Home extends React.Component {
+
   render() {
+    var {history} = this.props;
+    history.push("/login");
     return (
-      <div className="dye-plant">
+      <div>
         <h1>HOME</h1>
       </div>
     );

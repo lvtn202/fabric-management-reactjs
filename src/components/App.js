@@ -1,19 +1,11 @@
 import "./App.css";
-import Header from "./Header";
-import Login from "./Login";
-import DyePlant from "./DyePlant";
-import Order from "./Order";
-import Home from "./Home";
-import Register from "./Register";
-import NotFound from "./NotFound";
 import React from "react";
 import { Link, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import Sidebar from "./Sidebar/Sidebar";
 import Navbar from "react-bootstrap/Navbar";
-import {
-  TOGGLE_SIDEBAR,
-} from "../constants/actionTypes";
+import { CLOSE_SIDEBAR } from "../constants/actionTypes";
+import routes from "../routes";
 
 class App extends React.Component {
   render() {
@@ -24,29 +16,40 @@ class App extends React.Component {
           <Navbar bg="light">
             <Navbar.Brand>Quản lí vải nhuộm</Navbar.Brand>
             <Navbar.Toggle />
-            <Navbar.Collapse className="justify-content-end">             
-              <Navbar.Text className="mr-sm-5">Xin chào: Trung Tinh</Navbar.Text>
+            <Navbar.Collapse className="justify-content-end">
+              <Navbar.Text className="mr-sm-5">
+                Xin chào: Trung Tinh
+              </Navbar.Text>
               <Navbar.Text>
-                <Link to="/login" onClick={this.props.onToggleSidebar}>Đăng xuất</Link>
+                <Link to="/login" onClick={this.props.onCloseSidebar}>
+                  Đăng xuất
+                </Link>
               </Navbar.Text>
             </Navbar.Collapse>
           </Navbar>
         </div>
         {sideBar}
-        <div className="main-container">
-          <Switch>
-            <Route path="/" exact component={Home} />
-            <Route path="/register" component={Register} />
-            <Route path="/dye-plant" component={DyePlant} />
-            <Route path="/order" component={Order} />
-            <Route path="/login" component={Login} />
-            {/* <Route path="/payment" component={Login} /> */}
-            <Route component={NotFound} />
-          </Switch>
-        </div>
+        <div className="main-container">{this.configRouter(routes)}</div>
       </div>
     );
   }
+
+  configRouter = (routes) => {
+    var result = null;
+    if (routes.length > 0) {
+      result = routes.map((route, index) => {
+        return (
+          <Route
+            key={index}
+            path={route.path}
+            exact={route.exact}
+            component={route.main}
+          />
+        );
+      });
+    }
+    return <Switch>{result}</Switch>;
+  };
 }
 
 const mapStateToProps = (state) => ({
@@ -55,8 +58,8 @@ const mapStateToProps = (state) => ({
   isDisplaySideBar: state.sidebar,
 });
 
-const mapDispatchToProps = dispatch => ({
-  onToggleSidebar: () => dispatch({ type: TOGGLE_SIDEBAR })
+const mapDispatchToProps = (dispatch) => ({
+  onCloseSidebar: () => dispatch({ type: CLOSE_SIDEBAR }),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
