@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import ListErrors from './ListErrors';
 import React from 'react';
 import agent from '../agent';
@@ -8,6 +7,7 @@ import {
   LOGIN,
   LOGIN_PAGE_UNLOADED,
   OPEN_SIDEBAR,
+  CLOSE_SIDEBAR,
 } from '../constants/actionTypes';
 
 const mapStateToProps = state => ({ ...state.auth });
@@ -22,6 +22,7 @@ const mapDispatchToProps = dispatch => ({
   onUnload: () =>
     dispatch({ type: LOGIN_PAGE_UNLOADED }),
   onOpenSidebar: () => dispatch({ type: OPEN_SIDEBAR }),
+  onCloseSidebar: () => dispatch({ type: CLOSE_SIDEBAR }),
 });
 
 class Login extends React.Component {
@@ -43,6 +44,7 @@ class Login extends React.Component {
   }
 
   render() {
+    this.props.onCloseSidebar();
     const email = this.props.email;
     const password = this.props.password;
     return (

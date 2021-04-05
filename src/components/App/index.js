@@ -2,16 +2,18 @@ import "./App.css";
 import React from "react";
 import { Link, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import Sidebar from "./Sidebar/Sidebar";
+import Sidebar from "../Sidebar/Sidebar";
 import Navbar from "react-bootstrap/Navbar";
-import { CLOSE_SIDEBAR } from "../constants/actionTypes";
-import routes from "../routes";
+import { CLOSE_SIDEBAR } from "../../constants/actionTypes";
+import routes from "../../routes";
+import { ThemeProvider } from '@material-ui/styles';
+import theme from "./../theme";
 
 class App extends React.Component {
   render() {
     var sideBar = this.props.isDisplaySideBar === true ? <Sidebar /> : "";
     return (
-      <div>
+      <ThemeProvider theme={theme}>
         <div className="header" fixed="top">
           <Navbar bg="light">
             <Navbar.Brand>Quản lí vải nhuộm</Navbar.Brand>
@@ -29,8 +31,8 @@ class App extends React.Component {
           </Navbar>
         </div>
         {sideBar}
-        <div className="main-container">{this.configRouter(routes)}</div>
-      </div>
+        <div className={`main-container-${this.props.isDisplaySideBar ? 'sidebar' : ''}`}>{this.configRouter(routes)}</div>
+      </ThemeProvider>
     );
   }
 
