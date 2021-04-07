@@ -2,6 +2,7 @@ import React from "react";
 import Home from "./pages/Home";
 import Login from "./components/Login";
 import DyePlant from "./pages/DyePlant";
+import DyePlantDetail from "./pages/DyePlantDetail";
 import Order from "./pages/Order";
 import NotFound from "./pages/NotFound";
 
@@ -18,8 +19,13 @@ const routes = [
   },
   {
     path: "/dye-plant",
+    exact: true,
+    main: ({ history }) => <DyePlant history={history} />,
+  },
+  {
+    path: "/dye-plant/:id",
     exact: false,
-    main: () => <DyePlant />,
+    main: ({ match, history }) => <DyePlantDetail match={match} history={history}/>,
   },
   {
     path: "/order",

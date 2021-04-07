@@ -9,16 +9,14 @@ import {
   Typography,
   Paper,
   TableContainer,
-  IconButton,
-  InputBase,
   TableCell,
   Table,
   TableHead,
   TableRow,
   TableBody,
 } from "@material-ui/core";
+import * as dyePlantAction from "./../../actions/dye_plant";
 import * as orderAction from "./../../actions/order";
-import SearchIcon from "@material-ui/icons/Search";
 
 const mapStateToProps = (state) => ({
   detailDyePlant: state.dyeplant.detailDyePlant,
@@ -26,38 +24,57 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
+  dyePlantAction: bindActionCreators(dyePlantAction, dispatch),
   orderAction: bindActionCreators(orderAction, dispatch),
 });
 
-class Order extends React.Component {
+class DyePlantDetail extends React.Component {
   componentDidMount() {
+    var { match } = this.props;
+    const { dyePlantAction } = this.props;
+    const { getDetailDyePlantRequest } = dyePlantAction;
     const { orderAction } = this.props;
     const { getListOrderRequest } = orderAction;
-    getListOrderRequest("");
+    if (match) {
+      var id = match.params.id;
+      getDetailDyePlantRequest(id);
+      getListOrderRequest(id);
+    }
   }
 
   render() {
-    const { classes, listOrder } = this.props;
+    const { classes, detailDyePlant, listOrder } = this.props;
     return (
       <React.Fragment>
         <Typography variant="h5" gutterBottom>
-          Danh sách đơn đặt hàng
+          {detailDyePlant.name}
         </Typography>
         <Divider />
-        <Paper component="form" className={classes.root}>
-          <InputBase
-            className={classes.input}
-            placeholder="Tìm tên xưởng, loại vải"
-            inputProps={{ "aria-label": "search google maps" }}
-          />
-          <IconButton
-            type="submit"
-            className={classes.iconButton}
-            aria-label="search"
-          >
-            <SearchIcon />
-          </IconButton>
-        </Paper>
+        <Typography
+          className={classes.typography}
+          variant="subtitle1"
+          gutterBottom
+        >
+          {`Địa chỉ: ${detailDyePlant.address}`}
+        </Typography>
+        <Typography
+          className={classes.typography}
+          variant="subtitle1"
+          gutterBottom
+        >
+          {`Điện thoại: ${detailDyePlant.phoneNumber}`}
+        </Typography>
+        <Typography
+          className={classes.typography}
+          variant="subtitle1"
+          gutterBottom
+        >
+          {`Email: ${detailDyePlant.email}`}
+        </Typography>
+        <Divider />
+        <Typography className={classes.typography} variant="h6" gutterBottom>
+          {`Danh sách đơn đặt hàng`}
+        </Typography>
         <TableContainer component={Paper} className={classes.tableContainer}>
           <Table className={classes.table} aria-label="simple table">
             <TableHead>
@@ -97,8 +114,12 @@ class Order extends React.Component {
   }
 }
 
-Order.propTypes = {
+DyePlantDetail.propTypes = {
   classes: PropTypes.object,
+  dyePlantAction: PropTypes.shape({
+    getDetailDyePlantRequest: PropTypes.func,
+  }),
+  detailDyePlant: PropTypes.object,
   orderAction: PropTypes.shape({
     getListOrderRequest: PropTypes.func,
   }),
@@ -108,4 +129,4 @@ Order.propTypes = {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(withStyles(styles)(Order));
+)(withStyles(styles)(DyePlantDetail));

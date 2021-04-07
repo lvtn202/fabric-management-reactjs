@@ -1,0 +1,44 @@
+{
+    "listDyehouse": {
+        "status": "1",
+        "statusCode": "OK",
+        "result": [
+            {
+                "id": 1,
+                "name": "Tuyển Tâm",
+                "debt": 161344260,
+                "inStock": 563024.5
+            },
+            {
+                "id": 2,
+                "name": "Vạn Lợi",
+                "debt": 161344260,
+                "inStock": 563024.5
+            },
+            {
+                "id": 3,
+                "name": "Phú Hùng",
+                "debt": 161344260,
+                "inStock": 563024.5
+            },
+            {
+                "id": 4,
+                "name": "Khuyến Tâm",
+                "debt": 161344260,
+                "inStock": 563024.5
+            },
+            {
+                "id": 5,
+                "name": "Minh Tuấn",
+                "debt": 161344260,
+                "inStock": 563024.5
+            },
+            {
+                "id": 6,
+                "name": "Thành Hòa",
+                "debt": 161344260,
+                "inStock": 563024.5
+            }
+        ]
+    }
+}

@@ -7,7 +7,7 @@ import Navbar from "react-bootstrap/Navbar";
 import { CLOSE_SIDEBAR } from "../../constants/actionTypes";
 import routes from "../../routes";
 import { ThemeProvider } from '@material-ui/styles';
-import theme from "./../theme";
+import theme from "./../../commons/theme";
 
 class App extends React.Component {
   render() {

@@ -1,6 +1,5 @@
 import superagentPromise from 'superagent-promise';
 import _superagent from 'superagent';
-import axios from 'axios';
 
 const superagent = superagentPromise(_superagent, global.Promise);
 
@@ -35,13 +34,8 @@ const Auth = {
     requests.post('/users', { user: { username, email, password } })
 };
 
-const DyePlant = {
-  list: () => requests.get('/dyePlant')
-}
-
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   Auth,
-  DyePlant,
   setToken: _token => { token = _token; }
 };
