@@ -4,6 +4,7 @@ import Login from "./components/login";
 import DyePlant from "./pages/dye_plant";
 import DyePlantDetail from "./pages/dye_plant_detail";
 import Order from "./pages/order";
+import OrderDetail from "./pages/order_detail";
 import Fabric from "./pages/fabric";
 import NotFound from "./pages/not_found";
 import NestedList from "./pages/raw";
@@ -27,17 +28,19 @@ const routes = [
   {
     path: "/dye-plant/:id",
     exact: false,
-    main: ({ match, history }) => <DyePlantDetail match={match} history={history}/>,
+    main: ({ match, history }) => (
+      <DyePlantDetail match={match} history={history} />
+    ),
   },
   {
     path: "/order",
     exact: true,
-    main: () => <Order />,
+    main: ({ history }) => <Order history={history} />,
   },
   {
     path: "/order/:id",
     exact: false,
-    main: ({ match, history }) => <Order match={match} history={history} />,
+    main: ({ match }) => <OrderDetail match={match} />,
   },
   {
     path: "/raw",

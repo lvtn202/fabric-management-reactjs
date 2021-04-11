@@ -39,7 +39,10 @@ class Order extends React.Component {
   }
 
   render() {
-    const { classes, listOrder } = this.props;
+    const { classes, listOrder, history } = this.props;
+    const handleClick = (event, id) => {
+      history.push(`/order/${id}`);
+    };
     return (
       <React.Fragment>
         <Typography variant="h5" gutterBottom>
@@ -77,7 +80,7 @@ class Order extends React.Component {
               {listOrder.map((row) => (
                 <TableRow
                   key={row.id}
-                  // onClick={(event) => handleClick(event, row.id)}
+                  onClick={(event) => handleClick(event, row.id)}
                   hover
                 >
                   <TableCell align="center">{row.id}</TableCell>

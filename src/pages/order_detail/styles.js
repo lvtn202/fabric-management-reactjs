@@ -1,3 +1,4 @@
+
 const styles = (theme) => ({
   root: {
     marginTop: '20px',
@@ -7,27 +8,18 @@ const styles = (theme) => ({
     alignItems: 'center',
     width: 400,
   },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
+  typography: {
+    marginTop: '20px',
   },
-  input: {
-    marginLeft: theme.spacing(1),
-    flex: 1,
-  },
-  iconButton: {
-    padding: 10,
-  },
-  divider: {
-    height: 28,
-    margin: 4,
-  },
-  table: {
-    minWidth: 650,
+  debtField: {
+    marginTop: '20px',
+    float: 'left',
   },
   tableContainer: {
     marginTop: '20px',
+  },
+  button :{
+    padding: 8,
   }
 });
 

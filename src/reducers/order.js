@@ -2,6 +2,7 @@ import { Order } from "./../constants/action_types";
 
 const defaultState = {
   listOrder: [],
+  detailOrder: {},
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -21,6 +22,21 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         listOrder: [],
+      };
+      case Order.FETCH_DETAIL_ORDER:
+      return {
+        ...state,
+        detailOrder: {},
+      };
+    case Order.FETCH_DETAIL_ORDER_SUCCESS:
+      return {
+        ...state,
+        detailOrder: action.payload.data.result,
+      };
+    case Order.FETCH_DETAIL_ORDER_FAILED:
+      return {
+        ...state,
+        detailOrder: {},
       };
     default:
       return state;

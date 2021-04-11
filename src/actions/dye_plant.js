@@ -2,6 +2,8 @@ import * as apis from "./../apis/dye_plant";
 import { DyePlant } from "../constants/action_types";
 import { SHOW_LOADING, HIDE_LOADING } from "../constants/action_types";
 
+
+// GET LIST
 export const getListDyePlant = () => ({
   type: DyePlant.FETCH_LIST_DYEPLANT,
 });
@@ -18,10 +20,10 @@ export const getListDyePlantFail = (error) => ({
 
 export const getListDyePlantRequest = (keyword) => {
   return (dispatch) => {
-    dispatch(getListDyePlant(keyword));
+    dispatch(getListDyePlant());
     dispatch({ type: SHOW_LOADING });
     apis
-      .getList()
+      .getList(keyword)
       .then((data) => {
         dispatch(getListDyePlantSuccess(data));
         setTimeout(() => {
@@ -37,6 +39,8 @@ export const getListDyePlantRequest = (keyword) => {
   };
 };
 
+
+// GET DETAIL
 export const getDetailDyePlant = () => ({
   type: DyePlant.FETCH_DETAIL_DYEPLANT,
 });
@@ -54,13 +58,16 @@ export const getDetailFail = (error) => ({
 export const getDetailDyePlantRequest = (id) => {
   return (dispatch) => {
     dispatch(getDetailDyePlant());
+    dispatch({ type: SHOW_LOADING });
     apis
       .getDetail(id)
       .then((data) => {
         dispatch(getDetailSuccess(data));
+        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(getDetailFail(error));
+        dispatch({ type: HIDE_LOADING });
       });
   };
 };

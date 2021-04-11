@@ -1,6 +1,5 @@
 import ListErrors from './ListErrors';
 import React from 'react';
-import agent from '../agent';
 import { connect } from 'react-redux';
 import {
   UPDATE_FIELD_AUTH,
@@ -18,7 +17,7 @@ const mapDispatchToProps = dispatch => ({
   onChangePassword: value =>
     dispatch({ type: UPDATE_FIELD_AUTH, key: 'password', value }),
   onSubmit: (email, password) =>
-    dispatch({ type: LOGIN, payload: agent.Auth.login(email, password) }),
+    dispatch({ type: LOGIN}),
   onUnload: () =>
     dispatch({ type: LOGIN_PAGE_UNLOADED }),
   onOpenSidebar: () => dispatch({ type: OPEN_SIDEBAR }),
