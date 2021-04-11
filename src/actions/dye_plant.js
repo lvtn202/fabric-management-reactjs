@@ -1,6 +1,6 @@
 import * as apis from "./../apis/dye_plant";
-import { DyePlant } from "./../constants/actionTypes";
-import { SHOW_LOADING, HIDE_LOADING } from "./../constants/actionTypes";
+import { DyePlant } from "../constants/action_types";
+import { SHOW_LOADING, HIDE_LOADING } from "../constants/action_types";
 
 export const getListDyePlant = () => ({
   type: DyePlant.FETCH_LIST_DYEPLANT,
@@ -16,9 +16,9 @@ export const getListDyePlantFail = (error) => ({
   payload: error,
 });
 
-export const getListDyePlantRequest = () => {
+export const getListDyePlantRequest = (keyword) => {
   return (dispatch) => {
-    dispatch(getListDyePlant());
+    dispatch(getListDyePlant(keyword));
     dispatch({ type: SHOW_LOADING });
     apis
       .getList()

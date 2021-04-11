@@ -1,4 +1,4 @@
-import { Order } from "./../constants/actionTypes";
+import { Order } from "./../constants/action_types";
 
 const defaultState = {
   listOrder: [],

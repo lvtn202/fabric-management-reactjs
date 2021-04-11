@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import styles from "./styles";
 import PropTypes from "prop-types";
 import { bindActionCreators, compose } from "redux";
-import * as dyePlantAction from "./../../actions/dye_plant";
+import * as dyePlantAction from "../../actions/dye_plant";
 import {
   Divider,
   Typography,
@@ -22,6 +22,7 @@ import SearchIcon from "@material-ui/icons/Search";
 
 const mapStateToProps = (state) => ({
   listDyePlant: state.dyeplant.listDyePlant,
+  loading: state.common.loading,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -29,6 +30,13 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 class DyePlant extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      keyword: "",
+    };
+  }
+
   componentDidMount() {
     const { dyePlantAction } = this.props;
     const { getListDyePlantRequest } = dyePlantAction;
@@ -36,10 +44,11 @@ class DyePlant extends React.Component {
   }
 
   render() {
-    const { classes, listDyePlant, history } = this.props;
+    const { classes, listDyePlant, history, loading } = this.props;
     const handleClick = (event, id) => {
       history.push(`/dye-plant/${id}`);
-    }
+    };
+    console.log(this.state.keyword);
     return (
       <React.Fragment>
         <Typography variant="h5" gutterBottom>
@@ -51,6 +60,7 @@ class DyePlant extends React.Component {
             className={classes.input}
             placeholder="Tìm tên xưởng"
             inputProps={{ "aria-label": "search google maps" }}
+            onChange={(ev) => this.setState({ keyword: ev.target.value })}
           />
           <IconButton
             type="submit"
@@ -60,33 +70,38 @@ class DyePlant extends React.Component {
             <SearchIcon />
           </IconButton>
         </Paper>
-        {/* {listDyePlant === []} ?
-        <Typography variant="h5" gutterBottom>
-          Không tìm thấy xưởng nào
-        </Typography>
-        : */}
-        <TableContainer component={Paper} className={classes.tableContainer}>
-          <Table className={classes.table} aria-label="simple table">
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">Tên xưởng</TableCell>
-                <TableCell align="center">Công nợ</TableCell>
-                <TableCell align="center">Mộc tồn&nbsp;(m) </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {listDyePlant.map((row) => (
-                <TableRow key={row.id} onClick={(event) => handleClick(event, row.id)} hover>
-                  <TableCell align="center" component="th" scope="row">
-                    {row.name}
-                  </TableCell>
-                  <TableCell align="center">{row.debt}</TableCell>
-                  <TableCell align="center">{row.inStock}</TableCell>
+        {!listDyePlant.length && !loading ? (
+          <Typography variant="h5" gutterBottom className={classes.notFound}>
+            Không tìm thấy xưởng nào
+          </Typography>
+        ) : (
+          <TableContainer component={Paper} className={classes.tableContainer}>
+            <Table className={classes.table} aria-label="simple table">
+              <TableHead>
+                <TableRow>
+                  <TableCell align="center">Tên xưởng</TableCell>
+                  <TableCell align="center">Công nợ&nbsp;(VNĐ)</TableCell>
+                  <TableCell align="center">Mộc tồn&nbsp;(m) </TableCell>
                 </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+              </TableHead>
+              <TableBody>
+                {listDyePlant.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    onClick={(event) => handleClick(event, row.id)}
+                    hover
+                  >
+                    <TableCell align="center" component="th" scope="row">
+                      {row.name}
+                    </TableCell>
+                    <TableCell align="center">{row.debt}</TableCell>
+                    <TableCell align="center">{row.inStock}</TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
       </React.Fragment>
     );
   }
@@ -102,7 +117,4 @@ DyePlant.propTypes = {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  withStyles(styles),
-)(DyePlant);
+export default compose(withConnect, withStyles(styles))(DyePlant);

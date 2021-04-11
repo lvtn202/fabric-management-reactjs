@@ -4,6 +4,9 @@ import { connect } from "react-redux";
 import styles from "./styles";
 import PropTypes from "prop-types";
 import { bindActionCreators, compose } from "redux";
+import { statusDescription } from "../../constants/order_status_type";
+import { parseTimestamp } from "../../commons/utils";
+
 import {
   Divider,
   Typography,
@@ -15,8 +18,8 @@ import {
   TableRow,
   TableBody,
 } from "@material-ui/core";
-import * as dyePlantAction from "./../../actions/dye_plant";
-import * as orderAction from "./../../actions/order";
+import * as dyePlantAction from "../../actions/dye_plant";
+import * as orderAction from "../../actions/order";
 
 const mapStateToProps = (state) => ({
   detailDyePlant: state.dyeplant.detailDyePlant,
@@ -43,11 +46,14 @@ class DyePlantDetail extends React.Component {
   }
 
   render() {
-    const { classes, detailDyePlant, listOrder } = this.props;
+    const { classes, detailDyePlant, listOrder, history } = this.props;
+    const handleClick = (event, id) => {
+      history.push(`/order/${id}`);
+    };
     return (
       <React.Fragment>
         <Typography variant="h5" gutterBottom>
-          {detailDyePlant.name}
+          {detailDyePlant.name ?? ""}
         </Typography>
         <Divider />
         <Typography
@@ -55,21 +61,28 @@ class DyePlantDetail extends React.Component {
           variant="subtitle1"
           gutterBottom
         >
-          {`Địa chỉ: ${detailDyePlant.address}`}
+          {`Địa chỉ: ${detailDyePlant.address ?? ""}`}
         </Typography>
         <Typography
           className={classes.typography}
           variant="subtitle1"
           gutterBottom
         >
-          {`Điện thoại: ${detailDyePlant.phoneNumber}`}
+          {`Điện thoại: ${detailDyePlant.phoneNumber ?? ""}`}
         </Typography>
         <Typography
           className={classes.typography}
           variant="subtitle1"
           gutterBottom
         >
-          {`Email: ${detailDyePlant.email}`}
+          {`Email: ${detailDyePlant.email ?? ""}`}
+        </Typography>
+        <Typography
+          className={classes.typography}
+          variant="subtitle1"
+          gutterBottom
+        >
+          {`Công nợ: ${detailDyePlant.debt ?? ""} VNĐ`}
         </Typography>
         <Divider />
         <Typography className={classes.typography} variant="h6" gutterBottom>
@@ -92,18 +105,20 @@ class DyePlantDetail extends React.Component {
               {listOrder.map((row) => (
                 <TableRow
                   key={row.id}
-                  // onClick={(event) => handleClick(event, row.id)}
+                  onClick={(event) => handleClick(event, row.id)}
                   hover
                 >
                   <TableCell align="center">{row.id}</TableCell>
                   <TableCell align="center" component="th" scope="row">
-                    {row.createDate}
+                    {parseTimestamp(row.createDate)}
                   </TableCell>
                   <TableCell align="center">{row.type}</TableCell>
                   <TableCell align="center">{row.color}</TableCell>
                   <TableCell align="center">{row.orderLength}</TableCell>
                   <TableCell align="center">{row.doneLength}</TableCell>
-                  <TableCell align="center">{row.status}</TableCell>
+                  <TableCell align="center">
+                    {statusDescription(row.status)}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -128,7 +143,4 @@ DyePlantDetail.propTypes = {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  withStyles(styles),
-)(DyePlantDetail);
+export default compose(withConnect, withStyles(styles))(DyePlantDetail);

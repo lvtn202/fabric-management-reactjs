@@ -1,4 +1,4 @@
-import { DyePlant } from "./../constants/actionTypes";
+import { DyePlant } from "./../constants/action_types";
 
 const defaultState = {
   listDyePlant: [],

@@ -2,9 +2,9 @@ import "./App.css";
 import React from "react";
 import { connect } from "react-redux";
 import { Link, Route, Switch } from "react-router-dom";
-import { CLOSE_SIDEBAR } from "../../constants/actionTypes";
+import { CLOSE_SIDEBAR } from "../../constants/action_types";
 import routes from "../../routes";
-import Sidebar from "../Sidebar/Sidebar";
+import Sidebar from "../sidebar/sidebar";
 import theme from "./../../commons/theme";
 import { ThemeProvider, withStyles } from "@material-ui/styles";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
@@ -41,7 +41,7 @@ class App extends React.Component {
               Quản lí vải nhuộm
             </Typography>
             <Typography>Xin chào: Trung Tính</Typography>
-            {
+            { this.props.isDisplaySideBar &&
               <IconButton
                 component={Link}
                 to="/login"

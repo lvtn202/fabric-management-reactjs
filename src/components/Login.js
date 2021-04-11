@@ -8,7 +8,7 @@ import {
   LOGIN_PAGE_UNLOADED,
   OPEN_SIDEBAR,
   CLOSE_SIDEBAR,
-} from '../constants/actionTypes';
+} from '../constants/action_types';
 
 const mapStateToProps = state => ({ ...state.auth });
 

@@ -1,6 +1,6 @@
 import * as apis from "./../apis/order";
-import { Order } from "./../constants/actionTypes";
-import { SHOW_LOADING, HIDE_LOADING } from "./../constants/actionTypes";
+import { Order } from "../constants/action_types";
+import { SHOW_LOADING, HIDE_LOADING } from "../constants/action_types";
 
 export const getListOrder = () => ({
   type: Order.FETCH_LIST_ORDER,

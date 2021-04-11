@@ -1,12 +1,12 @@
 import React from "react";
-import Home from "./pages/Home";
-import Login from "./components/Login";
-import DyePlant from "./pages/DyePlant";
-import DyePlantDetail from "./pages/DyePlantDetail";
-import Order from "./pages/Order";
-import Fabric from "./pages/Fabric";
-import NotFound from "./pages/NotFound";
-import NestedList from "./pages/Raw";
+import Home from "./pages/home";
+import Login from "./components/login";
+import DyePlant from "./pages/dye_plant";
+import DyePlantDetail from "./pages/dye_plant_detail";
+import Order from "./pages/order";
+import Fabric from "./pages/fabric";
+import NotFound from "./pages/not_found";
+import NestedList from "./pages/raw";
 
 const routes = [
   {
@@ -33,6 +33,11 @@ const routes = [
     path: "/order",
     exact: true,
     main: () => <Order />,
+  },
+  {
+    path: "/order/:id",
+    exact: false,
+    main: ({ match, history }) => <Order match={match} history={history} />,
   },
   {
     path: "/raw",

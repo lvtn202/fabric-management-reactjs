@@ -2,7 +2,7 @@ import {
   TOGGLE_SIDEBAR,
   OPEN_SIDEBAR,
   CLOSE_SIDEBAR,
-} from "../constants/actionTypes";
+} from "../constants/action_types";
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state = true, action) => {

@@ -1,4 +1,4 @@
-import { SHOW_LOADING, HIDE_LOADING } from "./../constants/actionTypes";
+import { SHOW_LOADING, HIDE_LOADING } from "./../constants/action_types";
 
 const defaultState = {
   token: null,

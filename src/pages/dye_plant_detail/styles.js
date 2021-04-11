@@ -1,3 +1,4 @@
+
 const styles = (theme) => ({
   root: {
     marginTop: '20px',
@@ -10,8 +11,15 @@ const styles = (theme) => ({
   typography: {
     marginTop: '20px',
   },
+  debtField: {
+    marginTop: '20px',
+    float: 'left',
+  },
   tableContainer: {
     marginTop: '20px',
+  },
+  button :{
+    padding: 8,
   }
 });
 

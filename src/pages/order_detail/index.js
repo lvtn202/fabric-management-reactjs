@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import styles from "./styles";
 import PropTypes from "prop-types";
 import { bindActionCreators, compose } from "redux";
-import { parseTimestamp } from "../../commons/utils";
-import { statusDescription } from "../../constants/order_status_type";
+import { parseTimestamp } from "./../../commons/utils";
+import { statusDescription } from "./../../constants/orderStatusType";
 import {
   Divider,
   Typography,
@@ -19,7 +19,7 @@ import {
   TableRow,
   TableBody,
 } from "@material-ui/core";
-import * as orderAction from "../../actions/order";
+import * as orderAction from "./../../actions/order";
 import SearchIcon from "@material-ui/icons/Search";
 
 const mapStateToProps = (state) => ({
