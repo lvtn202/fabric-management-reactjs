@@ -1,37 +1,70 @@
 import "./App.css";
 import React from "react";
-import { Link, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import Sidebar from "../Sidebar/Sidebar";
-import Navbar from "react-bootstrap/Navbar";
+import { Link, Route, Switch } from "react-router-dom";
 import { CLOSE_SIDEBAR } from "../../constants/actionTypes";
 import routes from "../../routes";
-import { ThemeProvider } from '@material-ui/styles';
+import Sidebar from "../Sidebar/Sidebar";
 import theme from "./../../commons/theme";
+import { ThemeProvider, withStyles } from "@material-ui/styles";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  LinearProgress,
+} from "@material-ui/core";
+
+const styles = (theme) => ({
+  root: {
+    flexGrow: 1,
+  },
+  title: {
+    flexGrow: 1,
+    marginRight: "16px",
+  },
+  exitButton: {
+    marginLeft: "16px",
+  },
+});
 
 class App extends React.Component {
   render() {
+    const { classes, loading } = this.props;
     var sideBar = this.props.isDisplaySideBar === true ? <Sidebar /> : "";
     return (
       <ThemeProvider theme={theme}>
-        <div className="header" fixed="top">
-          <Navbar bg="light">
-            <Navbar.Brand>Quản lí vải nhuộm</Navbar.Brand>
-            <Navbar.Toggle />
-            <Navbar.Collapse className="justify-content-end">
-              <Navbar.Text className="mr-sm-5">
-                Xin chào: Trung Tinh
-              </Navbar.Text>
-              <Navbar.Text>
-                <Link to="/login" onClick={this.props.onCloseSidebar}>
-                  Đăng xuất
-                </Link>
-              </Navbar.Text>
-            </Navbar.Collapse>
-          </Navbar>
-        </div>
+        <AppBar position="sticky">
+          <Toolbar>
+            <Typography variant="h6" className={classes.title}>
+              Quản lí vải nhuộm
+            </Typography>
+            <Typography>Xin chào: Trung Tính</Typography>
+            {
+              <IconButton
+                component={Link}
+                to="/login"
+                edge="start"
+                className={classes.exitButton}
+                color="inherit"
+                aria-label="open drawer"
+                onClick={this.props.onCloseSidebar}
+              >
+                <ExitToAppIcon />
+              </IconButton>
+            }
+          </Toolbar>
+        </AppBar>
+        {loading && <LinearProgress />}
         {sideBar}
-        <div className={`main-container-${this.props.isDisplaySideBar ? 'sidebar' : ''}`}>{this.configRouter(routes)}</div>
+        <div
+          className={`main-container${
+            this.props.isDisplaySideBar ? "-sidebar" : ""
+          }`}
+        >
+          {this.configRouter(routes)}
+        </div>
       </ThemeProvider>
     );
   }
@@ -58,10 +91,14 @@ const mapStateToProps = (state) => ({
   appName: state.common.appName,
   redirectTo: state.common.redirectTo,
   isDisplaySideBar: state.sidebar,
+  loading: state.common.loading,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onCloseSidebar: () => dispatch({ type: CLOSE_SIDEBAR }),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withStyles(styles)(App));

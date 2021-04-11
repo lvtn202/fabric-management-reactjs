@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import styles from "./styles";
 import PropTypes from "prop-types";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, compose } from "redux";
 import {
   Divider,
   Typography,
@@ -33,7 +33,7 @@ class Order extends React.Component {
   componentDidMount() {
     const { orderAction } = this.props;
     const { getListOrderRequest } = orderAction;
-    getListOrderRequest("");
+    getListOrderRequest(-1);
   }
 
   render() {
@@ -105,7 +105,9 @@ Order.propTypes = {
   listOrder: PropTypes.array,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(Order));
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+export default compose(
+  withConnect,
+  withStyles(styles),
+)(Order);

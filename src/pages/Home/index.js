@@ -15,7 +15,6 @@ class Home extends React.Component {
     history.push("/login");
     return (
       <div>
-        <h1>HOME</h1>
       </div>
     );
   }

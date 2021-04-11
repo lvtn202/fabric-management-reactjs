@@ -1,11 +1,20 @@
+import { SHOW_LOADING, HIDE_LOADING } from "./../constants/actionTypes";
 
 const defaultState = {
-    appName: 'Quản lí vải nhuộm',
-    token: null,
+  token: null,
+  loading: false,
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (state = defaultState, action) => {
-    return state;
-}
-
+  switch (action.type) {
+    case SHOW_LOADING:
+      state.loading = true;
+      return { ...state };
+    case HIDE_LOADING:
+      state.loading = false;
+      return { ...state };
+    default:
+      return state;
+  }
+};

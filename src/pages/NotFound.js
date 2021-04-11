@@ -1,25 +1,27 @@
 import React from "react";
 import { connect } from "react-redux";
-import styled from "styled-components";
+import { withStyles } from "@material-ui/core/styles";
+import { compose } from "redux";
 
-const NotFoundStyle = styled.div`
-  padding: 40px 15px;
-  text-align: center;
-`;
+const styles = (theme) => ({
+  root: {
+    padding: "40px 15px",
+    textAlign: "center",
+  },
+});
 
 class NotFound extends React.Component {
   render() {
+    const { classes } = this.props;
     return (
-      <div class="col-md-12">
-        <NotFoundStyle>
+      <div className={classes.root}>        
           <div>
             <h1>Oops!</h1>
             <h2>404 Not Found</h2>
             <div class="error-details">
               Sorry, an error has occured, Requested page not found!
             </div>
-          </div>
-        </NotFoundStyle>
+          </div>        
       </div>
     );
   }
@@ -29,4 +31,6 @@ const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({});
 
-export default connect(mapStateToProps, mapDispatchToProps)(NotFound);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+export default compose(withConnect, withStyles(styles))(NotFound);

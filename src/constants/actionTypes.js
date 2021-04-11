@@ -16,6 +16,8 @@ export const ASYNC_FAIL = 'ASYNC_FAIL';
 export const TOGGLE_SIDEBAR = 'TOGGLE_SIDEBAR';
 export const OPEN_SIDEBAR = 'OPEN_SIDEBAR';
 export const CLOSE_SIDEBAR = 'CLOSE_SIDEBAR';
+export const SHOW_LOADING = 'SHOW_LOADING';
+export const HIDE_LOADING = 'HIDE_LOADING';
 
 export const DyePlant = {
     FETCH_LIST_DYEPLANT: "FETCH_LIST_DYEPLANT",

@@ -4,7 +4,9 @@ import Login from "./components/Login";
 import DyePlant from "./pages/DyePlant";
 import DyePlantDetail from "./pages/DyePlantDetail";
 import Order from "./pages/Order";
+import Fabric from "./pages/Fabric";
 import NotFound from "./pages/NotFound";
+import NestedList from "./pages/Raw";
 
 const routes = [
   {
@@ -31,6 +33,16 @@ const routes = [
     path: "/order",
     exact: true,
     main: () => <Order />,
+  },
+  {
+    path: "/raw",
+    exact: true,
+    main: () => <NestedList />,
+  },
+  {
+    path: "/fabric",
+    exact: true,
+    main: () => <Fabric />,
   },
   {
     path: "",

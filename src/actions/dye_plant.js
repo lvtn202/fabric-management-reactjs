@@ -1,5 +1,6 @@
 import * as apis from "./../apis/dye_plant";
 import { DyePlant } from "./../constants/actionTypes";
+import { SHOW_LOADING, HIDE_LOADING } from "./../constants/actionTypes";
 
 export const getListDyePlant = () => ({
   type: DyePlant.FETCH_LIST_DYEPLANT,
@@ -18,17 +19,23 @@ export const getListDyePlantFail = (error) => ({
 export const getListDyePlantRequest = () => {
   return (dispatch) => {
     dispatch(getListDyePlant());
+    dispatch({ type: SHOW_LOADING });
     apis
       .getList()
       .then((data) => {
         dispatch(getListDyePlantSuccess(data));
+        setTimeout(() => {
+          dispatch({ type: HIDE_LOADING });
+        }, 1000);
       })
       .catch((error) => {
         dispatch(getListDyePlantFail(error));
+        setTimeout(() => {
+          dispatch({ type: HIDE_LOADING });
+        }, 1000);
       });
   };
 };
-
 
 export const getDetailDyePlant = () => ({
   type: DyePlant.FETCH_DETAIL_DYEPLANT,

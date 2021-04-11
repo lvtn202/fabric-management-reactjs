@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { withStyles } from "@material-ui/styles";
 import styles from "./styles";
+import { bindActionCreators, compose } from "redux";
 
 class Component extends React.Component {
   render() {
@@ -13,7 +14,9 @@ const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({});
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(Component));
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+export default compose(
+  withConnect,
+  withStyles(styles),
+)(Component);

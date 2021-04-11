@@ -1,5 +1,6 @@
 import * as apis from "./../apis/order";
 import { Order } from "./../constants/actionTypes";
+import { SHOW_LOADING, HIDE_LOADING } from "./../constants/actionTypes";
 
 export const getListOrder = () => ({
   type: Order.FETCH_LIST_ORDER,
@@ -18,13 +19,20 @@ export const getListOrderFailed = (error) => ({
 export const getListOrderRequest = (id) => {
   return (dispatch) => {
     dispatch(getListOrder());
+    dispatch({ type: SHOW_LOADING });
     apis
       .getList(id)
       .then((data) => {
         dispatch(getListOrderSuccess(data));
+        setTimeout(() => {
+          dispatch({ type: HIDE_LOADING });
+        }, 1000);
       })
       .catch((error) => {
         dispatch(getListOrderFailed(error));
+        setTimeout(() => {
+          dispatch({ type: HIDE_LOADING });
+        }, 1000);
       });
   };
 };

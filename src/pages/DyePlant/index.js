@@ -3,7 +3,7 @@ import React from "react";
 import { connect } from "react-redux";
 import styles from "./styles";
 import PropTypes from "prop-types";
-import { bindActionCreators } from "redux";
+import { bindActionCreators, compose } from "redux";
 import * as dyePlantAction from "./../../actions/dye_plant";
 import {
   Divider,
@@ -100,7 +100,9 @@ DyePlant.propTypes = {
   listDyePlant: PropTypes.array,
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(withStyles(styles)(DyePlant));
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
+
+export default compose(
+  withConnect,
+  withStyles(styles),
+)(DyePlant);
