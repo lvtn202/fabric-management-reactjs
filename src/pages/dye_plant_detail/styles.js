@@ -1,7 +1,7 @@
 
 const styles = (theme) => ({
   root: {
-    marginTop: '20px',
+    marginTop: theme.spacing(2),
     flexGrow: 1,
     padding: '2px 4px',
     display: 'flex',
@@ -9,17 +9,28 @@ const styles = (theme) => ({
     width: 400,
   },
   typography: {
-    marginTop: '20px',
+    marginTop: theme.spacing(2),
+  },
+  divider: {
+    marginTop: theme.spacing(2),
+  },
+  grid: {
+    flexGrow: 1,
+    marginBottom: theme.spacing(4),
+    marginTop: theme.spacing(4),
   },
   debtField: {
-    marginTop: '20px',
+    marginTop: theme.spacing(2),
     float: 'left',
   },
   tableContainer: {
-    marginTop: '20px',
+    marginTop: theme.spacing(2),
   },
   button :{
-    padding: 8,
+    padding: theme.spacing(2),
+    textAlign: 'center',
+    color: theme.palette.text.secondary,
+    marginBottom: theme.spacing(2),
   }
 });
 

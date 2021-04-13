@@ -48,18 +48,25 @@ class DyePlant extends React.Component {
     const handleClick = (event, id) => {
       history.push(`/dye-plant/${id}`);
     };
-    console.log(this.state.keyword);
+    const handleSearch = (ev) => {
+      ev.preventDefault();
+      this.props.dyePlantAction.getListDyePlantRequest(this.state.keyword);
+    };
     return (
       <React.Fragment>
         <Typography variant="h5" gutterBottom>
           Danh sách xưởng nhuộm
         </Typography>
         <Divider />
-        <Paper component="form" className={classes.root}>
+        <Paper
+          component="form"
+          className={classes.root}
+          onSubmit={handleSearch}
+        >
           <InputBase
             className={classes.input}
             placeholder="Tìm tên xưởng"
-            inputProps={{ "aria-label": "search google maps" }}
+            inputProps={{ "aria-label": "search dye plant" }}
             onChange={(ev) => this.setState({ keyword: ev.target.value })}
           />
           <IconButton

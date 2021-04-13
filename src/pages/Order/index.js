@@ -32,6 +32,13 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 class Order extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      keyword: "",
+    };
+  }
+
   componentDidMount() {
     const { orderAction } = this.props;
     const { getListOrderRequest } = orderAction;
@@ -40,20 +47,32 @@ class Order extends React.Component {
 
   render() {
     const { classes, listOrder, history } = this.props;
+
     const handleClick = (event, id) => {
-      history.push(`/order/${id}`);
+      history.push(`/order/detail/${id}`);
     };
+
+    const handleSearch = (ev) => {
+      ev.preventDefault();
+      this.props.orderAction.getListOrderRequest(this.state.keyword);
+    };
+
     return (
       <React.Fragment>
         <Typography variant="h5" gutterBottom>
           Danh sách đơn đặt hàng
         </Typography>
-        <Divider />
-        <Paper component="form" className={classes.root}>
+        <Divider className={classes.divider} />
+        <Paper
+          component="form"
+          className={classes.root}
+          onSubmit={handleSearch}
+        >
           <InputBase
             className={classes.input}
             placeholder="Tìm tên xưởng, loại vải"
-            inputProps={{ "aria-label": "search google maps" }}
+            inputProps={{ "aria-label": "search order" }}
+            onChange={(ev) => this.setState({ keyword: ev.target.value })}
           />
           <IconButton
             type="submit"
@@ -91,7 +110,9 @@ class Order extends React.Component {
                   <TableCell align="center">{row.color}</TableCell>
                   <TableCell align="center">{row.orderLength}</TableCell>
                   <TableCell align="center">{row.doneLength}</TableCell>
-                  <TableCell align="center">{statusDescription(row.status)}</TableCell>
+                  <TableCell align="center">
+                    {statusDescription(row.status)}
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -112,7 +133,4 @@ Order.propTypes = {
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-export default compose(
-  withConnect,
-  withStyles(styles),
-)(Order);
+export default compose(withConnect, withStyles(styles))(Order);

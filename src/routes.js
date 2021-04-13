@@ -38,20 +38,25 @@ const routes = [
     main: ({ history }) => <Order history={history} />,
   },
   {
-    path: "/order/:id",
+    path: "/order/detail/:id",
     exact: false,
     main: ({ match }) => <OrderDetail match={match} />,
   },
   {
-    path: "/raw",
-    exact: true,
-    main: () => <NestedList />,
+    path: "/order/create",
+    exact: false,
+    main: ({ match }) => <NotFound />,
   },
-  {
-    path: "/fabric",
-    exact: true,
-    main: () => <Fabric />,
-  },
+  // {
+  //   path: "/raw",
+  //   exact: true,
+  //   main: () => <NestedList />,
+  // },
+  // {
+  //   path: "/fabric",
+  //   exact: true,
+  //   main: () => <Fabric />,
+  // },
   {
     path: "",
     exact: false,

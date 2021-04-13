@@ -9,11 +9,14 @@ const styles = (theme) => ({
     width: 400,
   },
   typography: {
-    marginTop: '20px',
+    marginTop:  theme.spacing(2),
   },
   debtField: {
     marginTop: '20px',
     float: 'left',
+  },  
+  divider: {
+    marginTop: theme.spacing(2),
   },
   tableContainer: {
     marginTop: '20px',

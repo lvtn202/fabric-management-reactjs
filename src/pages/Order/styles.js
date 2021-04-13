@@ -20,8 +20,7 @@ const styles = (theme) => ({
     padding: 10,
   },
   divider: {
-    height: 28,
-    margin: 4,
+    marginTop: theme.spacing(2),
   },
   table: {
     minWidth: 650,
