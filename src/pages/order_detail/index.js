@@ -16,8 +16,6 @@ import {
   TableHead,
   TableRow,
   TableBody,
-  Grid,
-  Button,
   Box,
 } from "@material-ui/core";
 import * as importAction from "../../actions/import";
@@ -48,7 +46,7 @@ class OrderDetail extends React.Component {
   }
 
   render() {
-    const { classes, detailOrder, listImport, history } = this.props;
+    const { classes } = this.props;
 
     return (
       <React.Fragment>
@@ -70,39 +68,53 @@ class OrderDetail extends React.Component {
   }
 
   renderInfo = () => {
-    const { classes, detailOrder } = this.props;
+    const { detailOrder } = this.props;
     return (
       <div>
-        <Typography className={classes.typography} variant="subtitle1">
+        <Box display="flex" mt={2}>
           <Box fontWeight="fontWeightMedium">Xưởng nhuộm:</Box>
-          {detailOrder.dyehouseName ?? ""}
-        </Typography>
-        <Typography className={classes.typography} variant="subtitle1">
+          <Box fontWeight="normal" ml={1}>
+            {detailOrder.dyehouseName ?? ""}
+          </Box>
+        </Box>
+        <Box display="flex" mt={2}>
           <Box fontWeight="fontWeightMedium">Loại vải:</Box>
-          {detailOrder.fabricType ?? ""}
-        </Typography>
-        <Typography className={classes.typography} variant="subtitle1">
+          <Box fontWeight="normal" ml={1}>
+            {detailOrder.fabricType ?? ""}
+          </Box>
+        </Box>
+        <Box display="flex" mt={2}>
           <Box fontWeight="fontWeightMedium">Màu:</Box>
-          {detailOrder.color ?? ""}
-        </Typography>
-        <Typography className={classes.typography} variant="subtitle1">
+          <Box fontWeight="normal" ml={1}>
+            {detailOrder.color ?? ""}
+          </Box>
+        </Box>
+        <Box display="flex" mt={2}>
           <Box fontWeight="fontWeightMedium">Số lượng đặt:</Box>
-          {`${detailOrder.orderLength ?? ""} (m)`}
-        </Typography>
-        <Typography className={classes.typography} variant="subtitle1">
+          <Box fontWeight="normal" ml={1}>
+            {`${detailOrder.orderLength ?? ""} (m)`}
+          </Box>
+        </Box>
+        <Box display="flex" mt={2}>
           <Box fontWeight="fontWeightMedium">Ngày tạo:</Box>
-          {detailOrder.createDate ? parseTimestamp(detailOrder.createDate) : ""}
-        </Typography>
-        <Typography className={classes.typography} variant="subtitle1">
+          <Box fontWeight="normal" ml={1}>
+            {detailOrder.createDate
+              ? parseTimestamp(detailOrder.createDate)
+              : ""}
+          </Box>
+        </Box>
+        <Box display="flex" mt={2}>
           <Box fontWeight="fontWeightMedium">Nhân viên tạo:</Box>
-          {detailOrder.employee ?? ""}
-        </Typography>
+          <Box fontWeight="normal" ml={1}>
+            {detailOrder.employee ?? ""}
+          </Box>
+        </Box>
       </div>
     );
   };
 
   renderTable = () => {
-    const { classes, listImport, history } = this.props;
+    const { classes, listImport } = this.props;
     const handleClick = (event, id) => {
       // history.push(`/order/${id}`);
     };

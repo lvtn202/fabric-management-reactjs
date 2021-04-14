@@ -5,8 +5,7 @@ import styles from "./styles";
 import PropTypes from "prop-types";
 import { bindActionCreators, compose } from "redux";
 import { statusDescription } from "../../constants/order_status_type";
-import { parseTimestamp } from "../../commons/utils";
-
+import { parseTimestamp, currencyFormat } from "../../commons/utils";
 import {
   Divider,
   Typography,
@@ -21,8 +20,10 @@ import {
   Button,
   Box,
 } from "@material-ui/core";
+import DyePlantForm from "./dye_plant_form";
 import * as dyePlantAction from "../../actions/dye_plant";
 import * as orderAction from "../../actions/order";
+import * as modalActions from "../../actions/modal";
 
 const mapStateToProps = (state) => ({
   detailDyePlant: state.dyeplant.detailDyePlant,
@@ -32,6 +33,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   dyePlantAction: bindActionCreators(dyePlantAction, dispatch),
   orderAction: bindActionCreators(orderAction, dispatch),
+  modalActions: bindActionCreators(modalActions, dispatch),
 });
 
 class DyePlantDetail extends React.Component {
@@ -48,8 +50,16 @@ class DyePlantDetail extends React.Component {
     }
   }
 
+  openModal = () => {
+    const { modalActions } = this.props;
+    const { showModal, changeModalContent, changeModalTitle } = modalActions;
+    showModal();
+    changeModalTitle("Chỉnh sửa thông tin");
+    changeModalContent(<DyePlantForm />);
+  };
+
   render() {
-    const { classes, detailDyePlant, listOrder, history } = this.props;
+    const { classes, detailDyePlant } = this.props;
 
     return (
       <React.Fragment>
@@ -75,29 +85,33 @@ class DyePlantDetail extends React.Component {
   }
 
   renderInfo = () => {
-    const { classes, detailDyePlant } = this.props;
+    const { detailDyePlant } = this.props;
     return (
       <div>
-        <Typography className={classes.typography} variant="subtitle1">
+        <Box display="flex" mt={2}>
           <Box fontWeight="fontWeightMedium">Địa chỉ:</Box>
-          {detailDyePlant.address ?? ""}
-        </Typography>
-        <Typography className={classes.typography} variant="subtitle1">
+          <Box fontWeight="normal" ml={1}>
+            {detailDyePlant.address ?? ""}
+          </Box>
+        </Box>
+        <Box display="flex" mt={2}>
           <Box fontWeight="fontWeightMedium">Điện thoại:</Box>
-          {detailDyePlant.phoneNumber ?? ""}
-        </Typography>
-        <Typography className={classes.typography} variant="subtitle1">
+          <Box fontWeight="normal" ml={1}>
+            {detailDyePlant.phoneNumber ?? ""}
+          </Box>
+        </Box>
+        <Box display="flex" mt={2}>
           <Box fontWeight="fontWeightMedium">Email:</Box>
-          {detailDyePlant.email ?? ""}
-        </Typography>
-        <Typography
-          className={classes.typography}
-          variant="subtitle1"
-          gutterBottom
-        >
+          <Box fontWeight="normal" ml={1}>
+            {detailDyePlant.email ?? ""}
+          </Box>
+        </Box>
+        <Box display="flex" mt={2}>
           <Box fontWeight="fontWeightMedium">Công nợ:</Box>
-          {`${detailDyePlant.debt ?? ""} VNĐ`}
-        </Typography>
+          <Box fontWeight="normal" ml={1}>
+            {currencyFormat(detailDyePlant.debt ?? "")}
+          </Box>
+        </Box>
       </div>
     );
   };
@@ -108,7 +122,11 @@ class DyePlantDetail extends React.Component {
       <div>
         <Grid container className={classes.grid}>
           <Grid item xs={6} sm={3}>
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.openModal}
+            >
               Chỉnh sửa thông tin
             </Button>
           </Grid>
@@ -188,6 +206,11 @@ DyePlantDetail.propTypes = {
     getListOrderRequest: PropTypes.func,
   }),
   listOrder: PropTypes.array,
+  modalActions: PropTypes.shape({
+    showModal: PropTypes.func,
+    changeModalTitle: PropTypes.func,
+    changeModalContent: PropTypes.func,
+  }),
 };
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

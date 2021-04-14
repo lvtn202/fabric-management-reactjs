@@ -19,6 +19,7 @@ import {
   TableBody,
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
+import { currencyFormat } from "./../../commons/utils";
 
 const mapStateToProps = (state) => ({
   listDyePlant: state.dyeplant.listDyePlant,
@@ -101,7 +102,9 @@ class DyePlant extends React.Component {
                     <TableCell align="center" component="th" scope="row">
                       {row.name}
                     </TableCell>
-                    <TableCell align="center">{row.debt}</TableCell>
+                    <TableCell align="center">
+                      {currencyFormat(row.debt)}
+                    </TableCell>
                     <TableCell align="center">{row.inStock}</TableCell>
                   </TableRow>
                 ))}

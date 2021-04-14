@@ -8,6 +8,7 @@ import Sidebar from "../sidebar/sidebar";
 import theme from "./../../commons/theme";
 import { ThemeProvider, withStyles } from "@material-ui/styles";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
+import ModalComponent from "./../modal";
 import {
   AppBar,
   Toolbar,
@@ -42,7 +43,7 @@ class App extends React.Component {
               Quản lí vải nhuộm
             </Typography>
             <Typography>Xin chào: Trung Tính</Typography>
-            { this.props.isDisplaySideBar &&
+            {this.props.isDisplaySideBar && (
               <IconButton
                 component={Link}
                 to="/login"
@@ -54,10 +55,10 @@ class App extends React.Component {
               >
                 <ExitToAppIcon />
               </IconButton>
-            }
+            )}
           </Toolbar>
         </AppBar>
-        
+        <ModalComponent />
         {sideBar}
         <div
           className={`main-container${

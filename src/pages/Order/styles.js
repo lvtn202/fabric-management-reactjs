@@ -7,11 +7,6 @@ const styles = (theme) => ({
     alignItems: 'center',
     width: 400,
   },
-  paper: {
-    padding: theme.spacing(2),
-    textAlign: "center",
-    color: theme.palette.text.secondary,
-  },
   input: {
     marginLeft: theme.spacing(1),
     flex: 1,

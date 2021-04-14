@@ -7,3 +7,10 @@ export const parseTimestamp = (timestamp) =>
     minute: "2-digit",
     second: "2-digit",
   }).format(timestamp);
+
+export const currencyFormat = (value) => {
+  return new Intl.NumberFormat('it-IT', {
+    style: 'currency',
+    currency: 'VND'
+  }).format(value);
+};
