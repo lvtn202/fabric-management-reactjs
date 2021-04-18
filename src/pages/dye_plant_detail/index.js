@@ -25,17 +25,6 @@ import * as dyePlantAction from "../../actions/dye_plant";
 import * as orderAction from "../../actions/order";
 import * as modalActions from "../../actions/modal";
 
-const mapStateToProps = (state) => ({
-  detailDyePlant: state.dyeplant.detailDyePlant,
-  listOrder: state.order.listOrder,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  dyePlantAction: bindActionCreators(dyePlantAction, dispatch),
-  orderAction: bindActionCreators(orderAction, dispatch),
-  modalActions: bindActionCreators(modalActions, dispatch),
-});
-
 class DyePlantDetail extends React.Component {
   componentDidMount() {
     var { match } = this.props;
@@ -117,7 +106,7 @@ class DyePlantDetail extends React.Component {
   };
 
   renderButton = () => {
-    const { classes } = this.props;
+    const { classes, history, detailDyePlant } = this.props;
     return (
       <div>
         <Grid container className={classes.grid}>
@@ -141,7 +130,11 @@ class DyePlantDetail extends React.Component {
             </Button>
           </Grid>
           <Grid item xs={6} sm={3}>
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => history.push(`/dye-plant/${detailDyePlant.id}/raw`)}
+            >
               Danh sách hàng tồn
             </Button>
           </Grid>
@@ -195,6 +188,17 @@ class DyePlantDetail extends React.Component {
     );
   };
 }
+
+const mapStateToProps = (state) => ({
+  detailDyePlant: state.dyeplant.detailDyePlant,
+  listOrder: state.order.listOrder,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  dyePlantAction: bindActionCreators(dyePlantAction, dispatch),
+  orderAction: bindActionCreators(orderAction, dispatch),
+  modalActions: bindActionCreators(modalActions, dispatch),
+});
 
 DyePlantDetail.propTypes = {
   classes: PropTypes.object,

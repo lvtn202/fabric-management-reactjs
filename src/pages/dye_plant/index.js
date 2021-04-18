@@ -21,15 +21,6 @@ import {
 import SearchIcon from "@material-ui/icons/Search";
 import { currencyFormat } from "./../../commons/utils";
 
-const mapStateToProps = (state) => ({
-  listDyePlant: state.dyeplant.listDyePlant,
-  loading: state.common.loading,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  dyePlantAction: bindActionCreators(dyePlantAction, dispatch),
-});
-
 class DyePlant extends React.Component {
   constructor(props) {
     super(props);
@@ -124,6 +115,15 @@ DyePlant.propTypes = {
   }),
   listDyePlant: PropTypes.array,
 };
+
+const mapStateToProps = (state) => ({
+  listDyePlant: state.dyeplant.listDyePlant,
+  loading: state.common.loading,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  dyePlantAction: bindActionCreators(dyePlantAction, dispatch),
+});
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 

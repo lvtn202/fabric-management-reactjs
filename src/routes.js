@@ -2,12 +2,13 @@ import React from "react";
 import Home from "./pages/home";
 import Login from "./components/login";
 import DyePlant from "./pages/dye_plant";
+import DyeBatch from "./pages/dye_batch";
 import DyePlantDetail from "./pages/dye_plant_detail";
+import DyePlantRaw from "./pages/dye_plant_raw";
 import Order from "./pages/order";
+import Raw from "./pages/raw";
 import OrderDetail from "./pages/order_detail";
-import Fabric from "./pages/fabric";
 import NotFound from "./pages/not_found";
-import NestedList from "./pages/raw";
 
 const routes = [
   {
@@ -27,9 +28,16 @@ const routes = [
   },
   {
     path: "/dye-plant/:id",
-    exact: false,
+    exact: true,
     main: ({ match, history }) => (
       <DyePlantDetail match={match} history={history} />
+    ),
+  },
+  {
+    path: "/dye-plant/:id/raw",
+    exact: false,
+    main: ({ match, history }) => (
+      <DyePlantRaw match={match} history={history} />
     ),
   },
   {
@@ -47,16 +55,16 @@ const routes = [
     exact: false,
     main: ({ match }) => <NotFound />,
   },
-  // {
-  //   path: "/raw",
-  //   exact: true,
-  //   main: () => <NestedList />,
-  // },
-  // {
-  //   path: "/fabric",
-  //   exact: true,
-  //   main: () => <Fabric />,
-  // },
+  {
+    path: "/dye-batch",
+    exact: true,
+    main: () => <DyeBatch />,
+  },
+  {
+    path: "/raw",
+    exact: true,
+    main: () => <Raw />,
+  },
   {
     path: "",
     exact: false,

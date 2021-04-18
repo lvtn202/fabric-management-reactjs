@@ -7,3 +7,7 @@ export const getList = (keyword) => {
 export const getDetail = (id) => {
     return RequestManager.get(`/detailDyehouse?id=${id}`);
 }
+
+export const editDetail = (body) => {
+    return RequestManager.put('/detailDyehouse/update', body)
+}

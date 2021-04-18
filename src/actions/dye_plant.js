@@ -1,7 +1,6 @@
 import * as apis from "./../apis/dye_plant";
 import { DyePlant } from "../constants/action_types";
-import { SHOW_LOADING, HIDE_LOADING } from "../constants/action_types";
-
+import { SHOW_LOADING, HIDE_LOADING, Modal } from "../constants/action_types";
 
 // GET LIST
 export const getListDyePlant = () => ({
@@ -39,7 +38,6 @@ export const getListDyePlantRequest = (keyword) => {
   };
 };
 
-
 // GET DETAIL
 export const getDetailDyePlant = () => ({
   type: DyePlant.FETCH_DETAIL_DYEPLANT,
@@ -67,6 +65,39 @@ export const getDetailDyePlantRequest = (id) => {
       })
       .catch((error) => {
         dispatch(getDetailFail(error));
+        dispatch({ type: HIDE_LOADING });
+      });
+  };
+};
+
+// UPDATE DETAIL
+export const updateDetail = () => ({
+  type: DyePlant.UPDATE_DETAIL_DYEPLANT,
+});
+
+export const updateDetailSuccess = (data) => ({
+  type: DyePlant.UPDATE_DETAIL_DYEPLANT_SUCCESS,
+  payload: data,
+});
+
+export const updateDetailFail = (error) => ({
+  type: DyePlant.UPDATE_DETAIL_DYEPLANT_FAILED,
+  payload: error,
+});
+
+export const updateDetailDyePlantRequest = (body) => {
+  return (dispatch) => {
+    dispatch(updateDetail());
+    dispatch({ type: SHOW_LOADING });
+    apis
+      .editDetail(body)
+      .then((data) => {
+        dispatch(updateDetailSuccess(data));
+        dispatch({ type: HIDE_LOADING });
+        dispatch({ type: Modal.HIDE_MODAL });
+      })
+      .catch((error) => {
+        dispatch(updateDetailFail(error));
         dispatch({ type: HIDE_LOADING });
       });
   };

@@ -36,7 +36,7 @@ export const SidebarData = [
   },
   {
     title: 'Vải thành phẩm',
-    path: '/fabric',
+    path: '/dye-batch',
     exact: false,
     level: 1,
     subNav: [

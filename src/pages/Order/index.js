@@ -87,6 +87,7 @@ class Order extends React.Component {
             <TableHead>
               <TableRow>
                 <TableCell align="center">Mã đơn</TableCell>
+                <TableCell align="center">Xưởng</TableCell>
                 <TableCell align="center">Ngày đặt</TableCell>
                 <TableCell align="center">Loại vải</TableCell>
                 <TableCell align="center">Màu</TableCell>
@@ -103,6 +104,7 @@ class Order extends React.Component {
                   hover
                 >
                   <TableCell align="center">{row.id}</TableCell>
+                  <TableCell align="center">{row.dyehouse}</TableCell>
                   <TableCell align="center" component="th" scope="row">
                     {parseTimestamp(row.createDate)}
                   </TableCell>

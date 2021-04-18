@@ -4,10 +4,19 @@ import { withStyles } from "@material-ui/styles";
 import PropTypes from "prop-types";
 import styles from "./styles";
 import { bindActionCreators, compose } from "redux";
+import { Typography, Divider } from "@material-ui/core";
 
 class Component extends React.Component {
   render() {
-    return <div>Sample Page</div>;
+    const { classes } = this.props;
+    return (
+      <React.Fragment>
+        <Typography variant="h5" gutterBottom>
+          Sample page
+        </Typography>
+        <Divider />
+      </React.Fragment>
+    );
   }
 }
 
@@ -17,6 +26,8 @@ const mapDispatchToProps = (dispatch) => ({});
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-Component.propTypes  = {};
+Component.propTypes = {
+  classes: PropTypes.object,
+};
 
 export default compose(withConnect, withStyles(styles))(Component);

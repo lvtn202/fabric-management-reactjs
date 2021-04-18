@@ -38,6 +38,19 @@ export default (state = defaultState, action) => {
         ...state,
         detailDyePlant: {},
       };
+    case DyePlant.UPDATE_DETAIL_DYEPLANT:
+      return {
+        ...state,
+      };
+    case DyePlant.UPDATE_DETAIL_DYEPLANT_SUCCESS:
+      return {
+        ...state,
+        detailDyePlant: action.payload.data.result,
+      };
+    case DyePlant.UPDATE_DETAIL_DYEPLANT_FAILED:
+      return {
+        ...state,
+      };
     default:
       return state;
   }
