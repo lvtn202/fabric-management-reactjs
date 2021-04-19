@@ -12,14 +12,16 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
+import { Field, reduxForm } from "redux-form";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Container from "@material-ui/core/Container";
+import validate from "./validate";
+import AppTextField from "../../components/form_helper/text_field";
 
 class Login extends React.Component {
-  submitForm = (email, password) => (ev) => {
-    ev.preventDefault();
+  submitForm = (data) => {
     var { history } = this.props;
     this.props.onOpenSidebar();
     history.push("/dye-plant");
@@ -27,7 +29,7 @@ class Login extends React.Component {
 
   render() {
     this.props.onCloseSidebar();
-    const { classes } = this.props;
+    const { classes, invalid, submitting, handleSubmit } = this.props;
     return (
       <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -36,34 +38,34 @@ class Login extends React.Component {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Đăng nhập
           </Typography>
-          <form className={classes.form} noValidate onSubmit={this.submitForm()}>
-            <TextField
-              variant="outlined"
+          <form
+            onSubmit={handleSubmit(this.submitForm)}
+            className={classes.form}
+          >
+            <Field
               margin="normal"
               required
               fullWidth
               id="email"
-              label="Email Address"
+              label="Email"
               name="email"
               autoComplete="email"
               autoFocus
+              component={AppTextField}
             />
-            <TextField
-              variant="outlined"
+            <Field
               margin="normal"
               required
               fullWidth
               name="password"
-              label="Password"
-              type="password"
+              label="Mật khẩu"
               id="password"
+              type="password"
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
+              autoFocus
+              component={AppTextField}
             />
             <Button
               type="submit"
@@ -71,18 +73,14 @@ class Login extends React.Component {
               variant="contained"
               color="primary"
               className={classes.submit}
+              disabled={invalid || submitting}
             >
-              Sign In
+              Đăng nhập
             </Button>
             <Grid container>
               <Grid item xs>
                 <Link href="#" variant="body2">
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
+                  Quên mật khẩu?
                 </Link>
               </Grid>
             </Grid>
@@ -104,6 +102,14 @@ const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 Login.propTypes = {
   classes: PropTypes.object,
+  invalid: PropTypes.bool,
+  submitting: PropTypes.bool,
+  handleSubmit: PropTypes.func,
 };
 
-export default compose(withConnect, withStyles(styles))(Login);
+const withReduxForm = reduxForm({
+  form: "LOG_IN_FORM",
+  validate,
+});
+
+export default compose(withConnect, withStyles(styles), withReduxForm)(Login);
