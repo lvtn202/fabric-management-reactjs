@@ -9,8 +9,6 @@ import {
   Divider,
   Typography,
   Paper,
-  IconButton,
-  InputBase,
   TableContainer,
   TableCell,
   Table,
@@ -18,7 +16,6 @@ import {
   TableRow,
   TableBody,
 } from "@material-ui/core";
-import SearchIcon from "@material-ui/icons/Search";
 import { parseTimestamp } from "./../../commons/utils";
 
 class DyeBatch extends React.Component {

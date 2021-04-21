@@ -1,15 +1,18 @@
 import axios from "axios";
 
-// const API_ROOT = 'http://localhost:3000';
-const API_ROOT = "http://192.168.0.125:8080";       //KTX
+const API_ROOT = "http://192.168.0.125:8080"; //KTX
 // const API_ROOT = "http://10.127.175.248:8080";   //HCMUT-Meeting
 
 class RequestManager {
   constructor() {
-    const token = "token ";
     const instance = axios.create();
     instance.interceptors.response.use(this.handleSuccess, this.handleError);
     this.instance = instance;
+    this.token = "";
+  }
+
+  setToken(token) {
+    console.log(`set token ${token}`);
     this.token = token;
   }
 
@@ -23,25 +26,25 @@ class RequestManager {
 
   get(url) {
     return this.instance.get(`${API_ROOT}${url}`, {
-      headers: { token: "token" },
+      headers: { token: this.token },
     });
   }
 
-  post(url, body) {
+  post(url, body, contentType = "application/x-www-form-urlencoded") {
     return this.instance.post(`${API_ROOT}${url}`, body, {
-      headers: { token: "token" },
+      headers: { "content-type": contentType, token: this.token },
     });
   }
 
   put(url, body) {
     return this.instance.put(`${API_ROOT}${url}`, body, {
-      headers: { token: "token" },
+      headers: { token: this.token },
     });
   }
 
   delete(url) {
     return this.instance.delete(`${API_ROOT}${url}`, {
-      headers: { token: "token" },
+      headers: { token: this.token },
     });
   }
 }

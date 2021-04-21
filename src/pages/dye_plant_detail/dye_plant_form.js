@@ -45,6 +45,8 @@ class DyePlantForm extends React.Component {
               className={classes.textField}
               margin="normal"
               required
+              fullWidth
+              autoFocus
               name="address"
               component={AppTextField}
               value={detailDyePlant.address}
@@ -55,6 +57,7 @@ class DyePlantForm extends React.Component {
               id="phoneNumber"
               label="Điện thoại"
               required
+              fullWidth
               multiline
               rowsMax="4"
               className={classes.textField}
@@ -70,6 +73,7 @@ class DyePlantForm extends React.Component {
               label="Email"
               required
               multiline
+              fullWidth
               rowsMax="4"
               className={classes.textField}
               margin="normal"

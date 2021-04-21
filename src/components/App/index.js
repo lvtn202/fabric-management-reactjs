@@ -1,8 +1,11 @@
-import "./App.css";
 import React from "react";
 import { connect } from "react-redux";
 import { Link, Route, Switch } from "react-router-dom";
-import { CLOSE_SIDEBAR } from "../../constants/action_types";
+import {
+  CLOSE_SIDEBAR,
+  Alert as alertActions,
+  Auth,
+} from "../../constants/action_types";
 import routes from "../../routes";
 import Sidebar from "../sidebar/sidebar";
 import theme from "./../../commons/theme";
@@ -16,24 +19,31 @@ import {
   IconButton,
   LinearProgress,
 } from "@material-ui/core";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+import styles from "./styles";
 
-const styles = (theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  title: {
-    flexGrow: 1,
-    marginRight: "16px",
-  },
-  exitButton: {
-    marginLeft: "16px",
-  },
-});
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 class App extends React.Component {
+  onClickLogout = () => {
+    this.props.onCloseSidebar();
+    this.props.onLogout();
+  };
+
   render() {
-    const { classes, loading } = this.props;
-    var sideBar = this.props.isDisplaySideBar === true ? <Sidebar /> : "";
+    const {
+      classes,
+      loading,
+      isDisplaySideBar,
+      errorMsg,
+      showErrorMsg,
+      successMsg,
+      showSuccessMsg,
+    } = this.props;
+    var sideBar = isDisplaySideBar === true ? <Sidebar /> : "";
     return (
       <ThemeProvider theme={theme}>
         {loading && <LinearProgress />}
@@ -42,8 +52,8 @@ class App extends React.Component {
             <Typography variant="h6" className={classes.title}>
               Quản lí vải nhuộm
             </Typography>
-            <Typography>Xin chào: Trung Tính</Typography>
-            {this.props.isDisplaySideBar && (
+            <Typography>{`Xin chào ${this.props.firstName} ${this.props.lastName}`}</Typography>
+            {isDisplaySideBar && (
               <IconButton
                 component={Link}
                 to="/login"
@@ -51,7 +61,7 @@ class App extends React.Component {
                 className={classes.exitButton}
                 color="inherit"
                 aria-label="open drawer"
-                onClick={this.props.onCloseSidebar}
+                onClick={this.onClickLogout}
               >
                 <ExitToAppIcon />
               </IconButton>
@@ -61,12 +71,32 @@ class App extends React.Component {
         <ModalComponent />
         {sideBar}
         <div
-          className={`main-container${
-            this.props.isDisplaySideBar ? "-sidebar" : ""
-          }`}
+          className={
+            isDisplaySideBar
+              ? classes.mainContainerSidebar
+              : classes.mainContainer
+          }
         >
           {this.configRouter(routes)}
         </div>
+        <Snackbar
+          open={showSuccessMsg}
+          autoHideDuration={3000}
+          onClose={this.props.onCloseSuccessMsg}
+        >
+          <Alert severity="success" onClose={this.props.onCloseSuccessMsg}>
+            {successMsg}
+          </Alert>
+        </Snackbar>
+        <Snackbar
+          open={showErrorMsg}
+          autoHideDuration={3000}
+          onClose={this.props.onCloseErrorMsg}
+        >
+          <Alert severity="error" onClose={this.props.onCloseErrorMsg}>
+            {errorMsg}
+          </Alert>
+        </Snackbar>
       </ThemeProvider>
     );
   }
@@ -90,14 +120,21 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  appName: state.common.appName,
-  redirectTo: state.common.redirectTo,
+  lastName: state.auth.lastName,
+  firstName: state.auth.firstName,
   isDisplaySideBar: state.sidebar,
-  loading: state.common.loading,
+  errorMsg: state.alert.errorMsg,
+  successMsg: state.alert.successMsg,
+  showSuccessMsg: state.alert.showSuccessMsg,
+  showErrorMsg: state.alert.showErrorMsg,
 });
 
 const mapDispatchToProps = (dispatch) => ({
   onCloseSidebar: () => dispatch({ type: CLOSE_SIDEBAR }),
+  onLogout: () => dispatch({ type: Auth.LOGOUT }),
+  onCloseErrorMsg: () => dispatch({ type: alertActions.HIDE_ERROR_MESSAGE }),
+  onCloseSuccessMsg: () =>
+    dispatch({ type: alertActions.HIDE_SUCCESS_MESSAGE }),
 });
 
 export default connect(

@@ -1,6 +1,7 @@
 import * as apis from "./../apis/dye_plant";
-import { DyePlant } from "../constants/action_types";
+import { DyePlant, Alert } from "../constants/action_types";
 import { SHOW_LOADING, HIDE_LOADING, Modal } from "../constants/action_types";
+import { showError } from "./../commons/handle_error";
 
 // GET LIST
 export const getListDyePlant = () => ({
@@ -24,12 +25,17 @@ export const getListDyePlantRequest = (keyword) => {
     apis
       .getList(keyword)
       .then((data) => {
-        dispatch(getListDyePlantSuccess(data));
+        if (data.data.status === 1) {
+          dispatch(getListDyePlantSuccess(data));
+        } else {
+          dispatch(showError(data.data.status_code, data.status));
+        }
         setTimeout(() => {
           dispatch({ type: HIDE_LOADING });
         }, 1000);
       })
       .catch((error) => {
+        dispatch(showError(error, error.status));
         dispatch(getListDyePlantFail(error));
         setTimeout(() => {
           dispatch({ type: HIDE_LOADING });
@@ -60,10 +66,15 @@ export const getDetailDyePlantRequest = (id) => {
     apis
       .getDetail(id)
       .then((data) => {
-        dispatch(getDetailSuccess(data));
+        if (data.data.status === 1) {
+          dispatch(getDetailSuccess(data));
+        } else {
+          dispatch(showError(data.data.status_code, data.status));
+        }
         dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
+        dispatch(showError(error, error.status));
         dispatch(getDetailFail(error));
         dispatch({ type: HIDE_LOADING });
       });
@@ -92,11 +103,22 @@ export const updateDetailDyePlantRequest = (body) => {
     apis
       .editDetail(body)
       .then((data) => {
-        dispatch(updateDetailSuccess(data));
+        if (data.data.status === 1) {
+          dispatch(updateDetailSuccess(data));
+          dispatch({ type: Modal.HIDE_MODAL });
+          dispatch({
+            type: Alert.SHOW_SUCCESS_MESSAGE,
+            payload: {
+              successMsg: "Thay đổi thông tin thành công",
+            },
+          });
+        } else {
+          dispatch(showError(data.data.status_code, data.status));
+        }
         dispatch({ type: HIDE_LOADING });
-        dispatch({ type: Modal.HIDE_MODAL });
       })
       .catch((error) => {
+        dispatch(showError(error, error.status));
         dispatch(updateDetailFail(error));
         dispatch({ type: HIDE_LOADING });
       });

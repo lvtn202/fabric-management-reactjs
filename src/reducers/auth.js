@@ -1,35 +1,41 @@
-import {
-  LOGIN,
-  REGISTER,
-  LOGIN_PAGE_UNLOADED,
-  REGISTER_PAGE_UNLOADED,
-  ASYNC_START,
-  UPDATE_FIELD_AUTH
-} from '../constants/action_types';
+import { Auth } from "../constants/action_types";
+import RequestManager from "../commons/request_manager";
+
+const defaultState = {
+  id: -1,
+  firstName: "",
+  lastName: "",
+  email: "",
+  sex: "",
+  roles: "",
+  token: "",
+};
 
 // eslint-disable-next-line import/no-anonymous-default-export
-export default (state = {}, action) => {
+export default (state = defaultState, action) => {
   switch (action.type) {
-    case LOGIN:
-    case REGISTER:
+    case Auth.LOGIN:
+      return {
+        ...defaultState,
+      };
+    case Auth.LOGIN_SUCCESS:
+      RequestManager.setToken(action.payload.data.result.token);
+      return {
+        ...action.payload.data.result,
+      };
+    case Auth.LOGIN_FAILED:
+    case Auth.LOGOUT:
+      RequestManager.setToken("");
+      return {
+        ...defaultState,
+      };
+    case Auth.REGISTER:
       return {
         ...state,
         inProgress: false,
-        errors: action.error ? action.payload.errors : null
+        errors: action.error ? action.payload.errors : null,
       };
-    case LOGIN_PAGE_UNLOADED:
-    case REGISTER_PAGE_UNLOADED:
-      return {};
-    case ASYNC_START:
-      if (action.subtype === LOGIN || action.subtype === REGISTER) {
-        return { ...state, inProgress: true };
-      }
-      break;
-    case UPDATE_FIELD_AUTH:
-      return { ...state, [action.key]: action.value };
     default:
       return state;
   }
-
-  return state;
 };

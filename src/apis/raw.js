@@ -19,3 +19,7 @@ export const getListRawAllPlants = () => {
     `/listStatisticExportedFabric?pageSize=100&pageIndex=0`
   );
 };
+
+export const getListFabricType = () => {
+  return RequestManager.get("/listFabricType");
+};

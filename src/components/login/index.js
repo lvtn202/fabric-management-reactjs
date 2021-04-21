@@ -9,9 +9,6 @@ import { OPEN_SIDEBAR, CLOSE_SIDEBAR } from "./../../constants/action_types";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import { Field, reduxForm } from "redux-form";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
@@ -19,12 +16,22 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Container from "@material-ui/core/Container";
 import validate from "./validate";
 import AppTextField from "../../components/form_helper/text_field";
+import * as authAction from "../../actions/auth";
 
 class Login extends React.Component {
   submitForm = (data) => {
-    var { history } = this.props;
-    this.props.onOpenSidebar();
-    history.push("/dye-plant");
+    const { history, authAction } = this.props;
+    const { email, password } = data;
+    const { loginRequest } = authAction;
+
+    let body = JSON.stringify({
+      password: password,
+      email: email,
+    });
+    loginRequest(body, () => {
+      this.props.onOpenSidebar();
+      history.push("/dye-plant");
+    });
   };
 
   render() {
@@ -64,7 +71,6 @@ class Login extends React.Component {
               id="password"
               type="password"
               autoComplete="current-password"
-              autoFocus
               component={AppTextField}
             />
             <Button
@@ -96,6 +102,7 @@ const mapStateToProps = (state) => ({});
 const mapDispatchToProps = (dispatch) => ({
   onOpenSidebar: () => dispatch({ type: OPEN_SIDEBAR }),
   onCloseSidebar: () => dispatch({ type: CLOSE_SIDEBAR }),
+  authAction: bindActionCreators(authAction, dispatch),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
@@ -105,6 +112,9 @@ Login.propTypes = {
   invalid: PropTypes.bool,
   submitting: PropTypes.bool,
   handleSubmit: PropTypes.func,
+  authAction: PropTypes.shape({
+    loginRequest: PropTypes.func,
+  }),
 };
 
 const withReduxForm = reduxForm({

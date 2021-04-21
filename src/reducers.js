@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
-import auth from "./reducers/auth";
 import common from "./reducers/common";
+import auth from "./reducers/auth";
+import alert from "./reducers/alert";
 import modal from "./reducers/modal";
 import sidebar from "./reducers/sidebar";
 import dyeplant from "./reducers/dye_plant";
@@ -12,6 +13,7 @@ import { reducer as formReducer } from "redux-form";
 
 export default combineReducers({
   auth,
+  alert,
   common,
   modal,
   dyebatch,

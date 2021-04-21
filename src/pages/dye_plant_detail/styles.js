@@ -11,9 +11,6 @@ const styles = (theme) => ({
   tableContainer: {
     marginTop: theme.spacing(2),
   },
-  textField: {
-    width: '100%',
-  },
   select: {
     display: 'flex',
     flexWrap: 'wrap',
