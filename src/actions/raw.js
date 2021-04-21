@@ -3,7 +3,7 @@ import { Raw } from "../constants/action_types";
 import { SHOW_LOADING, HIDE_LOADING } from "../constants/action_types";
 import { showError } from "./../commons/handle_error";
 
-// GET LIST RAW
+// GET LIST RAW IN STOCK
 export const getListRaw = () => ({
   type: Raw.FETCH_LIST_RAW_STOCK,
 });
@@ -44,7 +44,7 @@ export const getListRawRequest = (id) => {
   };
 };
 
-// GET LIST FABRIC
+// GET LIST FABRIC ONE PLANT
 export const getListFabric = () => ({
   type: Raw.FETCH_LIST_FABRIC_DYEPLANT,
 });
@@ -87,16 +87,16 @@ export const getListFabricRequest = (id, startDate, endDate) => {
 
 // GET LIST RAW ALL PLANTS
 export const getListRawAllPlants = () => ({
-  type: Raw.FETCH_LIST_FABRIC_DYEPLANT,
+  type: Raw.FETCH_LIST_RAW_ALL_PLANT,
 });
 
 export const getListRawAllPlantsSuccess = (data) => ({
-  type: Raw.FETCH_LIST_FABRIC_DYEPLANT_SUCCESS,
+  type: Raw.FETCH_LIST_RAW_ALL_PLANT_SUCCESS,
   payload: data,
 });
 
 export const getListRawAllPlantsFailed = (error) => ({
-  type: Raw.FETCH_LIST_FABRIC_DYEPLANT_FAILED,
+  type: Raw.FETCH_LIST_RAW_ALL_PLANT_FAILED,
   payload: error,
 });
 
@@ -119,6 +119,47 @@ export const getListRawAllPlantsRequest = () => {
       .catch((error) => {
         dispatch(showError(error, error.status));
         dispatch(getListRawAllPlantsFailed(error));
+        setTimeout(() => {
+          dispatch({ type: HIDE_LOADING });
+        }, 1000);
+      });
+  };
+};
+
+// GET LIST FABRIC TYPE
+export const getListFabricType = () => ({
+  type: Raw.FETCH_LIST_FABRIC_TYPE,
+});
+
+export const getListFabricTypeSuccess = (data) => ({
+  type: Raw.FETCH_LIST_FABRIC_TYPE_SUCCESS,
+  payload: data,
+});
+
+export const getListFabricTypeFailed = (error) => ({
+  type: Raw.FETCH_LIST_FABRIC_TYPE_FAILED,
+  payload: error,
+});
+
+export const getListFabricTypeRequest = () => {
+  return (dispatch) => {
+    dispatch(getListRaw());
+    dispatch({ type: SHOW_LOADING });
+    apis
+      .getListFabricType()
+      .then((data) => {
+        if (data.data.status === 1) {
+          dispatch(getListFabricTypeSuccess(data));
+        } else {
+          dispatch(showError(data.data.status_code, data.status));
+        }
+        setTimeout(() => {
+          dispatch({ type: HIDE_LOADING });
+        }, 1000);
+      })
+      .catch((error) => {
+        dispatch(showError(error, error.status));
+        dispatch(getListFabricTypeFailed(error));
         setTimeout(() => {
           dispatch({ type: HIDE_LOADING });
         }, 1000);

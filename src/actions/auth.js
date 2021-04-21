@@ -3,7 +3,6 @@ import { Auth, Alert } from "../constants/action_types";
 import { showError } from "./../commons/handle_error";
 import { SHOW_LOADING, HIDE_LOADING } from "../constants/action_types";
 
-// GET LIST RAW
 export const login = () => ({
   type: Auth.LOGIN,
 });

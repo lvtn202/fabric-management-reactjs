@@ -29,8 +29,14 @@ class Raw extends React.Component {
 
   componentDidMount() {
     const { rawActions } = this.props;
-    const { getListRawRequest } = rawActions;
+    const {
+      getListRawRequest,
+      getListRawAllPlantsRequest,
+      getListFabricTypeRequest,
+    } = rawActions;
     getListRawRequest();
+    getListRawAllPlantsRequest();
+    getListFabricTypeRequest();
   }
 
   render() {
@@ -89,13 +95,44 @@ class Raw extends React.Component {
   };
 
   renderRawAllPlant() {
-    const { classes } = this.props;
-    return <div></div>;
+    const { classes, listFabricType, listRawAllPlant, history } = this.props;
+    return (
+      <TableContainer component={Paper} className={classes.tableContainer}>
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="center">Xưởng</TableCell>
+              {listFabricType.map((row) => (
+                <TableCell align="center">{row.type}</TableCell>
+              ))}
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {listRawAllPlant.map((row) => (
+              <TableRow
+                key={row.id}
+                hover
+                onClick={() =>
+                  history.push(`/dye-plant/${row.dyehouseId}/raw`)
+                }
+              >
+                <TableCell align="center">{row.dyehouseName}</TableCell>
+                {row.fabricTypes.map((item) => (
+                  <TableCell align="center">{item.rawLength}</TableCell>
+                ))}
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
   }
 }
 
 const mapStateToProps = (state) => ({
   listRaw: state.raw.listRaw,
+  listRawAllPlant: state.raw.listRawAllPlant,
+  listFabricType: state.raw.listFabricType,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -107,6 +144,13 @@ const withConnect = connect(mapStateToProps, mapDispatchToProps);
 Raw.propTypes = {
   classes: PropTypes.object,
   listRaw: PropTypes.array,
+  listRawAllPlant: PropTypes.array,
+  listFabricType: PropTypes.array,
+  rawActions: PropTypes.shape({
+    getListRawRequest: PropTypes.func,
+    getListRawAllPlantsRequest: PropTypes.func,
+    getListFabricTypeRequest: PropTypes.func,
+  }),
 };
 
 export default compose(withConnect, withStyles(styles))(Raw);

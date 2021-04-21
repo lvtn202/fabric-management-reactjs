@@ -7,3 +7,7 @@ export const getList = (dyehouseId) => {
 export const getDetail = (id) => {
     return RequestManager.get(`/detailOrder?id=${id}`);
 }
+
+export const createOrder = (body) => {
+    return RequestManager.post('/createOrder', body, "application/json")
+}

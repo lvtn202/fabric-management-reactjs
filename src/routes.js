@@ -6,6 +6,7 @@ import DyeBatch from "./pages/dye_batch";
 import DyePlantDetail from "./pages/dye_plant_detail";
 import DyePlantRaw from "./pages/dye_plant_raw";
 import Order from "./pages/order";
+import OrderCreation from "./pages/order_creation";
 import Raw from "./pages/raw";
 import OrderDetail from "./pages/order_detail";
 import NotFound from "./pages/not_found";
@@ -53,7 +54,7 @@ const routes = [
   {
     path: "/order/create",
     exact: false,
-    main: ({ match }) => <NotFound />,
+    main: ({ history }) => <OrderCreation history={history}/>,
   },
   {
     path: "/dye-batch",
@@ -63,7 +64,7 @@ const routes = [
   {
     path: "/raw",
     exact: true,
-    main: () => <Raw />,
+    main: ({ history }) => <Raw history={history} />,
   },
   {
     path: "",
