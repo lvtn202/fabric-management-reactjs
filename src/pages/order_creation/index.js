@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/styles";
 import PropTypes from "prop-types";
 import styles from "./styles";
 import validate from "./validate";
-import { Field, reduxForm } from "redux-form";
+import { Field, reduxForm, getFormValues } from "redux-form";
 import { bindActionCreators, compose } from "redux";
 import { Typography, Divider } from "@material-ui/core";
 import AppSelectField from "../../components/form_helper/select_field";
@@ -62,7 +62,10 @@ class OrderCreation extends React.Component {
       listFabricType,
       handleSubmit,
       pristine,
+      formValues,
     } = this.props;
+    console.log(formValues);
+    
     return (
       <form className={classes.root} onSubmit={handleSubmit(this.submitForm)}>
         <Grid container spacing={3} alignItems="center">
@@ -76,8 +79,10 @@ class OrderCreation extends React.Component {
               component={AppSelectField}
               label="Chọn xưởng nhuộm"
             >
-              {listDyePlant.map((item) => (
-                <MenuItem value={item.id}>{item.name}</MenuItem>
+              {listDyePlant.map((item, index) => (
+                <MenuItem key={index} value={item.id}>
+                  {item.name}
+                </MenuItem>
               ))}
             </Field>
           </Grid>
@@ -93,8 +98,10 @@ class OrderCreation extends React.Component {
               component={AppSelectField}
               label="Chọn loại vải"
             >
-              {listFabricType.map((item) => (
-                <MenuItem value={item.type}>{item.type}</MenuItem>
+              {listFabricType.map((item, index) => (
+                <MenuItem key={index} value={item.type}>
+                  {item.type}
+                </MenuItem>
               ))}
             </Field>
           </Grid>
@@ -110,9 +117,11 @@ class OrderCreation extends React.Component {
               component={AppSelectField}
               label="Chọn màu"
             >
-              {listFabricType[0]?.colors.map((item) => (
-                <MenuItem value={item}>{item}</MenuItem>
-              ))}
+              {listFabricType
+                .find((item) => (item.type === formValues?.fabricType))
+                ?.colors.map((item, index) => (
+                  <MenuItem key={index} value={item}>{item}</MenuItem>
+                ))}
             </Field>
           </Grid>
         </Grid>
@@ -138,7 +147,7 @@ class OrderCreation extends React.Component {
               <Button
                 variant="contained"
                 onClick={reset}
-                disabled={invalid || submitting || pristine}
+                disabled={submitting || pristine}
               >
                 Hủy Bỏ
               </Button>
@@ -159,6 +168,7 @@ class OrderCreation extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
+  formValues: getFormValues("CREATE_ORDER_FORM")(state),
   listDyePlant: state.dyeplant.listDyePlant,
   listFabricType: state.raw.listFabricType,
   userId: state.auth.id,

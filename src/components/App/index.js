@@ -30,12 +30,16 @@ function Alert(props) {
 }
 
 class App extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
     const { authAction } = this.props;
+    console.log(this.props);
     const { loginSuccess } = authAction;
     const auth = JSON.parse(window.localStorage.getItem("user"));
     if (auth) {
       loginSuccess(auth);
+    } else {
+      // this.onClickLogout();
+      // push to log in page
     }
   }
 
