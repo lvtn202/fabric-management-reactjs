@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
   },
   nested: {
-    paddingLeft: theme.spacing(6),
+    paddingLeft: theme.spacing(5),
   },
   topLevel: {
     fontWeight: 500,
@@ -32,7 +32,7 @@ export default function NestedList() {
       {SidebarData.map((item, index) => {
         return (
           <div key={index}>
-            <ListItem button component={Link} to={item.path}>
+            <ListItem>
               <ListItemText
                 primary={item.title}
                 disableTypography={true}
