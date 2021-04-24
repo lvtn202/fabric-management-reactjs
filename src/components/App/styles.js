@@ -27,6 +27,9 @@ const styles = (theme) => ({
     bottom: 20,
     right: 20,
   },
+  loading: {
+    padding: 8,
+  },
 });
 
 export default styles;

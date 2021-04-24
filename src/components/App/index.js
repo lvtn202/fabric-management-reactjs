@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
 import { Link, Route, Switch } from "react-router-dom";
 import {
   CLOSE_SIDEBAR,
@@ -22,12 +23,22 @@ import {
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import styles from "./styles";
+import * as authAction from "../../actions/auth";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
 }
 
 class App extends React.Component {
+  componentWillMount() {
+    const { authAction } = this.props;
+    const { loginSuccess } = authAction;
+    const auth = JSON.parse(window.localStorage.getItem("user"));
+    if (auth) {
+      loginSuccess(auth);
+    }
+  }
+
   onClickLogout = () => {
     this.props.onCloseSidebar();
     this.props.onLogout();
@@ -127,6 +138,7 @@ const mapStateToProps = (state) => ({
   successMsg: state.alert.successMsg,
   showSuccessMsg: state.alert.showSuccessMsg,
   showErrorMsg: state.alert.showErrorMsg,
+  loading: state.common.loading,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -135,6 +147,7 @@ const mapDispatchToProps = (dispatch) => ({
   onCloseErrorMsg: () => dispatch({ type: alertActions.HIDE_ERROR_MESSAGE }),
   onCloseSuccessMsg: () =>
     dispatch({ type: alertActions.HIDE_SUCCESS_MESSAGE }),
+  authAction: bindActionCreators(authAction, dispatch),
 });
 
 export default connect(

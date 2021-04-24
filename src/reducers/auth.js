@@ -19,13 +19,14 @@ export default (state = defaultState, action) => {
         ...defaultState,
       };
     case Auth.LOGIN_SUCCESS:
-      RequestManager.setToken(action.payload.data.result.token);
+      RequestManager.setToken(action.payload.token);
       return {
-        ...action.payload.data.result,
+        ...action.payload,
       };
     case Auth.LOGIN_FAILED:
     case Auth.LOGOUT:
       RequestManager.setToken("");
+      window.localStorage.clear();
       return {
         ...defaultState,
       };

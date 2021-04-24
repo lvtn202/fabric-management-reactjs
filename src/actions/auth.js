@@ -26,14 +26,14 @@ export const loginRequest = (body, completion) => {
       .then((data) => {
         console.log(data);
         if (data.data.status === 1) {
-          dispatch(loginSuccess(data));
+          dispatch(loginSuccess(data.data.result));
           dispatch({
             type: Alert.SHOW_SUCCESS_MESSAGE,
             payload: {
               successMsg: "Đăng nhập thành công",
             },
           });
-          completion();
+          completion(data);
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }

@@ -28,7 +28,9 @@ class Login extends React.Component {
       password: password,
       email: email,
     });
-    loginRequest(body, () => {
+    loginRequest(body, (response) => {
+      console.log(response.data.result);
+      window.localStorage.setItem("user", JSON.stringify(response.data.result));
       this.props.onOpenSidebar();
       history.push("/dye-plant");
     });

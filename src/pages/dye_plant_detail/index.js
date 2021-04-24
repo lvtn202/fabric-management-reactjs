@@ -120,7 +120,11 @@ class DyePlantDetail extends React.Component {
             </Button>
           </Grid>
           <Grid item xs={6} sm={3}>
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => history.push("/order/create")}
+            >
               Tạo đơn đặt hàng
             </Button>
           </Grid>
@@ -133,7 +137,9 @@ class DyePlantDetail extends React.Component {
             <Button
               variant="contained"
               color="primary"
-              onClick={() => history.push(`/dye-plant/${detailDyePlant.id}/raw`)}
+              onClick={() =>
+                history.push(`/dye-plant/${detailDyePlant.id}/raw`)
+              }
             >
               Danh sách hàng tồn
             </Button>
