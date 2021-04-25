@@ -13,6 +13,7 @@ import { Grid, Box, Button, MenuItem } from "@material-ui/core";
 import * as dyePlantAction from "../../actions/dye_plant";
 import * as rawActions from "../../actions/raw";
 import * as orderActions from "../../actions/order";
+import { CREATE_ORDER_FORM } from "./../../constants/form_name";
 
 class OrderCreation extends React.Component {
   componentDidMount() {
@@ -65,7 +66,7 @@ class OrderCreation extends React.Component {
       formValues,
     } = this.props;
     console.log(formValues);
-    
+
     return (
       <form className={classes.root} onSubmit={handleSubmit(this.submitForm)}>
         <Grid container spacing={3} alignItems="center">
@@ -118,9 +119,11 @@ class OrderCreation extends React.Component {
               label="Chọn màu"
             >
               {listFabricType
-                .find((item) => (item.type === formValues?.fabricType))
+                .find((item) => item.type === formValues?.fabricType)
                 ?.colors.map((item, index) => (
-                  <MenuItem key={index} value={item}>{item}</MenuItem>
+                  <MenuItem key={index} value={item}>
+                    {item}
+                  </MenuItem>
                 ))}
             </Field>
           </Grid>
@@ -168,7 +171,7 @@ class OrderCreation extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  formValues: getFormValues("CREATE_ORDER_FORM")(state),
+  formValues: getFormValues(CREATE_ORDER_FORM)(state),
   listDyePlant: state.dyeplant.listDyePlant,
   listFabricType: state.raw.listFabricType,
   userId: state.auth.id,
@@ -202,7 +205,7 @@ OrderCreation.propTypes = {
 };
 
 const withReduxForm = reduxForm({
-  form: "CREATE_ORDER_FORM",
+  form: CREATE_ORDER_FORM,
   validate,
 });
 

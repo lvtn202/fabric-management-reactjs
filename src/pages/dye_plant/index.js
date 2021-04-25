@@ -75,7 +75,7 @@ class DyePlant extends React.Component {
           </Typography>
         ) : (
           <TableContainer component={Paper} className={classes.tableContainer}>
-            <Table className={classes.table} aria-label="simple table">
+            <Table stickyHeader className={classes.table} aria-label="simple table">
               <TableHead>
                 <TableRow>
                   <TableCell align="center">Tên xưởng</TableCell>

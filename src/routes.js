@@ -9,6 +9,7 @@ import Order from "./pages/order";
 import OrderCreation from "./pages/order_creation";
 import Raw from "./pages/raw";
 import OrderDetail from "./pages/order_detail";
+import ExportRaw from "./pages/export_raw";
 import NotFound from "./pages/not_found";
 
 const routes = [
@@ -65,6 +66,11 @@ const routes = [
     path: "/raw",
     exact: true,
     main: ({ history }) => <Raw history={history} />,
+  },
+  {
+    path: "/export",
+    exact: true,
+    main: ({ history }) => <ExportRaw history={history} />,
   },
   {
     path: "",

@@ -10,6 +10,7 @@ import AppTextField from "../../components/form_helper/text_field";
 import * as modalActions from "../../actions/modal";
 import validate from "./validate";
 import * as dyePlantAction from "../../actions/dye_plant";
+import { DYE_PLANT_FORM } from "./../../constants/form_name";
 
 class DyePlantForm extends React.Component {
   handleSubmitForm = (data) => {
@@ -133,7 +134,7 @@ DyePlantForm.propTypes = {
 };
 
 const withReduxForm = reduxForm({
-  form: "DYE_PLANT_FORM",
+  form: DYE_PLANT_FORM,
   validate,
 });
 

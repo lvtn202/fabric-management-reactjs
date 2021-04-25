@@ -15,8 +15,14 @@ class Component extends React.Component {
           Sample page
         </Typography>
         <Divider />
+        {this.renderPage()}
       </React.Fragment>
     );
+  }
+
+  renderPage() {
+    const { classes } = this.props;
+    return <React.Fragment></React.Fragment>;
   }
 }
 

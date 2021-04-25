@@ -1,10 +1,10 @@
 const styles = (theme) => ({
   root: {
-    marginTop: '20px',
+    marginTop: "20px",
     flexGrow: 1,
-    padding: '2px 4px',
-    display: 'flex',
-    alignItems: 'center',
+    padding: "2px 4px",
+    display: "flex",
+    alignItems: "center",
     width: 400,
   },
   input: {
@@ -18,12 +18,13 @@ const styles = (theme) => ({
     minWidth: 650,
   },
   tableContainer: {
-    marginTop: '20px',
+    marginTop: "20px",
+    maxHeight: 500,
   },
   notFound: {
     marginTop: 16,
-    alignItems: 'center'
-  }
+    alignItems: "center",
+  },
 });
 
 export default styles;

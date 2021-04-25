@@ -17,6 +17,7 @@ import Container from "@material-ui/core/Container";
 import validate from "./validate";
 import AppTextField from "../../components/form_helper/text_field";
 import * as authAction from "../../actions/auth";
+import { LOG_IN_FORM } from "./../../constants/form_name";
 
 class Login extends React.Component {
   submitForm = (data) => {
@@ -120,7 +121,7 @@ Login.propTypes = {
 };
 
 const withReduxForm = reduxForm({
-  form: "LOG_IN_FORM",
+  form: LOG_IN_FORM,
   validate,
 });
 

@@ -7,6 +7,7 @@ import sidebar from "./reducers/sidebar";
 import dyeplant from "./reducers/dye_plant";
 import dyebatch from "./reducers/dye_batch";
 import raw from "./reducers/raw";
+import exportRaw from "./reducers/export";
 import order from "./reducers/order";
 import importSlip from "./reducers/import";
 import { reducer as formReducer } from "redux-form";
@@ -15,6 +16,7 @@ export default combineReducers({
   auth,
   alert,
   common,
+  exportRaw,
   modal,
   dyebatch,
   dyeplant,
