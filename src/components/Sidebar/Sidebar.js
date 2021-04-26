@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     maxWidth: 240,
     backgroundColor: theme.palette.background.paper,
+    borderRight: "rgba(0, 0, 0, 0.12) solid 1px",
   },
   nested: {
     paddingLeft: theme.spacing(5),

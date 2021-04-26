@@ -39,8 +39,8 @@ export const SidebarData = [
         exact: false,
       },
       {
-        title: "Phiếu xuất",
-        path: "/export",
+        title: "Tạo phiếu xuất",
+        path: "/export/create",
         exact: false,
       },
     ],
@@ -56,8 +56,8 @@ export const SidebarData = [
         exact: false,
       },
       {
-        title: "Phiếu nhập",
-        path: "/import",
+        title: "Tạo phiếu nhập",
+        path: "/import/create",
         exact: false,
       },
     ],

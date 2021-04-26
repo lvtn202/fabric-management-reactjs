@@ -65,7 +65,6 @@ class OrderCreation extends React.Component {
       pristine,
       formValues,
     } = this.props;
-    console.log(formValues);
 
     return (
       <form className={classes.root} onSubmit={handleSubmit(this.submitForm)}>

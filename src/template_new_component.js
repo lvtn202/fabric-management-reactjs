@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
-import { withStyles } from "@material-ui/styles";
 import PropTypes from "prop-types";
 import styles from "./styles";
 import { bindActionCreators, compose } from "redux";
+import { withStyles } from "@material-ui/styles";
 import { Typography, Divider } from "@material-ui/core";
 
 class Component extends React.Component {

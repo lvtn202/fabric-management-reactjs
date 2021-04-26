@@ -17,7 +17,6 @@ const styles = (theme) => ({
     paddingLeft: 20,
     bottom: 20,
     right: 20,
-    borderLeft: "rgba(0, 0, 0, 0.12) solid 1px",
   },
   mainContainer: {
     position: "absolute",

@@ -61,7 +61,6 @@ class App extends React.Component {
     var sideBar = isDisplaySideBar === true ? <Sidebar /> : "";
     return (
       <ThemeProvider theme={theme}>
-        {loading && <LinearProgress />}
         <AppBar position="sticky">
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
@@ -83,6 +82,7 @@ class App extends React.Component {
             )}
           </Toolbar>
         </AppBar>
+        {loading && <LinearProgress />}
         <ModalComponent />
         {sideBar}
         <div
