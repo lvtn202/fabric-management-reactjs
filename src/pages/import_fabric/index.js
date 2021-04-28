@@ -12,17 +12,51 @@ import Stepper from "@material-ui/core/Stepper";
 import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
+import * as importActions from "../../actions/import";
 
 class ImportFabric extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       activeStep: 0,
+      disableNext: true,
+      disableFinish: true,
+      dyehouse: {},
+      fabricType: "",
+      color: "",
+      driver: "",
+      fabrics: [],
     };
   }
 
   handleNext = () => {
-    this.setState({ activeStep: this.state.activeStep + 1 });
+    if (this.state.activeStep === 1) {
+      const {
+        dyehouse,
+        fabricType,
+        color,
+        driver,
+        fabrics,
+        orderId,
+      } = this.state;
+      const { history, importActions, userId } = this.props;
+      const { createImportRequest } = importActions;
+      let body = JSON.stringify({
+        userId: userId,
+        dyehouseId: dyehouse.id,
+        fabricType: fabricType,
+        color: color,
+        fabrics: fabrics,
+        driver: driver,
+        orderId: orderId,
+        createDate: new Date().getTime(),
+      });
+      createImportRequest(body, () => {
+        history.push("/dye-batch");
+      });
+    } else {
+      this.setState({ activeStep: this.state.activeStep + 1 });
+    }
   };
 
   handleBack = () => {
@@ -32,13 +66,44 @@ class ImportFabric extends React.Component {
   getStepContent(step) {
     switch (step) {
       case 0:
-        return <InfoForm />;
+        return <InfoForm handleUpdateInfo={this.handleUpdateInfo} />;
       case 1:
-        return <ListFabricForm />;
+        return (
+          <ListFabricForm
+            infoValues={this.state}
+            handleUpdateFabrics={this.handleUpdateFabrics}
+          />
+        );
       default:
         throw new Error("Unknown step");
     }
   }
+
+  handleUpdateFabrics = (driver, fabrics) => {
+    if (fabrics.length && driver !== "") {
+      this.setState({
+        driver,
+        fabrics,
+        disableFinish: false,
+      });
+    } else {
+      this.setState({
+        disableFinish: true,
+      });
+    }
+  };
+
+  handleUpdateInfo = (infoFormValues) => {
+    const { dyehouse, fabricType, color, orderId } = infoFormValues;
+    console.log(infoFormValues);
+    this.setState({
+      dyehouse,
+      fabricType,
+      color,
+      orderId,
+      disableNext: false,
+    });
+  };
 
   render() {
     return (
@@ -92,6 +157,11 @@ class ImportFabric extends React.Component {
                   color="primary"
                   onClick={this.handleNext}
                   className={classes.button}
+                  disabled={
+                    activeStep === steps.length - 1
+                      ? this.state.disableFinish
+                      : this.state.disableNext
+                  }
                 >
                   {activeStep === steps.length - 1 ? "Tạo phiếu" : "Tiếp theo"}
                 </Button>
@@ -104,14 +174,21 @@ class ImportFabric extends React.Component {
   }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  userId: state.auth.id,
+});
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  importActions: bindActionCreators(importActions, dispatch),
+});
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 ImportFabric.propTypes = {
   classes: PropTypes.object,
+  importActions: PropTypes.shape({
+    createImportRequest: PropTypes.func,
+  }),
 };
 
 export default compose(withConnect, withStyles(styles))(ImportFabric);

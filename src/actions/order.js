@@ -44,6 +44,47 @@ export const getListOrderRequest = (keyword) => {
   };
 };
 
+// GET LIST IMPORT
+export const getListOrderImport = () => ({
+  type: Order.FETCH_LIST_ORDER_IMPORT,
+});
+
+export const getListOrderImportSuccess = (data) => ({
+  type: Order.FETCH_LIST_ORDER_IMPORT_SUCCESS,
+  payload: data,
+});
+
+export const getListOrderImportFailed = (error) => ({
+  type: Order.FETCH_LIST_ORDER_IMPORT_FAILED,
+  payload: error,
+});
+
+export const getListOrderImportRequest = (dyehouseId, fabricType, color) => {
+  return (dispatch) => {
+    dispatch(getListOrderImport());
+    dispatch({ type: SHOW_LOADING });
+    apis
+      .getListOrderImport(dyehouseId, fabricType, color)
+      .then((data) => {
+        if (data.data.status === 1) {
+          dispatch(getListOrderImportSuccess(data));
+        } else {
+          dispatch(showError(data.data.status_code, data.status));
+        }
+        setTimeout(() => {
+          dispatch({ type: HIDE_LOADING });
+        }, 1000);
+      })
+      .catch((error) => {
+        dispatch(showError(error, error.status));
+        dispatch(getListOrderImportFailed(error));
+        setTimeout(() => {
+          dispatch({ type: HIDE_LOADING });
+        }, 1000);
+      });
+  };
+};
+
 // GET DETAIL
 export const getDetailOrder = () => ({
   type: Order.FETCH_DETAIL_ORDER,

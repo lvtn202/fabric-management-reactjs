@@ -31,7 +31,6 @@ import {
   IconButton,
 } from "@material-ui/core";
 
-
 class ExportRaw extends React.Component {
   constructor(props) {
     super(props);
@@ -232,9 +231,11 @@ class ExportRaw extends React.Component {
   }
 
   add() {
-    this.setState((prev) => ({
-      currentListRaws: [...prev.currentListRaws, this.state.currentRaw],
-    }));
+    if (Object.keys(this.state.currentRaw).length !== 0)
+      this.setState((prev) => ({
+        currentListRaws: [...prev.currentListRaws, this.state.currentRaw],
+        currentRaw: {},
+      }));
   }
 
   remove = (item) => {

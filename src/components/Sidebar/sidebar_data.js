@@ -51,7 +51,7 @@ export const SidebarData = [
     exact: false,
     subNav: [
       {
-        title: "Danh sách vải thành phẩm",
+        title: "Danh sách phiếu nhập",
         path: "/dye-batch",
         exact: false,
       },
