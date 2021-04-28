@@ -19,6 +19,7 @@ const styles = (theme) => ({
     },
     tableContainer: {
       marginTop: '20px',
+      maxHeight: 500,
     },
     notFound: {
       marginTop: 16,

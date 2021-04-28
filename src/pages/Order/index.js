@@ -83,7 +83,7 @@ class Order extends React.Component {
           </IconButton>
         </Paper>
         <TableContainer component={Paper} className={classes.tableContainer}>
-          <Table className={classes.table} aria-label="simple table">
+          <Table stickyHeader className={classes.table} aria-label="simple table">
             <TableHead>
               <TableRow>
                 <TableCell align="center">Mã đơn</TableCell>

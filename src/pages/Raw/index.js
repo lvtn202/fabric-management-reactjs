@@ -72,7 +72,7 @@ class Raw extends React.Component {
     const { classes, listRaw } = this.props;
     return (
       <TableContainer component={Paper} className={classes.tableContainer}>
-        <Table className={classes.table} aria-label="simple table">
+        <Table stickyHeader className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell align="center">Mã loại vải</TableCell>
@@ -98,7 +98,7 @@ class Raw extends React.Component {
     const { classes, listFabricType, listRawAllPlant, history } = this.props;
     return (
       <TableContainer component={Paper} className={classes.tableContainer}>
-        <Table className={classes.table} aria-label="simple table">
+        <Table stickyHeader className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell align="center">Xưởng</TableCell>

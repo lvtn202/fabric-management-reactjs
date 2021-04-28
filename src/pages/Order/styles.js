@@ -22,6 +22,7 @@ const styles = (theme) => ({
   },
   tableContainer: {
     marginTop: '20px',
+    maxHeight: 500,
   }
 });
 
