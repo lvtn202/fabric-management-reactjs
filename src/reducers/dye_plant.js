@@ -9,6 +9,7 @@ const defaultState = {
 export default (state = defaultState, action) => {
   switch (action.type) {
     case DyePlant.FETCH_LIST_DYEPLANT:
+    case DyePlant.FETCH_LIST_DYEPLANT_FAILED:
       return {
         ...state,
         listDyePlant: [],
@@ -18,12 +19,8 @@ export default (state = defaultState, action) => {
         ...state,
         listDyePlant: action.payload.data.result,
       };
-    case DyePlant.FETCH_LIST_DYEPLANT_FAILED:
-      return {
-        ...state,
-        listDyePlant: [],
-      };
     case DyePlant.FETCH_DETAIL_DYEPLANT:
+    case DyePlant.FETCH_DETAIL_DYEPLANT_FAILED:
       return {
         ...state,
         detailDyePlant: {},
@@ -33,12 +30,8 @@ export default (state = defaultState, action) => {
         ...state,
         detailDyePlant: action.payload.data.result,
       };
-    case DyePlant.FETCH_DETAIL_DYEPLANT_FAILED:
-      return {
-        ...state,
-        detailDyePlant: {},
-      };
     case DyePlant.UPDATE_DETAIL_DYEPLANT:
+    case DyePlant.UPDATE_DETAIL_DYEPLANT_FAILED:
       return {
         ...state,
       };
@@ -46,10 +39,6 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         detailDyePlant: action.payload.data.result,
-      };
-    case DyePlant.UPDATE_DETAIL_DYEPLANT_FAILED:
-      return {
-        ...state,
       };
     default:
       return state;

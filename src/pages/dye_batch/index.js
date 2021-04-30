@@ -42,7 +42,7 @@ class DyeBatch extends React.Component {
         <Divider />
         {!listDyeBatch.length && !loading ? (
           <Typography variant="h5" gutterBottom className={classes.notFound}>
-            Không tìm thấy xưởng nào
+            Không tìm thấy phiếu nào
           </Typography>
         ) : (
           this.renderTable()
@@ -54,7 +54,7 @@ class DyeBatch extends React.Component {
   renderTable() {
     const { classes, listDyeBatch, history } = this.props;
     const handleClick = (event, id) => {
-      // history.push(`/dye-plant/${id}`);
+      history.push(`/dye-batch/${id}`);
     };
     return (
       <TableContainer component={Paper} className={classes.tableContainer}>

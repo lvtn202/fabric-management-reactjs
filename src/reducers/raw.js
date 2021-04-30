@@ -11,6 +11,7 @@ const defaultState = {
 export default (state = defaultState, action) => {
   switch (action.type) {
     case Raw.FETCH_LIST_RAW_STOCK:
+    case Raw.FETCH_LIST_RAW_STOCK_FAILED:
       return {
         ...state,
         listRaw: [],
@@ -20,12 +21,8 @@ export default (state = defaultState, action) => {
         ...state,
         listRaw: action.payload.data.result,
       };
-    case Raw.FETCH_LIST_RAW_STOCK_FAILED:
-      return {
-        ...state,
-        listRaw: [],
-      };
     case Raw.FETCH_LIST_FABRIC_DYEPLANT:
+    case Raw.FETCH_LIST_FABRIC_DYEPLANT_FAILED:
       return {
         ...state,
         listFabric: [],
@@ -35,12 +32,8 @@ export default (state = defaultState, action) => {
         ...state,
         listFabric: action.payload.data.result,
       };
-    case Raw.FETCH_LIST_FABRIC_DYEPLANT_FAILED:
-      return {
-        ...state,
-        listFabric: [],
-      };
     case Raw.FETCH_LIST_FABRIC_TYPE:
+    case Raw.FETCH_LIST_FABRIC_TYPE_FAILED:
       return {
         ...state,
         listFabricType: [],
@@ -50,12 +43,8 @@ export default (state = defaultState, action) => {
         ...state,
         listFabricType: action.payload.data.result,
       };
-    case Raw.FETCH_LIST_FABRIC_TYPE_FAILED:
-      return {
-        ...state,
-        listFabricType: [],
-      };
     case Raw.FETCH_LIST_RAW_ALL_PLANT:
+    case Raw.FETCH_LIST_RAW_ALL_PLANT_FAILED:
       return {
         ...state,
         listRawAllPlant: [],
@@ -64,11 +53,6 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         listRawAllPlant: action.payload.data.result,
-      };
-    case Raw.FETCH_LIST_RAW_ALL_PLANT_FAILED:
-      return {
-        ...state,
-        listRawAllPlant: [],
       };
     default:
       return state;

@@ -3,6 +3,7 @@ import Home from "./pages/home";
 import Login from "./components/login";
 import DyePlant from "./pages/dye_plant";
 import DyeBatch from "./pages/dye_batch";
+import DyeBatchDetail from "./pages/dye_batch_detail";
 import DyePlantDetail from "./pages/dye_plant_detail";
 import DyePlantRaw from "./pages/dye_plant_raw";
 import Order from "./pages/order";
@@ -62,6 +63,11 @@ const routes = [
     path: "/dye-batch",
     exact: true,
     main: () => <DyeBatch />,
+  },
+  {
+    path: "/dye-batch/:id",
+    exact: true,
+    main: ({ history, match }) => <DyeBatchDetail history={history} match={match}/>,
   },
   {
     path: "/raw",

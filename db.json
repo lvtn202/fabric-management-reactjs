@@ -40,5 +40,34 @@
                 "inStock": 563024.5
             }
         ]
+    },
+    "detailDyeBatch": {
+        "status": 1,
+        "status_code": "OK",
+        "result": {
+            "dyeBatchId": 1,
+            "color": "Maroon",
+            "dyehouseName": "Thành Hòa",
+            "fabricType": "1080",
+            "price": "5500.000",
+            "dyeDate": "1596236400000",
+            "firstName": null,
+            "lastName": "Admin",
+            "driver": "nguyen"
+        }
+    },
+    "listFabricOfDyeBatch": {
+        "status": 1,
+        "status_code": "OK",
+        "result": [
+            {
+                "id": 94,
+                "rawLength": 8694.0,
+                "finishedLength": 8668.0,
+                "status": "COMPLETED",
+                "colorName": "Blue",
+                "fabricType": "1080"
+            }
+        ]
     }
 }

@@ -10,6 +10,8 @@ export default (state = defaultState, action) => {
   switch (action.type) {
     case Order.FETCH_LIST_ORDER:
     case Order.FETCH_LIST_IMPORT_ORDER:
+    case Order.FETCH_LIST_ORDER_FAILED:
+    case Order.FETCH_LIST_ORDER_IMPORT_FAILED:
       return {
         ...state,
         listOrder: [],
@@ -20,13 +22,8 @@ export default (state = defaultState, action) => {
         ...state,
         listOrder: action.payload.data.result,
       };
-    case Order.FETCH_LIST_ORDER_FAILED:
-    case Order.FETCH_LIST_ORDER_IMPORT_FAILED:
-      return {
-        ...state,
-        listOrder: [],
-      };
     case Order.FETCH_DETAIL_ORDER:
+    case Order.FETCH_DETAIL_ORDER_FAILED:
       return {
         ...state,
         detailOrder: {},
@@ -35,11 +32,6 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         detailOrder: action.payload.data.result,
-      };
-    case Order.FETCH_DETAIL_ORDER_FAILED:
-      return {
-        ...state,
-        detailOrder: {},
       };
     default:
       return state;
