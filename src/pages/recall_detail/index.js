@@ -4,36 +4,178 @@ import PropTypes from "prop-types";
 import styles from "./styles";
 import { bindActionCreators, compose } from "redux";
 import { withStyles } from "@material-ui/styles";
-import { Typography, Divider } from "@material-ui/core";
+import * as recallActions from "../../actions/recall";
+import { Typography, Divider, Grid } from "@material-ui/core";
+import Box from "@material-ui/core/Box";
+import Button from "@material-ui/core/Button";
+import {
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@material-ui/core";
+import { currencyFormat, parseTimestamp } from "../../commons/utils";
+import { Fragment } from "react";
 
 class RecallList extends React.Component {
+  componentDidMount() {
+    const { recallActions, match } = this.props;
+    const {
+      getListFabricRecallRequest,
+      getDetailRecallRequest,
+    } = recallActions;
+    if (match) {
+      var id = match.params.id;
+      getListFabricRecallRequest(id);
+      getDetailRecallRequest(id);
+    }
+  }
+
   render() {
     const { classes } = this.props;
     return (
       <React.Fragment>
         <Typography variant="h5" gutterBottom>
-          Danh sách phiếu hàng trả
+          Phiếu hàng trả
         </Typography>
         <Divider />
         {this.renderPage()}
+        <Divider className={classes.divider} />
+        <Typography variant="h6" gutterBottom>
+          {`Danh sách cây vải`}
+        </Typography>
+        {this.renderTable()}
       </React.Fragment>
     );
   }
 
   renderPage() {
-    const { classes } = this.props;
-    return <React.Fragment></React.Fragment>;
+    const { classes, detailRecall } = this.props;
+    return (
+      <React.Fragment>
+        <Grid container spacing={3} className={classes.grid}>
+          <Grid item xs={2}>
+            <Box fontWeight="fontWeightMedium">Xưởng nhuộm:</Box>
+          </Grid>
+          <Grid item xs={10}>
+            <Box fontWeight="normal" ml={1}>
+              {detailRecall.dyehouseName ?? ""}
+            </Box>
+          </Grid>
+          <Grid item xs={2}>
+            <Box fontWeight="fontWeightMedium">Ngày tạo:</Box>
+          </Grid>
+          <Grid item xs={10}>
+            <Box fontWeight="normal" ml={1}>
+              {parseTimestamp(detailRecall.returnDate) ?? ""}
+            </Box>
+          </Grid>
+          <Grid item xs={2}>
+            <Box fontWeight="fontWeightMedium">Nhân viên tạo:</Box>
+          </Grid>
+          <Grid item xs={10}>
+            <Box fontWeight="normal" ml={1}>
+              {`${detailRecall.firstName ?? ""} ${detailRecall.lastName ?? ""}`}
+            </Box>
+          </Grid>
+          <Grid item xs={2}>
+            <Box fontWeight="fontWeightMedium">Nhân viên nhận:</Box>
+          </Grid>
+          <Grid item xs={10}>
+            <Box fontWeight="normal" ml={1}>
+              {detailRecall.receivedName ?? ""}
+            </Box>
+          </Grid>
+        </Grid>
+      </React.Fragment>
+    );
+  }
+
+  renderTable() {
+    const { classes, listFabricRecall } = this.props;
+    return (
+      <TableContainer component={Paper} className={classes.tableContainer}>
+        <Table stickyHeader className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              <TableCell align="center">Mã cây vải</TableCell>
+              <TableCell align="center">Màu</TableCell>
+              <TableCell align="center">Loại vải</TableCell>
+              <TableCell align="center">Độ dài thành phẩm&nbsp;(m)</TableCell>
+              <TableCell align="center">Độ dài trả&nbsp;(m)</TableCell>
+              <TableCell align="center">Thành tiền&nbsp;(VND)</TableCell>
+              <TableCell align="center">Lỗi</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {listFabricRecall.map((row) => (
+              <TableRow key={row.id} hover>
+                <TableCell align="center">{row.returnId}</TableCell>
+                <TableCell align="center">{row.color}</TableCell>
+                <TableCell align="center">{row.fabricType}</TableCell>
+                <TableCell align="center">{row.doneLength}</TableCell>
+                <TableCell align="center">{row.returnLength}</TableCell>
+                <TableCell align="center">
+                  {currencyFormat(row.money)}
+                </TableCell>
+                <TableCell align="center">{row.returnReason}</TableCell>
+              </TableRow>
+            ))}
+            <TableRow>
+              <TableCell rowSpan={3} />
+              <TableCell rowSpan={3} />
+              <TableCell rowSpan={3} />
+              <TableCell rowSpan={3} />
+              <TableCell rowSpan={3} />
+              <TableCell align="center">Tổng cây vải</TableCell>
+              <TableCell align="center">{listFabricRecall.length}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell align="center">Tổng trả</TableCell>
+              <TableCell align="center">
+                {listFabricRecall.reduce(
+                  (total, current, index) => total + Number(current.returnLength),
+                  0
+                )}
+                &nbsp;(m)
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell align="center">Thành tiền</TableCell>
+              <TableCell align="center">
+                {currencyFormat(
+                  listFabricRecall.reduce(
+                    (total, current, index) => total + Number(current.money),
+                    0
+                  )
+                )}
+              </TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </TableContainer>
+    );
   }
 }
 
-const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  detailRecall: state.recall.detailRecall,
+  listFabricRecall: state.recall.listFabricRecall,
+});
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  recallActions: bindActionCreators(recallActions, dispatch),
+});
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 RecallList.propTypes = {
   classes: PropTypes.object,
+  detailRecall: PropTypes.object,
+  listFabricRecall: PropTypes.array,
 };
 
 export default compose(withConnect, withStyles(styles))(RecallList);

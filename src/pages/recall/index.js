@@ -94,7 +94,7 @@ class RecallList extends React.Component {
                       {currencyFormat(row.money)}
                     </TableCell>
                     <TableCell align="center">{parseTimestamp(row.returnDate)}</TableCell>
-                    <TableCell align="center">{`${row.firstName ?? ""} ${row.lastName}`}</TableCell>
+                    <TableCell align="center">{`${row.firstName ?? ""} ${row.lastName ?? ""}`}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

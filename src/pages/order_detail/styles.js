@@ -3,7 +3,7 @@ const styles = (theme) => ({
     marginTop: theme.spacing(2),
   },
   tableContainer: {
-    marginTop: "20px",
+    marginTop: theme.spacing(2),
   },
 });
 

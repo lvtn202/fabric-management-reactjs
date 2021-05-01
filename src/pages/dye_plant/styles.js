@@ -1,6 +1,6 @@
 const styles = (theme) => ({
   root: {
-    marginTop: "20px",
+    marginTop: theme.spacing(2),
     flexGrow: 1,
     padding: "2px 4px",
     display: "flex",
@@ -18,7 +18,7 @@ const styles = (theme) => ({
     minWidth: 650,
   },
   tableContainer: {
-    marginTop: "20px",
+    marginTop: theme.spacing(2),
     maxHeight: 500,
   },
   notFound: {

@@ -96,7 +96,9 @@ const routes = [
   {
     path: "/recall/:id",
     exact: false,
-    main: ({ history }) => <RecallDetail history={history} />,
+    main: ({ history, match }) => (
+      <RecallDetail history={history} match={match} />
+    ),
   },
   {
     path: "",

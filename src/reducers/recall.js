@@ -3,7 +3,7 @@ import { Recall } from "./../constants/action_types";
 const defaultState = {
   listRecall: [],
   detailRecall: {},
-  ListFabricRecall: [],
+  listFabricRecall: [],
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export

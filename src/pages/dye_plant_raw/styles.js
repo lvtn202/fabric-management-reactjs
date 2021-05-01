@@ -12,7 +12,7 @@ const styles = (theme) => ({
     color: theme.palette.text.secondary,
   },
   tableContainer: {
-    marginTop: "20px",
+    marginTop: theme.spacing(2),
   },
 });
 
