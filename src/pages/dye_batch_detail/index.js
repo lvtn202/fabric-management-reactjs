@@ -143,12 +143,12 @@ class DyeBatchDetail extends React.Component {
     const { classes, listFabricDyeBatch } = this.props;
     return (
       <TableContainer component={Paper} className={classes.tableContainer}>
-        <Table className={classes.table} aria-label="simple table">
+        <Table stickyHeader className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
               <TableCell align="center">Mã cây vải</TableCell>
-              <TableCell align="center">Độ dài mộc</TableCell>
-              <TableCell align="center">Độ dài thành phẩm</TableCell>
+              <TableCell align="center">Độ dài mộc&nbsp;(m)</TableCell>
+              <TableCell align="center">Độ dài thành phẩm&nbsp;(m)</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -156,11 +156,34 @@ class DyeBatchDetail extends React.Component {
               <TableRow key={row.id} hover>
                 <TableCell align="center">{row.id}</TableCell>
                 <TableCell align="center" component="th" scope="row">
-                  {parseTimestamp(row.rawLength)}
+                  {row.rawLength}
                 </TableCell>
                 <TableCell align="center">{row.finishedLength}</TableCell>
               </TableRow>
             ))}
+            <TableRow>
+              <TableCell rowSpan={3} />
+              <TableCell align="center">Tổng cây vải</TableCell>
+              <TableCell align="center">{listFabricDyeBatch.length}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell align="center">Tổng mộc</TableCell>
+              <TableCell align="center">
+                {listFabricDyeBatch.reduce(
+                  (total, current, index) => total + current.rawLength,
+                  0
+                )}
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell align="center">Tổng thành phẩm</TableCell>
+              <TableCell align="center">
+                {listFabricDyeBatch.reduce(
+                  (total, current, index) => total + current.finishedLength,
+                  0
+                )}
+              </TableCell>
+            </TableRow>
           </TableBody>
         </Table>
       </TableContainer>
