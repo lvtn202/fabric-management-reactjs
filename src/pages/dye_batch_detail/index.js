@@ -129,7 +129,7 @@ class DyeBatchDetail extends React.Component {
               <Box fontWeight="fontWeightMedium">Đơn giá:</Box>
             </Box>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs>
             <Box fontWeight="normal" mt={2}>
               <Box>{currencyFormat(detailDyeBatch.price)}</Box>
             </Box>
@@ -140,7 +140,7 @@ class DyeBatchDetail extends React.Component {
   }
 
   renderTable() {
-    const { classes, listFabricDyeBatch } = this.props;
+    const { classes, listFabricDyeBatch, detailDyeBatch } = this.props;
     return (
       <TableContainer component={Paper} className={classes.tableContainer}>
         <Table stickyHeader className={classes.table} aria-label="simple table">
@@ -162,7 +162,7 @@ class DyeBatchDetail extends React.Component {
               </TableRow>
             ))}
             <TableRow>
-              <TableCell rowSpan={3} />
+              <TableCell rowSpan={4} />
               <TableCell align="center">Tổng cây vải</TableCell>
               <TableCell align="center">{listFabricDyeBatch.length}</TableCell>
             </TableRow>
@@ -172,7 +172,7 @@ class DyeBatchDetail extends React.Component {
                 {listFabricDyeBatch.reduce(
                   (total, current, index) => total + current.rawLength,
                   0
-                )}
+                )}&nbsp;(m)
               </TableCell>
             </TableRow>
             <TableRow>
@@ -181,6 +181,17 @@ class DyeBatchDetail extends React.Component {
                 {listFabricDyeBatch.reduce(
                   (total, current, index) => total + current.finishedLength,
                   0
+                )}&nbsp;(m)
+              </TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell align="center">Thành tiền</TableCell>
+              <TableCell align="center">
+                {currencyFormat(
+                  listFabricDyeBatch.reduce(
+                    (total, current, index) => total + current.finishedLength,
+                    0
+                  ) * detailDyeBatch.price
                 )}
               </TableCell>
             </TableRow>

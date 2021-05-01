@@ -9,6 +9,7 @@ import dyebatch from "./reducers/dye_batch";
 import raw from "./reducers/raw";
 import exportRaw from "./reducers/export";
 import order from "./reducers/order";
+import recall from "./reducers/recall";
 import importSlip from "./reducers/import";
 import { reducer as formReducer } from "redux-form";
 
@@ -19,6 +20,7 @@ export default combineReducers({
   exportRaw,
   modal,
   dyebatch,
+  recall,
   dyeplant,
   raw,
   order,

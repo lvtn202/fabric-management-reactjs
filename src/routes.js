@@ -9,6 +9,8 @@ import DyePlantRaw from "./pages/dye_plant_raw";
 import Order from "./pages/order";
 import OrderCreation from "./pages/order_creation";
 import Raw from "./pages/raw";
+import RecallList from "./pages/recall";
+import RecallDetail from "./pages/recall_detail";
 import OrderDetail from "./pages/order_detail";
 import ExportRaw from "./pages/export_raw";
 import ImportFabric from "./pages/import_fabric";
@@ -57,7 +59,7 @@ const routes = [
   {
     path: "/order/create",
     exact: false,
-    main: ({ history }) => <OrderCreation history={history}/>,
+    main: ({ history }) => <OrderCreation history={history} />,
   },
   {
     path: "/dye-batch",
@@ -67,7 +69,9 @@ const routes = [
   {
     path: "/dye-batch/:id",
     exact: true,
-    main: ({ history, match }) => <DyeBatchDetail history={history} match={match}/>,
+    main: ({ history, match }) => (
+      <DyeBatchDetail history={history} match={match} />
+    ),
   },
   {
     path: "/raw",
@@ -84,7 +88,16 @@ const routes = [
     exact: true,
     main: ({ history }) => <ImportFabric history={history} />,
   },
-
+  {
+    path: "/recall",
+    exact: true,
+    main: ({ history }) => <RecallList history={history} />,
+  },
+  {
+    path: "/recall/:id",
+    exact: false,
+    main: ({ history }) => <RecallDetail history={history} />,
+  },
   {
     path: "",
     exact: false,

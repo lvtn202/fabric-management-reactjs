@@ -69,5 +69,56 @@
                 "fabricType": "1080"
             }
         ]
+    },
+    "listReturnSlip": {
+        "status": 1,
+        "status_code": "OK",
+        "result": [
+            {
+                "id": 1,
+                "dyehouseName": "Thành Hòa",
+                "money": "12000000.000",
+                "returnDate": "1598403600000",
+                "firstName": null,
+                "lastName": "Admin"
+            }
+        ]
+    },
+    "detailReturnSlip": {
+        "status": 1,
+        "status_code": "OK",
+        "result": {
+            "returnSlipId": 1,
+            "dyehouseName": "Thành Hòa",
+            "money": "12000000.000",
+            "receivedName": "Nguyễn Văn A",
+            "returnDate": "1598403600000",
+            "firstName": null,
+            "lastName": "Admin"
+        }
+    },
+    "listReturn": {
+        "status": 1,
+        "status_code": "OK",
+        "result": [
+            {
+                "returnId": 1,
+                "color": "Teal",
+                "fabricType": "1080",
+                "doneLength": "8612.0",
+                "returnLength": "135.0",
+                "returnReason": "Lỗi màu",
+                "money": "1352000.000"
+            },
+            {
+                "returnId": 13,
+                "color": "Teal",
+                "fabricType": "1080",
+                "doneLength": "8612.0",
+                "returnLength": "685.0",
+                "returnReason": "Lỗi màu",
+                "money": "4532000.000"
+            }
+        ]
     }
 }

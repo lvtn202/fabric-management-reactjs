@@ -70,6 +70,11 @@ export const SidebarData = [
       {
         title: "Danh sách hàng trả",
         path: "/recall",
+        exact: true,
+      },
+      {
+        title: "Tạo phiếu hàng trả",
+        path: "/recall/create",
         exact: false,
       },
     ],

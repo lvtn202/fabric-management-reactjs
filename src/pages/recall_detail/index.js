@@ -4,16 +4,15 @@ import PropTypes from "prop-types";
 import styles from "./styles";
 import { bindActionCreators, compose } from "redux";
 import { withStyles } from "@material-ui/styles";
-import Typography from "@material-ui/core/Typography";
-import Divider from "@material-ui/core/Divider";
+import { Typography, Divider } from "@material-ui/core";
 
-class Component extends React.Component {
+class RecallList extends React.Component {
   render() {
     const { classes } = this.props;
     return (
       <React.Fragment>
         <Typography variant="h5" gutterBottom>
-          Sample page
+          Danh sách phiếu hàng trả
         </Typography>
         <Divider />
         {this.renderPage()}
@@ -33,8 +32,8 @@ const mapDispatchToProps = (dispatch) => ({});
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-Component.propTypes = {
+RecallList.propTypes = {
   classes: PropTypes.object,
 };
 
-export default compose(withConnect, withStyles(styles))(Component);
+export default compose(withConnect, withStyles(styles))(RecallList);
