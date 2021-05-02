@@ -1,41 +1,11 @@
 {
     "listDyehouse": {
-        "status": "1",
-        "statusCode": "OK",
+        "status": 1,
+        "status_code": "OK",
         "result": [
             {
                 "id": 1,
                 "name": "Tuyển Tâm",
-                "debt": 161344260,
-                "inStock": 563024.5
-            },
-            {
-                "id": 2,
-                "name": "Vạn Lợi",
-                "debt": 161344260,
-                "inStock": 563024.5
-            },
-            {
-                "id": 3,
-                "name": "Phú Hùng",
-                "debt": 161344260,
-                "inStock": 563024.5
-            },
-            {
-                "id": 4,
-                "name": "Khuyến Tâm",
-                "debt": 161344260,
-                "inStock": 563024.5
-            },
-            {
-                "id": 5,
-                "name": "Minh Tuấn",
-                "debt": 161344260,
-                "inStock": 563024.5
-            },
-            {
-                "id": 6,
-                "name": "Thành Hòa",
                 "debt": 161344260,
                 "inStock": 563024.5
             }
@@ -118,6 +88,102 @@
                 "returnLength": "685.0",
                 "returnReason": "Lỗi màu",
                 "money": "4532000.000"
+            }
+        ]
+    },
+    "listCompletedFabric": {
+        "status": 1,
+        "status_code": "OK",
+        "result": [
+            {
+                "id": 3,
+                "rawLength": "785.0",
+                "finishedLength": "3000.0",
+                "status": "COMPLETED",
+                "colorName": "White",
+                "fabricType": "1040",
+                "price": "5500.000"
+            },
+            {
+                "id": 88,
+                "rawLength": "788.0",
+                "finishedLength": "765.0",
+                "status": "COMPLETED",
+                "colorName": "Red",
+                "fabricType": "1010",
+                "price": "4500.000"
+            },
+            {
+                "id": 98,
+                "rawLength": "788.0",
+                "finishedLength": "700.0",
+                "status": "COMPLETED",
+                "colorName": "Red",
+                "fabricType": "1010",
+                "price": "4500.000"
+            },
+            {
+                "id": 105,
+                "rawLength": "788.0",
+                "finishedLength": "712.0",
+                "status": "COMPLETED",
+                "colorName": "Red",
+                "fabricType": "1010",
+                "price": "4500.000"
+            },
+            {
+                "id": 107,
+                "rawLength": "788.0",
+                "finishedLength": "780.0",
+                "status": "COMPLETED",
+                "colorName": "Red",
+                "fabricType": "1010",
+                "price": "4500.000"
+            },
+            {
+                "id": 1,
+                "rawLength": "3184.0",
+                "finishedLength": "3000.0",
+                "status": "COMPLETED",
+                "colorName": "White",
+                "fabricType": "1045",
+                "price": "5500.000"
+            },
+            {
+                "id": 2,
+                "rawLength": "5413.0",
+                "finishedLength": "5000.0",
+                "status": "COMPLETED",
+                "colorName": "Red",
+                "fabricType": "1060",
+                "price": "5500.000"
+            },
+            {
+                "id": 635,
+                "rawLength": "1000.0",
+                "finishedLength": "200.0",
+                "status": "COMPLETED",
+                "colorName": "Lime",
+                "fabricType": "1045",
+                "price": "5500.000"
+            },
+            {
+                "id": 1111,
+                "rawLength": "1000.0",
+                "finishedLength": "500.0",
+                "status": "COMPLETED",
+                "colorName": "Red",
+                "fabricType": "1045",
+                "price": "5500.000"
+            },
+            {
+                "id": 1112,
+                "rawLength": "6000.0",
+                "finishedLength": "5600.0",
+                "status": "COMPLETED",
+                "colorName": "Red",
+                "fabricType": "1045",
+                "price": "5500.000"
             }
         ]
     }

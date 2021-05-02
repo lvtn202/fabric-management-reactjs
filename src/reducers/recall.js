@@ -4,6 +4,7 @@ const defaultState = {
   listRecall: [],
   detailRecall: {},
   listFabricRecall: [],
+  listFabricOfDyeplant: [],
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -41,6 +42,17 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         listFabricRecall: action.payload.data.result,
+      };
+    case Recall.FETCH_LIST_FABRIC_OF_DYEPLANT:
+    case Recall.FETCH_LIST_FABRIC_OF_DYEPLANT_FAILED:
+      return {
+        ...state,
+        listFabricOfDyeplant: [],
+      };
+    case Recall.FETCH_LIST_FABRIC_OF_DYEPLANT_SUCCESS:
+      return {
+        ...state,
+        listFabricOfDyeplant: action.payload.data.result,
       };
     default:
       return state;

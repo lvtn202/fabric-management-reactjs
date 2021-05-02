@@ -11,6 +11,7 @@ import OrderCreation from "./pages/order_creation";
 import Raw from "./pages/raw";
 import RecallList from "./pages/recall";
 import RecallDetail from "./pages/recall_detail";
+import RecallCreation from "./pages/recall_creation";
 import OrderDetail from "./pages/order_detail";
 import ExportRaw from "./pages/export_raw";
 import ImportFabric from "./pages/import_fabric";
@@ -92,6 +93,11 @@ const routes = [
     path: "/recall",
     exact: true,
     main: ({ history }) => <RecallList history={history} />,
+  },
+  {
+    path: "/recall/create",
+    exact: true,
+    main: ({ history }) => <RecallCreation history={history} />,
   },
   {
     path: "/recall/:id",

@@ -10,8 +10,20 @@ export const getDetailRecall = (returnSlipId) => {
   );
 };
 
+// List fabric in detail
 export const getListFabric = (returnSlipId) => {
+  return RequestManager.get(`/listReturn?returnSlipId=${returnSlipId ?? ""}`);
+};
+
+// List fabric in create
+export const getListFabricDyeplant = (dyehouseId) => {
   return RequestManager.get(
-    `/listReturn?returnSlipId=${returnSlipId ?? ""}`
+    `/listCompletedFabric?dyehouseId=${
+      dyehouseId ?? ""
+    }?pageSize=100&pageIndex=0`
   );
+};
+
+export const createRecall = (body) => {
+  return RequestManager.post("/createReturnSlip", body, "application/json");
 };
