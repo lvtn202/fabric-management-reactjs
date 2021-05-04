@@ -7,7 +7,6 @@ import { withStyles } from "@material-ui/styles";
 import * as recallActions from "../../actions/recall";
 import { Typography, Divider, Grid } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
-import Button from "@material-ui/core/Button";
 import {
   Paper,
   Table,
@@ -18,7 +17,6 @@ import {
   TableRow,
 } from "@material-ui/core";
 import { currencyFormat, parseTimestamp } from "../../commons/utils";
-import { Fragment } from "react";
 
 class RecallList extends React.Component {
   componentDidMount() {

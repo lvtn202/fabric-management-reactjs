@@ -1,7 +1,7 @@
 import axios from "axios";
 
-const API_ROOT = " http://localhost:3000"; //local
-// const API_ROOT = "http://192.168.0.113:8080"; //KTX
+// const API_ROOT = " http://localhost:3000"; //local
+const API_ROOT = "http://192.168.0.113:8080"; //KTX
 // const API_ROOT = "http://10.127.175.248:8080";   //HCMUT-Meeting
 
 class RequestManager {

@@ -12,7 +12,7 @@ export const getDetailRecall = (returnSlipId) => {
 
 // List fabric in detail
 export const getListFabric = (returnSlipId) => {
-  return RequestManager.get(`/listReturn?returnSlipId=${returnSlipId ?? ""}`);
+  return RequestManager.get(`/listReturn?returnSlipId=${returnSlipId ?? ""}&pageSize=100&pageIndex=0`);
 };
 
 // List fabric in create
@@ -20,7 +20,7 @@ export const getListFabricDyeplant = (dyehouseId) => {
   return RequestManager.get(
     `/listCompletedFabric?dyehouseId=${
       dyehouseId ?? ""
-    }?pageSize=100&pageIndex=0`
+    }&pageSize=100&pageIndex=0`
   );
 };
 

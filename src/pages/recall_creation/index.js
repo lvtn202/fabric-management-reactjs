@@ -2,6 +2,8 @@ import React from "react";
 import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import styles from "./styles";
+import validate from "./validate";
+import { Alert } from "./../../constants/action_types";
 import { bindActionCreators, compose } from "redux";
 import { Field, reduxForm, getFormValues } from "redux-form";
 import AppSelectField from "../../components/form_helper/select_field";
@@ -36,8 +38,9 @@ class RecallCreation extends React.Component {
     super(props);
     this.createDate = new Date().getTime();
     this.state = {
-      currentFabric: "",
+      currentFabric: {},
       currentListFabrics: [],
+      currentListRecalls: [],
     };
     this.add = this.add.bind(this);
     this.remove = this.remove.bind(this);
@@ -50,7 +53,6 @@ class RecallCreation extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
     return (
       <React.Fragment>
         <Typography variant="h5" gutterBottom>
@@ -75,7 +77,11 @@ class RecallCreation extends React.Component {
       formValues,
       listFabricOfDyeplant,
     } = this.props;
-    const { currentListFabrics, currentFabric } = this.state;
+    const {
+      currentListFabrics,
+      currentFabric,
+      currentListRecalls,
+    } = this.state;
     const { getListFabricDyeplantRequest } = recallActions;
     return (
       <React.Fragment>
@@ -108,8 +114,9 @@ class RecallCreation extends React.Component {
                 name="dyehouseId"
                 component={AppSelectField}
                 label="Chọn xưởng nhuộm"
-                onBlur={() => {
-                  getListFabricDyeplantRequest(formValues.dyehouseId);
+                onChange={() => {
+                  if (formValues.dyehouseId)
+                    getListFabricDyeplantRequest(formValues.dyehouseId);
                 }}
               >
                 {listDyePlant.map((item, index) => (
@@ -148,6 +155,49 @@ class RecallCreation extends React.Component {
             </Grid>
           </Grid>
 
+          <Grid
+            container
+            spacing={3}
+            alignItems="center"
+            className={classes.grid}
+          >
+            <Grid item xs={2}>
+              <Box fontWeight="fontWeightMedium">Màu</Box>
+            </Grid>
+            <Grid item xs>
+              <Box fontWeight="normal">{currentFabric?.colorName ?? ""}</Box>
+            </Grid>
+          </Grid>
+          <Grid
+            container
+            spacing={3}
+            alignItems="center"
+            className={classes.grid}
+          >
+            <Grid item xs={2}>
+              <Box fontWeight="fontWeightMedium">Độ dài thành phẩm</Box>
+            </Grid>
+            <Grid item xs>
+              <Box fontWeight="normal">
+                {currentFabric?.finishedLength ?? ""}
+              </Box>
+            </Grid>
+          </Grid>
+          <Grid
+            container
+            spacing={3}
+            alignItems="center"
+            className={classes.grid}
+          >
+            <Grid item xs={2}>
+              <Box fontWeight="fontWeightMedium">Đơn giá</Box>
+            </Grid>
+            <Grid item xs>
+              <Box fontWeight="normal">
+                {currencyFormat(currentFabric?.price ?? "")}
+              </Box>
+            </Grid>
+          </Grid>
           <Grid container spacing={3} alignItems="center">
             <Grid item xs={2}>
               <Box fontWeight="fontWeightMedium">Độ dài trả&nbsp;(m)</Box>
@@ -162,34 +212,6 @@ class RecallCreation extends React.Component {
                 type="number"
                 component={AppTextField}
               />
-            </Grid>
-          </Grid>
-          <Grid
-            container
-            spacing={3}
-            alignItems="center"
-            className={classes.grid}
-          >
-            <Grid item xs={2}>
-              <Box fontWeight="fontWeightMedium">Màu</Box>
-            </Grid>
-            <Grid item xs>
-              <Box fontWeight="normal">{currentFabric.colorName ?? ""}</Box>
-            </Grid>
-          </Grid>
-          <Grid
-            container
-            spacing={3}
-            alignItems="center"
-            className={classes.grid}
-          >
-            <Grid item xs={2}>
-              <Box fontWeight="fontWeightMedium">Thành tiền</Box>
-            </Grid>
-            <Grid item xs>
-              <Box fontWeight="normal">
-                {currencyFormat(currentFabric.price ?? "")}
-              </Box>
             </Grid>
           </Grid>
           <Grid container spacing={3} className={classes.grid}>
@@ -211,7 +233,17 @@ class RecallCreation extends React.Component {
           </Grid>
           <Grid container spacing={3} justify="center">
             <Box m={1}>
-              <Button variant="contained" color="primary" onClick={this.add}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={this.add}
+                disabled={
+                  submitting ||
+                  invalid ||
+                  !currentFabric ||
+                  currentFabric === undefined
+                }
+              >
                 Thêm
               </Button>
             </Box>
@@ -241,10 +273,10 @@ class RecallCreation extends React.Component {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {currentListFabrics.map((row, index) => (
+                  {currentListRecalls.map((row, index) => (
                     <TableRow key={index} hover>
                       <TableCell align="center" component="th" scope="row">
-                        {row.id}
+                        {row.fabricId}
                       </TableCell>
                       <TableCell align="center">{row.colorName}</TableCell>
                       <TableCell align="center">{row.finishedLength}</TableCell>
@@ -301,36 +333,54 @@ class RecallCreation extends React.Component {
   }
 
   add() {
-    // if (Object.keys(this.state.currentRaw).length !== 0)
-    //   this.setState((prev) => ({
-    //     currentListRaws: [...prev.currentListRaws, this.state.currentRaw],
-    //     currentRaw: {},
-    //   }));
+    console.log(this.props.formValues);
+    console.log(this.state.currentFabric);
+    const { returnLength, returnReason } = this.props.formValues;
+    const { currentFabric } = this.state;
+    if (Number(returnLength) <= Number(currentFabric.finishedLength)) {
+      var newRecall = {
+        fabricId: currentFabric?.id,
+        returnLength,
+        returnReason,
+        finishedLength: currentFabric?.finishedLength,
+        money: Number(returnLength) * Number(currentFabric.price),
+        colorName: currentFabric.colorName,
+      };
+      this.setState((prev) => ({
+        currentListFabrics: [...prev.currentListFabrics, currentFabric],
+        currentListRecalls: [...prev.currentListRecalls, newRecall],
+        currentFabric: {},
+      }));
+    } else {
+      this.props.onShowErrorMsg();
+    }
   }
 
   remove = (item) => {
-    // console.log(item);
-    // this.setState((prev) => ({
-    //   currentListRaws: prev.currentListRaws.filter((x) => x !== item),
-    // }));
+    this.setState((prev) => ({
+      currentListFabrics: prev.currentListFabrics.filter(
+        (x) => x.id !== item.fabricId
+      ),
+      currentListRecalls: prev.currentListRecalls.filter((x) => x !== item),
+    }));
   };
 
   handleSubmitForm = (data) => {
-    // const { history, exportActions, userId } = this.props;
-    // const { createExportRequest } = exportActions;
-    // const { dyeplantId, fabricType } = data;
-    // const finalListRaw = [];
-    // this.state.currentListRaws.map((item) => finalListRaw.push(item.id));
-    // let body = JSON.stringify({
-    //   userId: userId,
-    //   dyehouseId: dyeplantId,
-    //   fabricType: fabricType,
-    //   createDate: new Date().getTime(),
-    //   listRaw: finalListRaw,
-    // });
-    // createExportRequest(body, () => {
-    //   history.push("/raw");
-    // });
+    const { recallActions, formValues, history, userId } = this.props;
+    const { dyehouseId, receivedName } = formValues;
+    const { currentListRecalls } = this.state;
+    const { createRecallRequest } = recallActions;
+    let body = JSON.stringify({
+      userId: userId,
+      dyehouseId: dyehouseId,
+      receivedName: receivedName,
+      returnDate: new Date().getTime(),
+      fabrics: currentListRecalls,
+    });
+    console.log(body);
+    createRecallRequest(body, () => {
+      history.push("/recall");
+    });
   };
 }
 
@@ -344,6 +394,13 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   dyePlantAction: bindActionCreators(dyePlantAction, dispatch),
   recallActions: bindActionCreators(recallActions, dispatch),
+  onShowErrorMsg: () =>
+    dispatch({
+      type: Alert.SHOW_ERROR_MESSAGE,
+      payload: {
+        errorMsg: "Độ dài hàng trả phải nhỏ hơn độ dài thành phẩm",
+      },
+    }),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
@@ -361,6 +418,7 @@ RecallCreation.propTypes = {
 
 const withReduxForm = reduxForm({
   form: RECALL_FORM,
+  validate,
 });
 
 export default compose(
