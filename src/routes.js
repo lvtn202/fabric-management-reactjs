@@ -15,6 +15,9 @@ import RecallCreation from "./pages/recall_creation";
 import OrderDetail from "./pages/order_detail";
 import ExportRaw from "./pages/export_raw";
 import ImportFabric from "./pages/import_fabric";
+import Debt from "./pages/debt";
+import Payment from "./pages/payment_list";
+import PaymentCreation from "./pages/payment_creation";
 import NotFound from "./pages/not_found";
 
 const routes = [
@@ -104,6 +107,23 @@ const routes = [
     exact: false,
     main: ({ history, match }) => (
       <RecallDetail history={history} match={match} />
+    ),
+  },
+  {
+    path: "/debt",
+    exact: false,
+    main: ({ history }) => <Debt history={history} />,
+  },
+  {
+    path: "/payment",
+    exact: true,
+    main: ({ history }) => <Payment history={history} />,
+  },
+  {
+    path: "/payment/create",
+    exact: false,
+    main: ({ history, match }) => (
+      <PaymentCreation history={history} match={match} />
     ),
   },
   {
