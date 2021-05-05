@@ -5,3 +5,4 @@ export const CREATE_ORDER_FORM = "CREATE_ORDER_FORM";
 export const INFO_FORM = "INFO_FORM";
 export const LIST_FABRIC_FORM = "LIST_FABRIC_FORM";
 export const RECALL_FORM = "RECALL_FORM";
+export const PAYMENT_FORM = "PAYMENT_FORM";

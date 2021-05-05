@@ -105,7 +105,7 @@ const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 PaymentCreation.propTypes = {
   classes: PropTypes.object,
-  loading: PropTypes.object,
+  loading: PropTypes.bool,
   paymentActions: PropTypes.shape({
     getListPaymentRequest: PropTypes.func,
   }),
