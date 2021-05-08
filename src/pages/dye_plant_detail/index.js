@@ -129,7 +129,11 @@ class DyePlantDetail extends React.Component {
             </Button>
           </Grid>
           <Grid item xs={6} sm={3}>
-            <Button variant="contained" color="primary">
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={() => history.push("/payment/create")}
+            >
               Tạo thanh toán
             </Button>
           </Grid>

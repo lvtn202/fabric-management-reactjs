@@ -246,6 +246,7 @@ class ListFabricForm extends React.Component {
                     <TableCell align="center">
                       Độ dài thành phẩm&nbsp;(m)
                     </TableCell>
+                    <TableCell align="center">Độ hao hụt</TableCell>
                     <TableCell align="center"></TableCell>
                   </TableRow>
                 </TableHead>
@@ -257,6 +258,14 @@ class ListFabricForm extends React.Component {
                       </TableCell>
                       <TableCell align="center">{row.rawLength}</TableCell>
                       <TableCell align="center">{row.finishedLength}</TableCell>
+                      <TableCell align="center">
+                        {`${(
+                          (row.rawLength - row.finishedLength) /
+                          row.rawLength * 100
+                        ).toLocaleString(undefined, {
+                          maximumFractionDigits: 2,
+                        })}%`}
+                      </TableCell>
                       <TableCell align="center">
                         <IconButton
                           aria-label="delete"

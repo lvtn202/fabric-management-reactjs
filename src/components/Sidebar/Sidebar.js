@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
     borderRight: "rgba(0, 0, 0, 0.12) solid 1px",
   },
   nested: {
-    paddingLeft: theme.spacing(5),
+    paddingLeft: theme.spacing(3),
   },
   topLevel: {
     fontWeight: 500,
