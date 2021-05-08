@@ -24,6 +24,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import styles from "./styles";
 import * as authAction from "../../actions/auth";
+import Dashboard from './../../test'
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -32,7 +33,6 @@ function Alert(props) {
 class App extends React.Component {
   componentDidMount() {
     const { authAction } = this.props;
-    console.log(this.props);
     const { loginSuccess } = authAction;
     const auth = JSON.parse(window.localStorage.getItem("user"));
     if (auth) {
@@ -84,15 +84,17 @@ class App extends React.Component {
         </AppBar>
         {loading && <LinearProgress />}
         <ModalComponent />
-        {sideBar}
-        <div
-          className={
-            isDisplaySideBar
-              ? classes.mainContainerSidebar
-              : classes.mainContainer
-          }
-        >
-          {this.configRouter(routes)}
+        <div className={classes.wrapper}>
+          {sideBar}
+          <div
+            className={
+              isDisplaySideBar
+                ? classes.mainContainerSidebar
+                : classes.mainContainer
+            }
+          >
+            {this.configRouter(routes)}
+          </div>
         </div>
         <Snackbar
           open={showSuccessMsg}

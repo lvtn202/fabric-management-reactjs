@@ -54,7 +54,7 @@ class DyeBatch extends React.Component {
   renderTable() {
     const { classes, listDyeBatch, history } = this.props;
     const handleClick = (event, id) => {
-      history.push(`/dye-batch/${id}`);
+      // history.push(`/dye-batch/${id}`);
     };
     return (
       <TableContainer component={Paper} className={classes.tableContainer}>

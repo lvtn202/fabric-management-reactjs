@@ -19,6 +19,7 @@ import Debt from "./pages/debt";
 import Payment from "./pages/payment_list";
 import PaymentCreation from "./pages/payment_creation";
 import NotFound from "./pages/not_found";
+import Dashboard from './test';
 
 const routes = [
   {
@@ -129,7 +130,7 @@ const routes = [
   {
     path: "",
     exact: false,
-    main: () => <NotFound />,
+    main: () => <Dashboard />,
   },
 ];
 

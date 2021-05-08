@@ -8,8 +8,11 @@ import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: "100%",
-    maxWidth: 240,
+    position: "relative",
+    whiteSpace: "nowrap",
+    width: 300,
+    height: '100vh',
+    overflow: 'auto',
     backgroundColor: theme.palette.background.paper,
     borderRight: "rgba(0, 0, 0, 0.12) solid 1px",
   },

@@ -40,10 +40,15 @@ class RecallList extends React.Component {
   }
 
   renderPage() {
+    const { history } = this.props;
     return (
       <React.Fragment>
         <Box display="flex" justifyContent="center" m={1} p={1}>
-          <Button variant="contained" color="primary">
+          <Button
+            variant="contained"
+            color="primary"
+            onClick={() => history.push("/recall/create")}
+          >
             Tạo mới
           </Button>
         </Box>
@@ -93,8 +98,12 @@ class RecallList extends React.Component {
                     <TableCell align="center">
                       {currencyFormat(row.money)}
                     </TableCell>
-                    <TableCell align="center">{parseTimestamp(row.returnDate)}</TableCell>
-                    <TableCell align="center">{`${row.firstName ?? ""} ${row.lastName ?? ""}`}</TableCell>
+                    <TableCell align="center">
+                      {parseTimestamp(row.returnDate)}
+                    </TableCell>
+                    <TableCell align="center">{`${row.firstName ?? ""} ${
+                      row.lastName ?? ""
+                    }`}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

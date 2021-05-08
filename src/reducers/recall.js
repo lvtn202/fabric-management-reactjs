@@ -54,6 +54,10 @@ export default (state = defaultState, action) => {
         ...state,
         listFabricOfDyeplant: action.payload.data.result,
       };
+    case Recall.CREATE_RECALL:
+    case Recall.CREATE_RECALL_FAILED:
+    case Recall.CREATE_RECALL_SUCCESS:
+      return state;
     default:
       return state;
   }

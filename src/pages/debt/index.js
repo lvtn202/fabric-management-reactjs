@@ -44,7 +44,7 @@ class Debt extends React.Component {
   };
 
   handleClick = (event, id) => {
-    // this.props.history.push(`/dye-plant/${id}`);
+    this.props.history.push("/payment/create");
   };
 
   render() {

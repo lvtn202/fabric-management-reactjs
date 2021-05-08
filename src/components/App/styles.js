@@ -1,5 +1,9 @@
 const styles = (theme) => ({
-  root: {
+  wrapper: {
+    display: "flex",
+    flexDirection: "row",
+  },
+  appBar: {
     flexGrow: 1,
   },
   title: {
@@ -10,13 +14,11 @@ const styles = (theme) => ({
     marginLeft: "16px",
   },
   mainContainerSidebar: {
-    position: "absolute",
-    alignItems: "center",
-    top: 80,
-    left: 240,
+    flexGrow: 1,
+    width: "100%",
     paddingLeft: 20,
-    bottom: 20,
-    right: 20,
+    paddingRight: 20,
+    paddingTop: 10,
   },
   mainContainer: {
     position: "absolute",
