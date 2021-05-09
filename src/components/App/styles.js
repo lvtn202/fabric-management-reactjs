@@ -31,6 +31,9 @@ const styles = (theme) => ({
   loading: {
     padding: 8,
   },
+  appBarSpacer: {
+    height: 64,
+  },
 });
 
 export default styles;

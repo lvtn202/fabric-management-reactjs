@@ -18,14 +18,19 @@ import ImportFabric from "./pages/import_fabric";
 import Debt from "./pages/debt";
 import Payment from "./pages/payment_list";
 import PaymentCreation from "./pages/payment_creation";
+import Dashboard from "./pages/dashboard";
 import NotFound from "./pages/not_found";
-import Dashboard from './test';
 
 const routes = [
   {
     path: "/",
     exact: true,
     main: ({ history }) => <Home history={history} />,
+  },
+  {
+    path: "/dashboard",
+    exact: true,
+    main: ({ history }) => <Dashboard history={history} />,
   },
   {
     path: "/login",
@@ -130,7 +135,7 @@ const routes = [
   {
     path: "",
     exact: false,
-    main: () => <Dashboard />,
+    main: () => <NotFound />,
   },
 ];
 

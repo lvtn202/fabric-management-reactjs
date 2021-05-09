@@ -24,7 +24,6 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import styles from "./styles";
 import * as authAction from "../../actions/auth";
-import Dashboard from './../../test'
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -85,6 +84,7 @@ class App extends React.Component {
         {loading && <LinearProgress />}
         <ModalComponent />
         <div className={classes.wrapper}>
+          {/* <div className={classes.appBarSpacer} /> */}
           {sideBar}
           <div
             className={
