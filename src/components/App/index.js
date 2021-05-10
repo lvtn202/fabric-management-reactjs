@@ -8,7 +8,7 @@ import {
   Auth,
 } from "../../constants/action_types";
 import routes from "../../routes";
-import Sidebar from "../sidebar/sidebar";
+import Sidebar from "../sidebar";
 import theme from "./../../commons/theme";
 import { ThemeProvider, withStyles } from "@material-ui/styles";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
