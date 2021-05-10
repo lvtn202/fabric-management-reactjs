@@ -15,6 +15,7 @@ import AppTextField from "../../components/form_helper/text_field";
 import { currencyFormat } from "../../commons/utils";
 import { Field, reduxForm, getFormValues } from "redux-form";
 import { Button, Box, Grid, MenuItem } from "@material-ui/core";
+import { PAYMENT } from "./../../constants/path"
 
 class Payment extends React.Component {
   componentDidMount() {
@@ -47,7 +48,7 @@ class Payment extends React.Component {
     });
 
     createPaymentRequest(body, () => {
-      history.push("/payment");
+      history.push(PAYMENT);
     });
   };
 

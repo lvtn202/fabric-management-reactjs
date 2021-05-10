@@ -1,4 +1,5 @@
 import React from "react";
+import * as Path from './constants/path';
 import Home from "./pages/home";
 import Login from "./components/login";
 import DyePlant from "./pages/dye_plant";
@@ -21,112 +22,113 @@ import PaymentCreation from "./pages/payment_creation";
 import Dashboard from "./pages/dashboard";
 import NotFound from "./pages/not_found";
 
+
 const routes = [
   {
-    path: "/",
+    path: Path.HOME,
     exact: true,
     main: ({ history }) => <Home history={history} />,
   },
   {
-    path: "/dashboard",
+    path: Path.DASHBOARD,
     exact: true,
     main: ({ history }) => <Dashboard history={history} />,
   },
   {
-    path: "/login",
+    path: Path.LOGIN,
     exact: true,
     main: ({ history }) => <Login history={history} />,
   },
   {
-    path: "/dye-plant",
+    path: Path.DYE_PLANT,
     exact: true,
     main: ({ history }) => <DyePlant history={history} />,
   },
   {
-    path: "/dye-plant/:id",
+    path: Path.DYE_PLANT_DETAIL,
     exact: true,
     main: ({ match, history }) => (
       <DyePlantDetail match={match} history={history} />
     ),
   },
   {
-    path: "/dye-plant/:id/raw",
+    path: Path.DYE_PLANT_RAW,
     exact: false,
     main: ({ match, history }) => (
       <DyePlantRaw match={match} history={history} />
     ),
   },
   {
-    path: "/order",
+    path: Path.ORDER,
     exact: true,
     main: ({ history }) => <Order history={history} />,
   },
   {
-    path: "/order/detail/:id",
+    path: Path.ORDER_DETAIL,
     exact: false,
     main: ({ match }) => <OrderDetail match={match} />,
   },
   {
-    path: "/order/create",
+    path: Path.ORDER_CREATION,
     exact: false,
     main: ({ history }) => <OrderCreation history={history} />,
   },
   {
-    path: "/dye-batch",
+    path: Path.DYE_BATCH,
     exact: true,
     main: () => <DyeBatch />,
   },
   {
-    path: "/dye-batch/:id",
+    path: Path.DYE_BATCH_DETAIL,
     exact: true,
     main: ({ history, match }) => (
       <DyeBatchDetail history={history} match={match} />
     ),
   },
   {
-    path: "/raw",
+    path: Path.RAW,
     exact: true,
     main: ({ history }) => <Raw history={history} />,
   },
   {
-    path: "/export/create",
+    path: Path.EXPORT_RAW,
     exact: true,
     main: ({ history }) => <ExportRaw history={history} />,
   },
   {
-    path: "/import/create",
+    path: Path.IMPORT_FABRIC,
     exact: true,
     main: ({ history }) => <ImportFabric history={history} />,
   },
   {
-    path: "/recall",
+    path: Path.RECALL,
     exact: true,
     main: ({ history }) => <RecallList history={history} />,
   },
   {
-    path: "/recall/create",
+    path: Path.RECALL_CREATION,
     exact: true,
     main: ({ history }) => <RecallCreation history={history} />,
   },
   {
-    path: "/recall/:id",
+    path: Path.RECALL_DETAIL,
     exact: false,
     main: ({ history, match }) => (
       <RecallDetail history={history} match={match} />
     ),
   },
   {
-    path: "/debt",
+    path: Path.DEBT,
     exact: false,
     main: ({ history }) => <Debt history={history} />,
   },
   {
-    path: "/payment",
+    path: Path.PAYMENT,
     exact: true,
     main: ({ history }) => <Payment history={history} />,
   },
   {
-    path: "/payment/create",
+    path: Path.PAYMENT_CREATION,
     exact: false,
     main: ({ history, match }) => (
       <PaymentCreation history={history} match={match} />

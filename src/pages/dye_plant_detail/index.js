@@ -24,6 +24,7 @@ import DyePlantForm from "./dye_plant_form";
 import * as dyePlantAction from "../../actions/dye_plant";
 import * as orderAction from "../../actions/order";
 import * as modalActions from "../../actions/modal";
+import { PAYMENT_CREATION, ORDER_CREATION } from "./../../constants/path"
 
 class DyePlantDetail extends React.Component {
   componentDidMount() {
@@ -123,7 +124,7 @@ class DyePlantDetail extends React.Component {
             <Button
               variant="contained"
               color="primary"
-              onClick={() => history.push("/order/create")}
+              onClick={() => history.push(ORDER_CREATION)}
             >
               Tạo đơn đặt hàng
             </Button>
@@ -132,7 +133,7 @@ class DyePlantDetail extends React.Component {
             <Button
               variant="contained"
               color="primary"
-              onClick={() => history.push("/payment/create")}
+              onClick={() => history.push(PAYMENT_CREATION)}
             >
               Tạo thanh toán
             </Button>

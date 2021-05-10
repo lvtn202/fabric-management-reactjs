@@ -9,6 +9,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import { parseTimestamp } from "../../commons/utils";
+import { DYE_BATCH } from "./../../constants/path"
 
 // Generate Order Data
 function createData(id, date, name, shipTo, paymentMethod, amount) {
@@ -99,7 +100,7 @@ export default function Import(props) {
         </TableBody>
       </Table>
       <div className={classes.seeMore}>
-        <Button color="primary" onClick={() => history.push("/dye-batch")}>
+        <Button color="primary" onClick={() => history.push(DYE_BATCH)}>
           Xem danh sách
         </Button>
       </div>

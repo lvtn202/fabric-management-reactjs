@@ -2,6 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import * as authAction from "../../actions/auth";
+import { DASHBOARD, LOGIN } from "./../../constants/path"
 
 const mapStateToProps = (state) => ({});
 
@@ -17,9 +18,9 @@ class Home extends React.Component {
     const auth = JSON.parse(window.localStorage.getItem("user"));
     if (auth) {
       loginSuccess(auth);
-      history.push("/dye-plant");
+      history.push(DASHBOARD);
     } else {
-      history.push("/login");
+      history.push(LOGIN);
     }
     return <div></div>;
   }

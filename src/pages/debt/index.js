@@ -21,6 +21,7 @@ import {
 } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import { currencyFormat } from "./../../commons/utils";
+import { PAYMENT_CREATION } from "./../../constants/path"
 
 class Debt extends React.Component {
   constructor(props) {
@@ -44,7 +45,7 @@ class Debt extends React.Component {
   };
 
   handleClick = (event, id) => {
-    this.props.history.push("/payment/create");
+    this.props.history.push(PAYMENT_CREATION);
   };
 
   render() {

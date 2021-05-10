@@ -13,6 +13,7 @@ import Step from "@material-ui/core/Step";
 import StepLabel from "@material-ui/core/StepLabel";
 import Button from "@material-ui/core/Button";
 import * as importActions from "../../actions/import";
+import { DYE_BATCH } from "./../../constants/path"
 
 class ImportFabric extends React.Component {
   constructor(props) {
@@ -52,7 +53,7 @@ class ImportFabric extends React.Component {
         createDate: new Date().getTime(),
       });
       createImportRequest(body, () => {
-        history.push("/dye-batch");
+        history.push(DYE_BATCH);
       });
     } else {
       this.setState({ activeStep: this.state.activeStep + 1 });

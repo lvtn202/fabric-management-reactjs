@@ -19,6 +19,7 @@ import {
   TableRow,
 } from "@material-ui/core";
 import { currencyFormat, parseTimestamp } from "../../commons/utils";
+import { RECALL_CREATION } from "./../../constants/path"
 
 class RecallList extends React.Component {
   componentDidMount() {
@@ -47,7 +48,7 @@ class RecallList extends React.Component {
           <Button
             variant="contained"
             color="primary"
-            onClick={() => history.push("/recall/create")}
+            onClick={() => history.push(RECALL_CREATION)}
           >
             Tạo mới
           </Button>
@@ -101,9 +102,8 @@ class RecallList extends React.Component {
                     <TableCell align="center">
                       {parseTimestamp(row.returnDate)}
                     </TableCell>
-                    <TableCell align="center">{`${row.firstName ?? ""} ${
-                      row.lastName ?? ""
-                    }`}</TableCell>
+                    <TableCell align="center">{`${row.firstName ?? ""} ${row.lastName ?? ""
+                      }`}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>

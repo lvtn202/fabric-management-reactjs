@@ -14,6 +14,7 @@ import * as dyePlantAction from "../../actions/dye_plant";
 import * as rawActions from "../../actions/raw";
 import * as orderActions from "../../actions/order";
 import { CREATE_ORDER_FORM } from "./../../constants/form_name";
+import { ORDER } from "./../../constants/path"
 
 class OrderCreation extends React.Component {
   componentDidMount() {
@@ -37,7 +38,7 @@ class OrderCreation extends React.Component {
       createDate: new Date().getTime(),
     });
     createOrderRequest(body, () => {
-      history.push("/order");
+      history.push(ORDER);
     });
   };
 

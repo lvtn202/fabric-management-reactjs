@@ -4,6 +4,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import { currencyFormat, parseTimestampDate } from "./../../commons/utils";
+import { PAYMENT } from "./../../constants/path"
 
 function preventDefault(event) {
   event.preventDefault();
@@ -30,7 +31,7 @@ export default function Payment(props) {
         {`Từ ngày ${parseTimestampDate(new Date().getTime() - 604800000)}`}
       </Typography>
       <div>
-        <Button color="primary" onClick={() => history.push("/payment")}>
+        <Button color="primary" onClick={() => history.push(PAYMENT)}>
           Xem danh sách
         </Button>
       </div>

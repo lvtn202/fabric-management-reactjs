@@ -30,6 +30,7 @@ import {
   TextField,
   IconButton,
 } from "@material-ui/core";
+import { RAW } from "./../../constants/path"
 
 class ExportRaw extends React.Component {
   constructor(props) {
@@ -259,7 +260,7 @@ class ExportRaw extends React.Component {
       listRaw: finalListRaw,
     });
     createExportRequest(body, () => {
-      history.push("/raw");
+      history.push(RAW);
     });
   };
 }

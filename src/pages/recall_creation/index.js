@@ -32,6 +32,7 @@ import {
 import AppTextField from "../../components/form_helper/text_field";
 import { currencyFormat } from "../../commons/utils";
 import DeleteIcon from "@material-ui/icons/Delete";
+import { RECALL } from "./../../constants/path"
 
 class RecallCreation extends React.Component {
   constructor(props) {
@@ -379,7 +380,7 @@ class RecallCreation extends React.Component {
     });
     console.log(body);
     createRecallRequest(body, () => {
-      history.push("/recall");
+      history.push(RECALL);
     });
   };
 }
