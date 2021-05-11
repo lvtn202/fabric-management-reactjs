@@ -6,12 +6,6 @@ import { bindActionCreators, compose } from "redux";
 import { withStyles } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-import Box from "@material-ui/core/Box";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import List from "@material-ui/core/List";
-import IconButton from "@material-ui/core/IconButton";
-import Badge from "@material-ui/core/Badge";
 import Container from "@material-ui/core/Container";
 import Grid from "@material-ui/core/Grid";
 import Paper from "@material-ui/core/Paper";
@@ -63,16 +57,13 @@ class Dashboard extends React.Component {
             {/* Chart */}
             <Grid item xs={12} md={8} lg={9}>
               <Paper className={`${classes.paper} ${classes.fixedHeight}`}>
-                <Chart />
+                <Chart statisticFabric={statisticFabric} />
               </Paper>
             </Grid>
             {/* Recent Payment */}
             <Grid item xs={12} md={4} lg={3}>
               <Paper className={`${classes.paper} ${classes.fixedHeight}`}>
-                <Payment
-                  money={recentPayment}
-                  history={this.props.history}
-                />
+                <Payment money={recentPayment} history={this.props.history} />
               </Paper>
             </Grid>
             {/* Recent Import */}

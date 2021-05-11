@@ -2,109 +2,20 @@ import React from "react";
 import { useTheme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import {
-  LineChart,
   Line,
   XAxis,
   YAxis,
   Label,
   ResponsiveContainer,
   ComposedChart,
-  Area,
   Bar,
-  CartesianGrid,
   Tooltip,
   Legend,
-  Scatter,
 } from "recharts";
 
-// Generate Sales Data
-function createData(time, amount) {
-  return { time, amount };
-}
-
-const data = [
-  {
-    name: "Page A",
-    uv: 590,
-    pv: 800,
-    amt: 1400,
-    cnt: 490,
-  },
-  {
-    name: "Page B",
-    uv: 868,
-    pv: 967,
-    amt: 1506,
-    cnt: 590,
-  },
-  {
-    name: "Page C",
-    uv: 1397,
-    pv: 1098,
-    amt: 989,
-    cnt: 350,
-  },
-  {
-    name: "Page D",
-    uv: 1480,
-    pv: 1200,
-    amt: 1228,
-    cnt: 480,
-  },
-  {
-    name: "Page E",
-    uv: 1520,
-    pv: 1108,
-    amt: 1100,
-    cnt: 460,
-  },
-  {
-    name: "Page F",
-    uv: 1400,
-    pv: 680,
-    amt: 1700,
-    cnt: 380,
-  },
-  {
-    name: "Page G",
-    uv: 1400,
-    pv: 680,
-    amt: 1700,
-    cnt: 380,
-  },
-  {
-    name: "Page H",
-    uv: 1400,
-    pv: 680,
-    amt: 1700,
-    cnt: 380,
-  },
-  {
-    name: "Page I",
-    uv: 1400,
-    pv: 680,
-    amt: 1700,
-    cnt: 380,
-  },
-  {
-    name: "Page J",
-    uv: 1400,
-    pv: 680,
-    amt: 1700,
-    cnt: 380,
-  },
-  {
-    name: "Page K",
-    uv: 1400,
-    pv: 680,
-    amt: 1700,
-    cnt: 380,
-  },
-];
-
-export default function Chart() {
+export default function Chart(props) {
   const theme = useTheme();
-
+  const { statisticFabric } = props;
   return (
     <React.Fragment>
       <Typography component="h2" variant="h6" color="primary" gutterBottom>
@@ -112,7 +23,7 @@ export default function Chart() {
       </Typography>
       <ResponsiveContainer>
         <ComposedChart
-          data={data}
+          data={statisticFabric}
           margin={{
             top: 16,
             right: 16,
@@ -121,11 +32,11 @@ export default function Chart() {
           }}
         >
           <XAxis
-            dataKey="name"
+            dataKey="fabricType"
             scale="band"
             stroke={theme.palette.text.secondary}
           />
-          <YAxis stroke={theme.palette.text.secondary}>
+          <YAxis yAxisId="left" stroke={theme.palette.text.secondary}>
             <Label
               angle={270}
               position="left"
@@ -134,15 +45,45 @@ export default function Chart() {
               Số lượng (m)
             </Label>
           </YAxis>
+          <YAxis yAxisId="right" orientation="right">
+            <Label
+              angle={90}
+              position="right"
+              style={{ textAnchor: "middle", fill: theme.palette.text.primary }}
+            >
+              Số cây
+            </Label>
+          </YAxis>
           <Tooltip />
           <Legend />
-          <Bar dataKey="pv" barSize={20} fill={theme.palette.success.light} />
+          <Bar
+            name="Độ dài mộc"
+            yAxisId="left"
+            dataKey="rawLength"
+            barSize={20}
+            fill={theme.palette.success.light}
+          />
+          <Bar
+            name="Độ dài thành phẩm"
+            yAxisId="left"
+            dataKey="completedLength"
+            barSize={20}
+            fill={theme.palette.info.light}
+          />
           <Line
+            name="Số cây mộc"
+            yAxisId="right"
             type="monotone"
-            dataKey="uv"
+            dataKey="rawNumber"
             stroke={theme.palette.primary.light}
           />
-          <Bar dataKey="cnt" barSize={20} fill={theme.palette.info.light} />
+          <Line
+            name="Số cây thành phẩm"
+            yAxisId="right"
+            type="monotone"
+            dataKey="completedNumber"
+            stroke={theme.palette.error.light}
+          />
         </ComposedChart>
       </ResponsiveContainer>
     </React.Fragment>
