@@ -18,7 +18,7 @@ import validate from "./validate";
 import AppTextField from "../../components/form_helper/text_field";
 import * as authAction from "../../actions/auth";
 import { LOG_IN_FORM } from "./../../constants/form_name";
-import { DYE_PLANT } from "./../../constants/path";
+import { DASHBOARD } from "./../../constants/path";
 
 class Login extends React.Component {
   submitForm = (data) => {
@@ -34,7 +34,7 @@ class Login extends React.Component {
       console.log(response.data.result);
       window.localStorage.setItem("user", JSON.stringify(response.data.result));
       this.props.onOpenSidebar();
-      history.push(DYE_PLANT);
+      history.push(DASHBOARD);
     });
   };
 
