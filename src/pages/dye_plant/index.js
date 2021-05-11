@@ -4,22 +4,20 @@ import { connect } from "react-redux";
 import styles from "./styles";
 import PropTypes from "prop-types";
 import { bindActionCreators, compose } from "redux";
-import * as dyePlantAction from "../../actions/dye_plant";
-import {
-  Divider,
-  Typography,
-  Paper,
-  IconButton,
-  InputBase,
-  TableContainer,
-  TableCell,
-  Table,
-  TableHead,
-  TableRow,
-  TableBody,
-} from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import InputBase from "@material-ui/core/InputBase";
+import IconButton from "@material-ui/core/IconButton";
+import Paper from "@material-ui/core/Paper";
+import TableContainer from "@material-ui/core/TableContainer";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
 import SearchIcon from "@material-ui/icons/Search";
 import { currencyFormat } from "./../../commons/utils";
+import * as dyePlantAction from "../../actions/dye_plant";
 
 class DyePlant extends React.Component {
   constructor(props) {

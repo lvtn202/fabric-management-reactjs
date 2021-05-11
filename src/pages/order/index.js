@@ -6,19 +6,17 @@ import PropTypes from "prop-types";
 import { bindActionCreators, compose } from "redux";
 import { parseTimestamp } from "../../commons/utils";
 import { statusDescription } from "../../constants/order_status_type";
-import {
-  Divider,
-  Typography,
-  Paper,
-  TableContainer,
-  IconButton,
-  InputBase,
-  TableCell,
-  Table,
-  TableHead,
-  TableRow,
-  TableBody,
-} from "@material-ui/core";
+import InputBase from "@material-ui/core/InputBase";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import Paper from "@material-ui/core/Paper";
+import IconButton from "@material-ui/core/IconButton";
+import TableContainer from "@material-ui/core/TableContainer";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
 import * as orderAction from "../../actions/order";
 import SearchIcon from "@material-ui/icons/Search";
 

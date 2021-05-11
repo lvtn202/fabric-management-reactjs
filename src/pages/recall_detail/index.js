@@ -5,17 +5,18 @@ import styles from "./styles";
 import { bindActionCreators, compose } from "redux";
 import { withStyles } from "@material-ui/styles";
 import * as recallActions from "../../actions/recall";
-import { Typography, Divider, Grid } from "@material-ui/core";
 import Box from "@material-ui/core/Box";
-import {
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
-} from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import Paper from "@material-ui/core/Paper";
+import TableContainer from "@material-ui/core/TableContainer";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
 import { currencyFormat, parseTimestamp } from "../../commons/utils";
 
 class RecallList extends React.Component {

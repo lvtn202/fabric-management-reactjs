@@ -5,19 +5,17 @@ import PropTypes from "prop-types";
 import styles from "./styles";
 import { bindActionCreators, compose } from "redux";
 import * as rawActions from "../../actions/raw";
-import {
-  Paper,
-  Tabs,
-  Tab,
-  Typography,
-  Divider,
-  TableContainer,
-  Table,
-  TableHead,
-  TableRow,
-  TableCell,
-  TableBody,
-} from "@material-ui/core";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import Paper from "@material-ui/core/Paper";
+import TableContainer from "@material-ui/core/TableContainer";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
 
 class Raw extends React.Component {
   constructor(props) {
