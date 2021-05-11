@@ -6,20 +6,18 @@ import PropTypes from "prop-types";
 import { bindActionCreators, compose } from "redux";
 import { statusDescription } from "../../constants/order_status_type";
 import { parseTimestamp, currencyFormat } from "../../commons/utils";
-import {
-  Divider,
-  Typography,
-  Paper,
-  TableContainer,
-  TableCell,
-  Table,
-  TableHead,
-  TableRow,
-  TableBody,
-  Grid,
-  Button,
-  Box,
-} from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import Grid from "@material-ui/core/Grid";
+import Box from "@material-ui/core/Box";
+import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
+import TableContainer from "@material-ui/core/TableContainer";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
 import DyePlantForm from "./dye_plant_form";
 import * as dyePlantAction from "../../actions/dye_plant";
 import * as orderAction from "../../actions/order";

@@ -5,19 +5,16 @@ import styles from "./styles";
 import PropTypes from "prop-types";
 import { bindActionCreators, compose } from "redux";
 import { parseTimestamp } from "../../commons/utils";
-
-import {
-  Divider,
-  Typography,
-  Paper,
-  TableContainer,
-  TableCell,
-  Table,
-  TableHead,
-  TableRow,
-  TableBody,
-  Box,
-} from "@material-ui/core";
+import Typography from "@material-ui/core/Typography";
+import Box from "@material-ui/core/Box";
+import Divider from "@material-ui/core/Divider";
+import Paper from "@material-ui/core/Paper";
+import TableContainer from "@material-ui/core/TableContainer";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
 import * as importAction from "../../actions/import";
 import * as orderAction from "../../actions/order";
 

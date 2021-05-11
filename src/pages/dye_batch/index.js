@@ -4,18 +4,16 @@ import { connect } from "react-redux";
 import styles from "./styles";
 import PropTypes from "prop-types";
 import { bindActionCreators, compose } from "redux";
+import Typography from "@material-ui/core/Typography";
+import Divider from "@material-ui/core/Divider";
+import Paper from "@material-ui/core/Paper";
+import TableContainer from "@material-ui/core/TableContainer";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
 import * as dyeBatchAction from "../../actions/dye_batch";
-import {
-  Divider,
-  Typography,
-  Paper,
-  TableContainer,
-  TableCell,
-  Table,
-  TableHead,
-  TableRow,
-  TableBody,
-} from "@material-ui/core";
 import { parseTimestamp } from "./../../commons/utils";
 
 class DyeBatch extends React.Component {

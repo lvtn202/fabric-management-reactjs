@@ -6,20 +6,18 @@ import { bindActionCreators, compose } from "redux";
 import { withStyles } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-import * as dyePlantAction from "../../actions/dye_plant";
-import {
-  Paper,
-  IconButton,
-  InputBase,
-  TableContainer,
-  TableCell,
-  Table,
-  TableHead,
-  TableRow,
-  TableBody,
-  Button,
-} from "@material-ui/core";
+import InputBase from "@material-ui/core/InputBase";
+import IconButton from "@material-ui/core/IconButton";
+import Paper from "@material-ui/core/Paper";
+import Button from "@material-ui/core/Button";
+import TableContainer from "@material-ui/core/TableContainer";
+import Table from "@material-ui/core/Table";
+import TableBody from "@material-ui/core/TableBody";
+import TableCell from "@material-ui/core/TableCell";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
 import SearchIcon from "@material-ui/icons/Search";
+import * as dyePlantAction from "../../actions/dye_plant";
 import { currencyFormat } from "./../../commons/utils";
 import { PAYMENT_CREATION } from "./../../constants/path"
 
