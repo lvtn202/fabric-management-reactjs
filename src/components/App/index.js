@@ -24,6 +24,7 @@ import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import styles from "./styles";
 import * as authAction from "../../actions/auth";
+import { errorMapping } from "../../commons/error_mapping";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -37,8 +38,11 @@ class App extends React.Component {
     if (auth) {
       loginSuccess(auth);
     } else {
-      // this.onClickLogout();
-      // push to log in page
+      this.props.onShowErrorMsg();
+      // setTimeout(() => {
+      //   history.push(LOGIN);
+      //   window.location.reload();
+      // }, 1000);
     }
   }
 
@@ -150,6 +154,13 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   onCloseSidebar: () => dispatch({ type: CLOSE_SIDEBAR }),
   onLogout: () => dispatch({ type: Auth.LOGOUT }),
+  onShowErrorMsg: () =>
+    dispatch({
+      type: alertActions.SHOW_ERROR_MESSAGE,
+      payload: {
+        errorMsg: errorMapping("ERROR_TOKEN"),
+      },
+    }),
   onCloseErrorMsg: () => dispatch({ type: alertActions.HIDE_ERROR_MESSAGE }),
   onCloseSuccessMsg: () =>
     dispatch({ type: alertActions.HIDE_SUCCESS_MESSAGE }),

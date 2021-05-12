@@ -6,19 +6,19 @@ export const getRecentPayment = (dyehouseId, period) => {
   );
 };
 
-export const getRecentImport = (dyehouseId, pageSize) => {
+export const getRecentImport = (dyehouseId, pageSize, pageIndex) => {
   return RequestManager.get(
     `/listRecentImportSlip?dyehouseId=${dyehouseId ?? -1}&pageSize=${
       pageSize ?? 5
-    }`
+    }&pageIndex=${pageIndex ?? 0}`
   );
 };
 
-export const getRecentExport = (dyehouseId, pageSize) => {
+export const getRecentExport = (dyehouseId, pageSize, pageIndex) => {
   return RequestManager.get(
     `/listRecentExportSlip?dyehouseId=${dyehouseId ?? -1}&pageSize=${
       pageSize ?? 5
-    }`
+    }&pageIndex=${pageIndex ?? 0}`
   );
 };
 
