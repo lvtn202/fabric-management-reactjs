@@ -34,7 +34,7 @@ class DyePlant extends React.Component {
   }
 
   render() {
-    const { classes, listDyePlant, history, loading } = this.props;
+    const { classes, listDyePlant, history } = this.props;
     const handleClick = (event, id) => {
       history.push(`/dye-plant/${id}`);
     };

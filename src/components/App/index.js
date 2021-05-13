@@ -18,7 +18,8 @@ import {
   Toolbar,
   Typography,
   IconButton,
-  LinearProgress,
+  Backdrop,
+  CircularProgress,
 } from "@material-ui/core";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
@@ -31,14 +32,14 @@ function Alert(props) {
 }
 
 class App extends React.Component {
-  componentDidMount() {
-    const { authAction } = this.props;
+  static getDerivedStateFromProps(props) {
+    const { authAction } = props;
     const { loginSuccess } = authAction;
     const auth = JSON.parse(window.localStorage.getItem("user"));
     if (auth) {
       loginSuccess(auth);
     } else {
-      this.props.onShowErrorMsg();
+      props.onShowErrorMsg();
       // setTimeout(() => {
       //   history.push(LOGIN);
       //   window.location.reload();
@@ -85,7 +86,11 @@ class App extends React.Component {
             )}
           </Toolbar>
         </AppBar>
-        {loading && <LinearProgress />}
+        {loading && (
+          <Backdrop open={true} className={classes.backdrop}>
+            <CircularProgress color="inherit" />
+          </Backdrop>
+        )}
         <ModalComponent />
         <div className={classes.wrapper}>
           {/* <div className={classes.appBarSpacer} /> */}
