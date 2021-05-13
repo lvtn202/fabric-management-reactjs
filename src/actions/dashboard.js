@@ -30,16 +30,12 @@ export const getRecentPaymentRequest = () => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(showError(error, error.status));
         dispatch(getRecentPaymentFail(error));
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -71,16 +67,12 @@ export const getRecentImportRequest = () => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(showError(error, error.status));
         dispatch(getRecentImportFail(error));
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -112,16 +104,12 @@ export const getRecentExportRequest = () => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(showError(error, error.status));
         dispatch(getRecentExportFail(error));
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -153,16 +141,12 @@ export const getStatisticFabricRequest = () => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(showError(error, error.status));
         dispatch(getStatisticFabricFail(error));
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       });
   };
 };

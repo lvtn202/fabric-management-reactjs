@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import styles from "./styles";
 import { bindActionCreators, compose } from "redux";
 import Typography from "@material-ui/core/Typography";
-import { OPEN_SIDEBAR, CLOSE_SIDEBAR } from "./../../constants/action_types";
+import { OPEN_SIDEBAR, CLOSE_SIDEBAR, Auth } from "./../../constants/action_types";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -40,6 +40,7 @@ class Login extends React.Component {
 
   render() {
     this.props.onCloseSidebar();
+    this.props.onLogout();
     const { classes, invalid, submitting, handleSubmit } = this.props;
     return (
       <Container component="main" maxWidth="xs">
@@ -106,6 +107,7 @@ const mapStateToProps = (state) => ({});
 const mapDispatchToProps = (dispatch) => ({
   onOpenSidebar: () => dispatch({ type: OPEN_SIDEBAR }),
   onCloseSidebar: () => dispatch({ type: CLOSE_SIDEBAR }),
+  onLogout: () => dispatch({ type: Auth.LOGOUT }),
   authAction: bindActionCreators(authAction, dispatch),
 });
 

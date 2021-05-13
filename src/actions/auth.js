@@ -37,16 +37,12 @@ export const loginRequest = (body, completion) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(loginFailed(error));
         dispatch(showError(error, error.status));
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       });
   };
 };

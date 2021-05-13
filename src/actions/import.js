@@ -30,16 +30,12 @@ export const getListImportRequest = (keyword) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(showError(error, error.status));
         dispatch(getListImportFailed(error));
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -71,16 +67,12 @@ export const getListExportedFabricRequest = (dyehouseId, fabricType) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(showError(error, error.status));
         dispatch(getListExportedFabricFailed(error));
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -112,16 +104,12 @@ export const getDyeingPriceRequest = (fabricType, color) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(showError(error, error.status));
         dispatch(getDyeingPriceFailed(error));
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -161,16 +149,12 @@ export const createImportRequest = (body, completion) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(createImportFailed(error));
         dispatch(showError(error, error.status));
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       });
   };
 };

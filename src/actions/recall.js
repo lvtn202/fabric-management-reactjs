@@ -30,16 +30,12 @@ export const getListRecallRequest = () => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(showError(error, error.status));
         dispatch(getListRecallFailed(error));
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -71,16 +67,12 @@ export const getDetailRecallRequest = (returnSlipId) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(showError(error, error.status));
         dispatch(getDetailRecallFailed(error));
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -112,16 +104,12 @@ export const getListFabricRecallRequest = (returnSlipId) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(showError(error, error.status));
         dispatch(getListFabricRecallFailed(error));
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -153,16 +141,12 @@ export const getListFabricDyeplantRequest = (dyehouseId) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(showError(error, error.status));
         dispatch(getListFabricDyeplantFailed(error));
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -202,16 +186,12 @@ export const createRecallRequest = (body, completion) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(createRecallFailed(error));
         dispatch(showError(error, error.status));
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       });
   };
 };

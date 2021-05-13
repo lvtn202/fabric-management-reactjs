@@ -34,6 +34,10 @@ const styles = (theme) => ({
   appBarSpacer: {
     height: 64,
   },
+  backdrop: {
+    zIndex: 99,
+    color: "#fff",
+  },
 });
 
 export default styles;

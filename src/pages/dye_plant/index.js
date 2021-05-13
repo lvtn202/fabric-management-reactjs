@@ -34,7 +34,7 @@ class DyePlant extends React.Component {
   }
 
   render() {
-    const { classes, listDyePlant, history, loading } = this.props;
+    const { classes, listDyePlant, history } = this.props;
     const handleClick = (event, id) => {
       history.push(`/dye-plant/${id}`);
     };
@@ -67,40 +67,43 @@ class DyePlant extends React.Component {
             <SearchIcon />
           </IconButton>
         </Paper>
-        {!listDyePlant.length && !loading ? (
-          <Typography variant="h5" gutterBottom className={classes.notFound}>
-            Không tìm thấy xưởng nào
-          </Typography>
-        ) : (
-          <TableContainer component={Paper} className={classes.tableContainer}>
-            <Table stickyHeader className={classes.table} aria-label="simple table">
-              <TableHead>
+        <TableContainer component={Paper} className={classes.tableContainer}>
+          <Table
+            stickyHeader
+            className={classes.table}
+            aria-label="simple table"
+          >
+            <TableHead>
+              <TableRow>
+                <TableCell align="center">Tên xưởng</TableCell>
+                <TableCell align="center">Công nợ&nbsp;(VNĐ)</TableCell>
+                <TableCell align="center">Mộc tồn&nbsp;(m) </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {!listDyePlant.length && (
                 <TableRow>
-                  <TableCell align="center">Tên xưởng</TableCell>
-                  <TableCell align="center">Công nợ&nbsp;(VNĐ)</TableCell>
-                  <TableCell align="center">Mộc tồn&nbsp;(m) </TableCell>
+                  <TableCell colSpan={3}>Không tìm thấy xưởng nào</TableCell>
                 </TableRow>
-              </TableHead>
-              <TableBody>
-                {listDyePlant.map((row) => (
-                  <TableRow
-                    key={row.id}
-                    onClick={(event) => handleClick(event, row.id)}
-                    hover
-                  >
-                    <TableCell align="center" component="th" scope="row">
-                      {row.name}
-                    </TableCell>
-                    <TableCell align="center">
-                      {currencyFormat(row.debt)}
-                    </TableCell>
-                    <TableCell align="center">{row.inStock}</TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        )}
+              )}
+              {listDyePlant.map((row) => (
+                <TableRow
+                  key={row.id}
+                  onClick={(event) => handleClick(event, row.id)}
+                  hover
+                >
+                  <TableCell align="center" component="th" scope="row">
+                    {row.name}
+                  </TableCell>
+                  <TableCell align="center">
+                    {currencyFormat(row.debt)}
+                  </TableCell>
+                  <TableCell align="center">{row.inStock}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </React.Fragment>
     );
   }

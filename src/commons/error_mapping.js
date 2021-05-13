@@ -7,6 +7,8 @@ export const errorMapping = (error) => {
       return "Email không tồn tại";
     case "WRONG_PASSWORD":
       return "Sai mật khẩu";
+    case "ERROR_TOKEN":
+      return "Phiên đăng nhập hết hạn, vui lòng đăng nhập lại";
     default:
       break;
   }

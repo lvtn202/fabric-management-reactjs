@@ -3,8 +3,8 @@ import axios from "axios";
 // const API_ROOT = " http://localhost:3000"; //local
 // const API_ROOT = "http://10.127.175.248:8080";   //HCMUT-Meeting
 // const API_ROOT = "http://192.168.0.113:8080"; 
-const API_ROOT = "https://api-fabric-management.herokuapp.com/"; // Production
-// const API_ROOT = "https://api-fabric-management-staging.herokuapp.com/"; // Staging
+// const API_ROOT = "https://api-fabric-management.herokuapp.com"; // Production
+const API_ROOT = "https://api-fabric-management-staging.herokuapp.com"; // Staging
 
 
 class RequestManager {

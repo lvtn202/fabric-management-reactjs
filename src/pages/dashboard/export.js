@@ -17,7 +17,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function Export(props) {
   const classes = useStyles();
-  const { history, recentExport } = props;
+  const { recentExport } = props;
   return (
     <React.Fragment>
       <Typography component="h2" variant="h6" color="primary" gutterBottom>

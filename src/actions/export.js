@@ -30,16 +30,12 @@ export const getListRawExportRequest = (fabricType) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(showError(error, error.status));
         dispatch(getListRawExportFailed(error));
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -79,16 +75,12 @@ export const createExportRequest = (body, completion) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(createExportFailed(error));
         dispatch(showError(error, error.status));
-        setTimeout(() => {
-          dispatch({ type: HIDE_LOADING });
-        }, 1000);
+        dispatch({ type: HIDE_LOADING });
       });
   };
 };
