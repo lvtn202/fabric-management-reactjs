@@ -1,6 +1,6 @@
 import * as apis from "./../apis/dye_plant";
 import { DyePlant, Alert } from "../constants/action_types";
-import { SHOW_LOADING, HIDE_LOADING, Modal } from "../constants/action_types";
+import { Modal } from "../constants/action_types";
 import { showError } from "./../commons/handle_error";
 
 // GET LIST
@@ -21,7 +21,6 @@ export const getListDyePlantFail = (error) => ({
 export const getListDyePlantRequest = (keyword) => {
   return (dispatch) => {
     dispatch(getListDyePlant());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getList(keyword)
       .then((data) => {
@@ -30,12 +29,9 @@ export const getListDyePlantRequest = (keyword) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getListDyePlantFail(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -58,7 +54,6 @@ export const getDetailFail = (error) => ({
 export const getDetailDyePlantRequest = (id) => {
   return (dispatch) => {
     dispatch(getDetailDyePlant());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getDetail(id)
       .then((data) => {
@@ -67,12 +62,9 @@ export const getDetailDyePlantRequest = (id) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getDetailFail(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -95,7 +87,6 @@ export const updateDetailFail = (error) => ({
 export const updateDetailDyePlantRequest = (body) => {
   return (dispatch) => {
     dispatch(updateDetail());
-    dispatch({ type: SHOW_LOADING });
     apis
       .editDetail(body)
       .then((data) => {
@@ -111,12 +102,9 @@ export const updateDetailDyePlantRequest = (body) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(updateDetailFail(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };

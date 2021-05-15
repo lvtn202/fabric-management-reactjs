@@ -1,7 +1,6 @@
 import * as apis from "./../apis/auth";
 import { Auth, Alert } from "../constants/action_types";
 import { showError } from "./../commons/handle_error";
-import { SHOW_LOADING, HIDE_LOADING } from "../constants/action_types";
 
 export const login = () => ({
   type: Auth.LOGIN,
@@ -20,7 +19,6 @@ export const loginFailed = (error) => ({
 export const loginRequest = (body, completion) => {
   return (dispatch) => {
     dispatch(login());
-    dispatch({ type: SHOW_LOADING });
     apis
       .login(body)
       .then((data) => {
@@ -37,12 +35,9 @@ export const loginRequest = (body, completion) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(loginFailed(error));
-        dispatch(showError(error, error.status));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };

@@ -1,6 +1,5 @@
 import * as apis from "./../apis/export";
 import { Export, Alert } from "../constants/action_types";
-import { SHOW_LOADING, HIDE_LOADING } from "../constants/action_types";
 import { showError } from "./../commons/handle_error";
 
 // GET LIST RAW EXPORT
@@ -21,7 +20,6 @@ export const getListRawExportFailed = (error) => ({
 export const getListRawExportRequest = (fabricType) => {
   return (dispatch) => {
     dispatch(getListRawExport());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getListRawExport(fabricType)
       .then((data) => {
@@ -30,12 +28,9 @@ export const getListRawExportRequest = (fabricType) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getListRawExportFailed(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -58,7 +53,6 @@ export const createExportFailed = (error) => ({
 export const createExportRequest = (body, completion) => {
   return (dispatch) => {
     dispatch(createExport());
-    dispatch({ type: SHOW_LOADING });
     apis
       .createExport(body)
       .then((data) => {
@@ -75,12 +69,9 @@ export const createExportRequest = (body, completion) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(createExportFailed(error));
-        dispatch(showError(error, error.status));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };

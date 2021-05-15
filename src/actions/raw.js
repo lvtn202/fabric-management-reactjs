@@ -1,6 +1,5 @@
 import * as apis from "./../apis/raw";
 import { Raw } from "../constants/action_types";
-import { SHOW_LOADING, HIDE_LOADING } from "../constants/action_types";
 import { showError } from "./../commons/handle_error";
 
 // GET LIST RAW IN STOCK
@@ -21,7 +20,6 @@ export const getListRawFailed = (error) => ({
 export const getListRawRequest = (id) => {
   return (dispatch) => {
     dispatch(getListRaw());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getListRaw(id)
       .then((data) => {
@@ -30,12 +28,9 @@ export const getListRawRequest = (id) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getListRawFailed(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -58,7 +53,6 @@ export const getListFabricFailed = (error) => ({
 export const getListFabricRequest = (id, startDate, endDate) => {
   return (dispatch) => {
     dispatch(getListFabric());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getListFabric(id, startDate, endDate)
       .then((data) => {
@@ -67,12 +61,9 @@ export const getListFabricRequest = (id, startDate, endDate) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getListFabricFailed(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -95,7 +86,6 @@ export const getListRawAllPlantsFailed = (error) => ({
 export const getListRawAllPlantsRequest = () => {
   return (dispatch) => {
     dispatch(getListRawAllPlants());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getListRawAllPlants()
       .then((data) => {
@@ -104,12 +94,9 @@ export const getListRawAllPlantsRequest = () => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getListRawAllPlantsFailed(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -132,7 +119,6 @@ export const getListFabricTypeFailed = (error) => ({
 export const getListFabricTypeRequest = () => {
   return (dispatch) => {
     dispatch(getListRaw());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getListFabricType()
       .then((data) => {
@@ -141,12 +127,9 @@ export const getListFabricTypeRequest = () => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getListFabricTypeFailed(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };

@@ -1,6 +1,6 @@
 import * as apis from "./../apis/dye_batch";
 import { DyeBatch } from "../constants/action_types";
-import { SHOW_LOADING, HIDE_LOADING } from "../constants/action_types";
+import {} from "../constants/action_types";
 import { showError } from "./../commons/handle_error";
 
 // GET LIST
@@ -21,7 +21,6 @@ export const getListDyeBatchFailed = (error) => ({
 export const getListDyeBatchRequest = (keyword) => {
   return (dispatch) => {
     dispatch(getListDyeBatch());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getList(keyword)
       .then((data) => {
@@ -30,12 +29,9 @@ export const getListDyeBatchRequest = (keyword) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getListDyeBatchFailed(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -58,7 +54,6 @@ export const getDetailDyeBatchFailed = (error) => ({
 export const getDetailDyeBatchRequest = (dyeBatchId) => {
   return (dispatch) => {
     dispatch(getListDyeBatch());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getDetail(dyeBatchId)
       .then((data) => {
@@ -67,12 +62,9 @@ export const getDetailDyeBatchRequest = (dyeBatchId) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getDetailDyeBatchFailed(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -95,7 +87,6 @@ export const getListFabricDyeBatchFailed = (error) => ({
 export const getListFabricDyeBatchRequest = (dyeBatchId) => {
   return (dispatch) => {
     dispatch(getListFabricDyeBatch());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getListFabric(dyeBatchId)
       .then((data) => {
@@ -104,12 +95,9 @@ export const getListFabricDyeBatchRequest = (dyeBatchId) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getListFabricDyeBatchFailed(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };

@@ -1,6 +1,6 @@
 import * as apis from "./../apis/dashboard";
 import { Dashboard } from "../constants/action_types";
-import { SHOW_LOADING, HIDE_LOADING } from "../constants/action_types";
+import {} from "../constants/action_types";
 import { showError } from "./../commons/handle_error";
 
 // Get recent payment
@@ -21,7 +21,6 @@ export const getRecentPaymentFail = (error) => ({
 export const getRecentPaymentRequest = () => {
   return (dispatch) => {
     dispatch(getRecentPayment());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getRecentPayment()
       .then((data) => {
@@ -30,12 +29,9 @@ export const getRecentPaymentRequest = () => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getRecentPaymentFail(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -58,7 +54,6 @@ export const getRecentImportFail = (error) => ({
 export const getRecentImportRequest = () => {
   return (dispatch) => {
     dispatch(getRecentImport());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getRecentImport()
       .then((data) => {
@@ -67,12 +62,9 @@ export const getRecentImportRequest = () => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getRecentImportFail(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -95,7 +87,6 @@ export const getRecentExportFail = (error) => ({
 export const getRecentExportRequest = () => {
   return (dispatch) => {
     dispatch(getRecentExport());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getRecentExport()
       .then((data) => {
@@ -104,12 +95,9 @@ export const getRecentExportRequest = () => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getRecentExportFail(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -132,7 +120,6 @@ export const getStatisticFabricFail = (error) => ({
 export const getStatisticFabricRequest = () => {
   return (dispatch) => {
     dispatch(getStatisticFabric());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getStatisticFabric()
       .then((data) => {
@@ -141,12 +128,9 @@ export const getStatisticFabricRequest = () => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getStatisticFabricFail(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };

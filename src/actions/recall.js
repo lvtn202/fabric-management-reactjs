@@ -1,6 +1,5 @@
 import * as apis from "./../apis/recall";
 import { Recall, Alert } from "../constants/action_types";
-import { SHOW_LOADING, HIDE_LOADING } from "../constants/action_types";
 import { showError } from "./../commons/handle_error";
 
 // Get list recall
@@ -21,7 +20,6 @@ export const getListRecallFailed = (error) => ({
 export const getListRecallRequest = () => {
   return (dispatch) => {
     dispatch(getListRecall());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getListRecall()
       .then((data) => {
@@ -30,12 +28,9 @@ export const getListRecallRequest = () => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getListRecallFailed(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -58,7 +53,6 @@ export const getDetailRecallFailed = (error) => ({
 export const getDetailRecallRequest = (returnSlipId) => {
   return (dispatch) => {
     dispatch(getDetailRecall());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getDetailRecall(returnSlipId)
       .then((data) => {
@@ -67,12 +61,9 @@ export const getDetailRecallRequest = (returnSlipId) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getDetailRecallFailed(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -95,7 +86,6 @@ export const getListFabricRecallFailed = (error) => ({
 export const getListFabricRecallRequest = (returnSlipId) => {
   return (dispatch) => {
     dispatch(getListFabricRecall());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getListFabric(returnSlipId)
       .then((data) => {
@@ -104,12 +94,9 @@ export const getListFabricRecallRequest = (returnSlipId) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getListFabricRecallFailed(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -132,7 +119,6 @@ export const getListFabricDyeplantFailed = (error) => ({
 export const getListFabricDyeplantRequest = (dyehouseId) => {
   return (dispatch) => {
     dispatch(getListFabricDyeplant());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getListFabricDyeplant(dyehouseId)
       .then((data) => {
@@ -141,12 +127,9 @@ export const getListFabricDyeplantRequest = (dyehouseId) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getListFabricDyeplantFailed(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -169,7 +152,6 @@ export const createRecallFailed = (error) => ({
 export const createRecallRequest = (body, completion) => {
   return (dispatch) => {
     dispatch(createRecall());
-    dispatch({ type: SHOW_LOADING });
     apis
       .createRecall(body)
       .then((data) => {
@@ -186,12 +168,9 @@ export const createRecallRequest = (body, completion) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(createRecallFailed(error));
-        dispatch(showError(error, error.status));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };

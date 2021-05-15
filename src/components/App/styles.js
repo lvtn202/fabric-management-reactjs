@@ -2,6 +2,7 @@ const styles = (theme) => ({
   wrapper: {
     display: "flex",
     flexDirection: "row",
+    paddingTop: 10,
   },
   appBar: {
     flexGrow: 1,

@@ -1,6 +1,5 @@
 import * as apis from "./../apis/order";
 import { Order, Alert } from "../constants/action_types";
-import { SHOW_LOADING, HIDE_LOADING } from "../constants/action_types";
 import { showError } from "./../commons/handle_error";
 
 // GET LIST
@@ -21,7 +20,6 @@ export const getListOrderFailed = (error) => ({
 export const getListOrderRequest = (keyword) => {
   return (dispatch) => {
     dispatch(getListOrder());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getList(keyword)
       .then((data) => {
@@ -30,12 +28,9 @@ export const getListOrderRequest = (keyword) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getListOrderFailed(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -58,7 +53,6 @@ export const getListOrderImportFailed = (error) => ({
 export const getListOrderImportRequest = (dyehouseId, fabricType, color) => {
   return (dispatch) => {
     dispatch(getListOrderImport());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getListOrderImport(dyehouseId, fabricType, color)
       .then((data) => {
@@ -67,12 +61,9 @@ export const getListOrderImportRequest = (dyehouseId, fabricType, color) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getListOrderImportFailed(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -95,7 +86,6 @@ export const getDetailFail = (error) => ({
 export const getDetailOrderRequest = (id) => {
   return (dispatch) => {
     dispatch(getDetailOrder());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getDetail(id)
       .then((data) => {
@@ -104,12 +94,9 @@ export const getDetailOrderRequest = (id) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getDetailFail(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -132,7 +119,6 @@ export const createOrderFailed = (error) => ({
 export const createOrderRequest = (body, completion) => {
   return (dispatch) => {
     dispatch(createOrder());
-    dispatch({ type: SHOW_LOADING });
     apis
       .createOrder(body)
       .then((data) => {
@@ -149,12 +135,9 @@ export const createOrderRequest = (body, completion) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(createOrderFailed(error));
-        dispatch(showError(error, error.status));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
