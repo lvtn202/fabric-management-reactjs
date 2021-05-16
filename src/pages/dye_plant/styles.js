@@ -14,6 +14,7 @@ const styles = (theme) => ({
   iconButton: {
     padding: 10,
   },
+  
   table: {
     minWidth: 650,
   },
