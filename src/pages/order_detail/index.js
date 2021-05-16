@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { bindActionCreators, compose } from "redux";
 import { parseTimestamp } from "../../commons/utils";
 import Typography from "@material-ui/core/Typography";
+import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Divider from "@material-ui/core/Divider";
 import Paper from "@material-ui/core/Paper";
@@ -17,16 +18,6 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import * as importAction from "../../actions/import";
 import * as orderAction from "../../actions/order";
-
-const mapStateToProps = (state) => ({
-  detailOrder: state.order.detailOrder,
-  listImport: state.importSlip.listImport,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  importAction: bindActionCreators(importAction, dispatch),
-  orderAction: bindActionCreators(orderAction, dispatch),
-});
 
 class OrderDetail extends React.Component {
   componentDidMount() {
@@ -65,47 +56,66 @@ class OrderDetail extends React.Component {
   }
 
   renderInfo = () => {
-    const { detailOrder } = this.props;
+    const { detailOrder, classes } = this.props;
     return (
       <div>
-        <Box display="flex" mt={2}>
-          <Box fontWeight="fontWeightMedium">Xưởng nhuộm:</Box>
-          <Box fontWeight="normal" ml={1}>
-            {detailOrder.dyehouseName ?? ""}
-          </Box>
-        </Box>
-        <Box display="flex" mt={2}>
-          <Box fontWeight="fontWeightMedium">Loại vải:</Box>
-          <Box fontWeight="normal" ml={1}>
-            {detailOrder.fabricType ?? ""}
-          </Box>
-        </Box>
-        <Box display="flex" mt={2}>
-          <Box fontWeight="fontWeightMedium">Màu:</Box>
-          <Box fontWeight="normal" ml={1}>
-            {detailOrder.color ?? ""}
-          </Box>
-        </Box>
-        <Box display="flex" mt={2}>
-          <Box fontWeight="fontWeightMedium">Số lượng đặt:</Box>
-          <Box fontWeight="normal" ml={1}>
-            {`${detailOrder.orderLength ?? ""} (m)`}
-          </Box>
-        </Box>
-        <Box display="flex" mt={2}>
-          <Box fontWeight="fontWeightMedium">Ngày tạo:</Box>
-          <Box fontWeight="normal" ml={1}>
-            {detailOrder.createDate
-              ? parseTimestamp(detailOrder.createDate)
-              : ""}
-          </Box>
-        </Box>
-        <Box display="flex" mt={2}>
-          <Box fontWeight="fontWeightMedium">Nhân viên tạo:</Box>
-          <Box fontWeight="normal" ml={1}>
-            {detailOrder.employee ?? ""}
-          </Box>
-        </Box>
+        <Grid container spacing={3} className={classes.grid}>
+          <Grid item xs={2}>
+            <Box fontWeight="fontWeightMedium">Xưởng nhuộm:</Box>
+          </Grid>
+          <Grid item xs={10}>
+            <Box fontWeight="normal" ml={1}>
+              {detailOrder.dyehouseName ?? ""}
+            </Box>
+          </Grid>
+
+          <Grid item xs={2}>
+            <Box fontWeight="fontWeightMedium">Loại vải:</Box>
+          </Grid>
+          <Grid item xs={10}>
+            <Box fontWeight="normal" ml={1}>
+              {detailOrder.fabricType ?? ""}
+            </Box>
+          </Grid>
+
+          <Grid item xs={2}>
+            <Box fontWeight="fontWeightMedium">Màu:</Box>
+          </Grid>
+          <Grid item xs={10}>
+            <Box fontWeight="normal" ml={1}>
+              {detailOrder.color ?? ""}
+            </Box>
+          </Grid>
+
+          <Grid item xs={2}>
+            <Box fontWeight="fontWeightMedium">Số lượng đặt:</Box>
+          </Grid>
+          <Grid item xs={10}>
+            <Box fontWeight="normal" ml={1}>
+              {`${detailOrder.orderLength ?? ""} (m)`}
+            </Box>
+          </Grid>
+
+          <Grid item xs={2}>
+            <Box fontWeight="fontWeightMedium">Ngày tạo:</Box>
+          </Grid>
+          <Grid item xs={10}>
+            <Box fontWeight="normal" ml={1}>
+              {detailOrder.createDate
+                ? parseTimestamp(detailOrder.createDate)
+                : ""}
+            </Box>
+          </Grid>
+
+          <Grid item xs={2}>
+            <Box fontWeight="fontWeightMedium">Nhân viên tạo:</Box>
+          </Grid>
+          <Grid item xs={10}>
+            <Box fontWeight="normal" ml={1}>
+              {detailOrder.employee ?? ""}
+            </Box>
+          </Grid>
+        </Grid>
       </div>
     );
   };
@@ -157,6 +167,16 @@ OrderDetail.propTypes = {
   }),
   listImport: PropTypes.array,
 };
+
+const mapStateToProps = (state) => ({
+  detailOrder: state.order.detailOrder,
+  listImport: state.importSlip.listImport,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  importAction: bindActionCreators(importAction, dispatch),
+  orderAction: bindActionCreators(orderAction, dispatch),
+});
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 

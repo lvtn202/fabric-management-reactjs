@@ -2,21 +2,11 @@ import { withStyles } from "@material-ui/styles";
 import React from "react";
 import { connect } from "react-redux";
 import styles from "./styles";
+import DataGridTable from "./table";
 import PropTypes from "prop-types";
 import { bindActionCreators, compose } from "redux";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-import InputBase from "@material-ui/core/InputBase";
-import IconButton from "@material-ui/core/IconButton";
-import Paper from "@material-ui/core/Paper";
-import TableContainer from "@material-ui/core/TableContainer";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import TableCell from "@material-ui/core/TableCell";
-import TableHead from "@material-ui/core/TableHead";
-import TableRow from "@material-ui/core/TableRow";
-import SearchIcon from "@material-ui/icons/Search";
-import { currencyFormat } from "./../../commons/utils";
 import * as dyePlantAction from "../../actions/dye_plant";
 
 class DyePlant extends React.Component {
@@ -35,20 +25,21 @@ class DyePlant extends React.Component {
 
   render() {
     const { classes, listDyePlant, history } = this.props;
-    const handleClick = (event, id) => {
-      history.push(`/dye-plant/${id}`);
-    };
-    const handleSearch = (ev) => {
-      ev.preventDefault();
-      this.props.dyePlantAction.getListDyePlantRequest(this.state.keyword);
-    };
+    // const handleClick = (event, id) => {
+    //   history.push(`/dye-plant/${id}`);
+    // };
+    // const handleSearch = (ev) => {
+    //   ev.preventDefault();
+    //   this.props.dyePlantAction.getListDyePlantRequest(this.state.keyword);
+    // };
     return (
       <React.Fragment>
         <Typography variant="h5" gutterBottom>
           Danh sách xưởng nhuộm
         </Typography>
         <Divider />
-        <Paper
+
+        {/* <Paper
           component="form"
           className={classes.root}
           onSubmit={handleSearch}
@@ -66,44 +57,11 @@ class DyePlant extends React.Component {
           >
             <SearchIcon />
           </IconButton>
-        </Paper>
-        <TableContainer component={Paper} className={classes.tableContainer}>
-          <Table
-            stickyHeader
-            className={classes.table}
-            aria-label="simple table"
-          >
-            <TableHead>
-              <TableRow>
-                <TableCell align="center">Tên xưởng</TableCell>
-                <TableCell align="center">Công nợ&nbsp;(VNĐ)</TableCell>
-                <TableCell align="center">Mộc tồn&nbsp;(m) </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {!listDyePlant.length && (
-                <TableRow>
-                  <TableCell colSpan={3}>Không tìm thấy xưởng nào</TableCell>
-                </TableRow>
-              )}
-              {listDyePlant.map((row) => (
-                <TableRow
-                  key={row.id}
-                  onClick={(event) => handleClick(event, row.id)}
-                  hover
-                >
-                  <TableCell align="center" component="th" scope="row">
-                    {row.name}
-                  </TableCell>
-                  <TableCell align="center">
-                    {currencyFormat(row.debt)}
-                  </TableCell>
-                  <TableCell align="center">{row.inStock}</TableCell>
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </TableContainer>
+        </Paper> */}
+
+        <div className={classes.tableContainer}>
+          <DataGridTable data={listDyePlant} history={history} />
+        </div>
       </React.Fragment>
     );
   }

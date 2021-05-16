@@ -22,7 +22,7 @@ import DyePlantForm from "./dye_plant_form";
 import * as dyePlantAction from "../../actions/dye_plant";
 import * as orderAction from "../../actions/order";
 import * as modalActions from "../../actions/modal";
-import { PAYMENT_CREATION, ORDER_CREATION } from "./../../constants/path"
+import { PAYMENT_CREATION, ORDER_CREATION } from "./../../constants/path";
 
 class DyePlantDetail extends React.Component {
   componentDidMount() {
@@ -73,33 +73,46 @@ class DyePlantDetail extends React.Component {
   }
 
   renderInfo = () => {
-    const { detailDyePlant } = this.props;
+    const { detailDyePlant, classes } = this.props;
     return (
       <div>
-        <Box display="flex" mt={2}>
-          <Box fontWeight="fontWeightMedium">Địa chỉ:</Box>
-          <Box fontWeight="normal" ml={1}>
-            {detailDyePlant.address ?? ""}
-          </Box>
-        </Box>
-        <Box display="flex" mt={2}>
-          <Box fontWeight="fontWeightMedium">Điện thoại:</Box>
-          <Box fontWeight="normal" ml={1}>
-            {detailDyePlant.phoneNumber ?? ""}
-          </Box>
-        </Box>
-        <Box display="flex" mt={2}>
-          <Box fontWeight="fontWeightMedium">Email:</Box>
-          <Box fontWeight="normal" ml={1}>
-            {detailDyePlant.email ?? ""}
-          </Box>
-        </Box>
-        <Box display="flex" mt={2}>
-          <Box fontWeight="fontWeightMedium">Công nợ:</Box>
-          <Box fontWeight="normal" ml={1}>
-            {currencyFormat(detailDyePlant.debt ?? "")}
-          </Box>
-        </Box>
+        <Grid container spacing={3} className={classes.grid}>
+          <Grid item xs={2}>
+            <Box fontWeight="fontWeightMedium">Địa chỉ:</Box>
+          </Grid>
+          <Grid item xs={10}>
+            <Box fontWeight="normal" ml={1}>
+              {detailDyePlant.address ?? ""}
+            </Box>
+          </Grid>
+
+          <Grid item xs={2}>
+            <Box fontWeight="fontWeightMedium">Điện thoại:</Box>
+          </Grid>
+          <Grid item xs={10}>
+            <Box fontWeight="normal" ml={1}>
+              {detailDyePlant.phoneNumber ?? ""}
+            </Box>
+          </Grid>
+
+          <Grid item xs={2}>
+            <Box fontWeight="fontWeightMedium">Email:</Box>
+          </Grid>
+          <Grid item xs={10}>
+            <Box fontWeight="normal" ml={1}>
+              {detailDyePlant.email ?? ""}
+            </Box>
+          </Grid>
+
+          <Grid item xs={2}>
+            <Box fontWeight="fontWeightMedium">Công nợ:</Box>
+          </Grid>
+          <Grid item xs={10}>
+            <Box fontWeight="normal" ml={1}>
+              {currencyFormat(detailDyePlant.debt ?? "")}
+            </Box>
+          </Grid>
+        </Grid>
       </div>
     );
   };

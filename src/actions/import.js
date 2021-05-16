@@ -1,6 +1,5 @@
 import * as apis from "./../apis/import";
 import { Import, Alert } from "../constants/action_types";
-import { SHOW_LOADING, HIDE_LOADING } from "../constants/action_types";
 import { showError } from "./../commons/handle_error";
 
 // GET LIST
@@ -21,7 +20,6 @@ export const getListImportFailed = (error) => ({
 export const getListImportRequest = (keyword) => {
   return (dispatch) => {
     dispatch(getListImport());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getList(keyword)
       .then((data) => {
@@ -30,12 +28,9 @@ export const getListImportRequest = (keyword) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getListImportFailed(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -58,7 +53,6 @@ export const getListExportedFabricFailed = (error) => ({
 export const getListExportedFabricRequest = (dyehouseId, fabricType) => {
   return (dispatch) => {
     dispatch(getListExportedFabric());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getListExportedFabric(dyehouseId, fabricType)
       .then((data) => {
@@ -67,12 +61,9 @@ export const getListExportedFabricRequest = (dyehouseId, fabricType) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getListExportedFabricFailed(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -95,7 +86,6 @@ export const getDyeingPriceFailed = (error) => ({
 export const getDyeingPriceRequest = (fabricType, color) => {
   return (dispatch) => {
     dispatch(getDyeingPrice());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getDyeingPrice(fabricType, color)
       .then((data) => {
@@ -104,16 +94,12 @@ export const getDyeingPriceRequest = (fabricType, color) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getDyeingPriceFailed(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
-
 
 export const createImport = () => ({
   type: Import.CREATE_IMPORT,
@@ -132,7 +118,6 @@ export const createImportFailed = (error) => ({
 export const createImportRequest = (body, completion) => {
   return (dispatch) => {
     dispatch(createImport());
-    dispatch({ type: SHOW_LOADING });
     apis
       .createImport(body)
       .then((data) => {
@@ -149,12 +134,9 @@ export const createImportRequest = (body, completion) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(createImportFailed(error));
-        dispatch(showError(error, error.status));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };

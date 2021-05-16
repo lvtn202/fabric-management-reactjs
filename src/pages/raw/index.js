@@ -45,7 +45,7 @@ class Raw extends React.Component {
     return (
       <Fragment>
         <Typography variant="h5" gutterBottom>
-          Danh sách vải mộc
+          Danh sách vải mộc tồn kho
         </Typography>
         <Divider className={classes.divider} />
         <Paper className={classes.tabs}>

@@ -1,6 +1,6 @@
 import * as apis from "./../apis/payment";
 import { Payment, Alert } from "../constants/action_types";
-import { SHOW_LOADING, HIDE_LOADING } from "../constants/action_types";
+import {} from "../constants/action_types";
 import { showError } from "./../commons/handle_error";
 
 // Get list payment
@@ -21,7 +21,6 @@ export const getListPaymentFail = (error) => ({
 export const getListPaymentRequest = (dyehouseId) => {
   return (dispatch) => {
     dispatch(getListPayment());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getListPayment(dyehouseId)
       .then((data) => {
@@ -30,12 +29,9 @@ export const getListPaymentRequest = (dyehouseId) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getListPaymentFail(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -58,7 +54,6 @@ export const getListPaymentMethodFail = (error) => ({
 export const getListPaymentMethodRequest = () => {
   return (dispatch) => {
     dispatch(getListPaymentMethod());
-    dispatch({ type: SHOW_LOADING });
     apis
       .getListPaymentMethod()
       .then((data) => {
@@ -67,12 +62,9 @@ export const getListPaymentMethodRequest = () => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
-        dispatch(showError(error, error.status));
         dispatch(getListPaymentMethodFail(error));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };
@@ -95,7 +87,6 @@ export const createPaymentFail = (error) => ({
 export const createPaymentRequest = (body, completion) => {
   return (dispatch) => {
     dispatch(createPayment());
-    dispatch({ type: SHOW_LOADING });
     apis
       .createPayment(body)
       .then((data) => {
@@ -112,12 +103,9 @@ export const createPaymentRequest = (body, completion) => {
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }
-        dispatch({ type: HIDE_LOADING });
       })
       .catch((error) => {
         dispatch(createPaymentFail(error));
-        dispatch(showError(error, error.status));
-        dispatch({ type: HIDE_LOADING });
       });
   };
 };

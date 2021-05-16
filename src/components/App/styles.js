@@ -2,6 +2,9 @@ const styles = (theme) => ({
   wrapper: {
     display: "flex",
     flexDirection: "row",
+    paddingTop: 10,
+    height: '90vh',
+    overflow: 'auto',
   },
   appBar: {
     flexGrow: 1,
@@ -19,6 +22,8 @@ const styles = (theme) => ({
     paddingLeft: 20,
     paddingRight: 20,
     paddingTop: 10,
+    height: '88vh',
+    overflow: 'auto',
   },
   mainContainer: {
     position: "absolute",

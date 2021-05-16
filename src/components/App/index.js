@@ -32,6 +32,11 @@ function Alert(props) {
 }
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
+
   static getDerivedStateFromProps(props) {
     const { authAction } = props;
     const { loginSuccess } = authAction;
@@ -39,12 +44,13 @@ class App extends React.Component {
     if (auth) {
       loginSuccess(auth);
     } else {
-      props.onShowErrorMsg();
+      // props.onShowErrorMsg();
       // setTimeout(() => {
       //   history.push(LOGIN);
       //   window.location.reload();
       // }, 1000);
     }
+    return null;
   }
 
   onClickLogout = () => {
