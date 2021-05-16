@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withStyles } from "@material-ui/styles";
 import PropTypes from "prop-types";
 import styles from "./styles";
+import validate from "./validate";
 import { bindActionCreators, compose } from "redux";
 import Typography from "@material-ui/core/Typography";
 import {
@@ -14,32 +15,29 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { Field, reduxForm } from "redux-form";
-import { Link } from "react-router-dom";
-import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Container from "@material-ui/core/Container";
-import validate from "./validate";
 import AppTextField from "../../components/form_helper/text_field";
 import * as authAction from "../../actions/auth";
-import { LOG_IN_FORM } from "./../../constants/form_name";
-import { DASHBOARD, FORGOT_PASSWORD } from "./../../constants/path";
+import { NEW_PASSWORD_FORM } from "./../../constants/form_name";
+import { LOGIN } from "./../../constants/path";
+import queryString from "query-string";
 
-class Login extends React.Component {
+class NewPassword extends React.Component {
   submitForm = (data) => {
-    const { history, authAction } = this.props;
-    const { email, password } = data;
-    const { loginRequest } = authAction;
+    const { history, authAction, location } = this.props;
+    const { email, token } = queryString.parse(location.search);
+    const { password } = data;
+    const { resetPasswordRequest } = authAction;
 
     let body = JSON.stringify({
-      password: password,
+      newPassword: password,
       email: email,
+      token: token,
     });
 
-    loginRequest(body, (response) => {
-      console.log(response.data.result);
-      window.localStorage.setItem("user", JSON.stringify(response.data.result));
-      this.props.onOpenSidebar();
-      history.push(DASHBOARD);
+    resetPasswordRequest(body, (response) => {
+      history.push(LOGIN);
     });
   };
 
@@ -55,7 +53,7 @@ class Login extends React.Component {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Đăng nhập
+            Đặt lại mật khẩu
           </Typography>
           <form
             onSubmit={handleSubmit(this.submitForm)}
@@ -65,22 +63,20 @@ class Login extends React.Component {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email"
-              name="email"
-              autoComplete="email"
-              autoFocus
+              name="password"
+              label="Mật khẩu"
+              id="password"
+              type="password"
               component={AppTextField}
             />
             <Field
               margin="normal"
               required
               fullWidth
-              name="password"
-              label="Mật khẩu"
-              id="password"
+              name="confirmPassword"
+              label="Nhập lại mật khẩu"
+              id="confirmPassword"
               type="password"
-              autoComplete="current-password"
               component={AppTextField}
             />
             <Button
@@ -91,17 +87,8 @@ class Login extends React.Component {
               className={classes.submit}
               disabled={invalid || submitting}
             >
-              Đăng nhập
+              Đặt lại
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link to={FORGOT_PASSWORD}>
-                  <Typography variant="button" color="primary">
-                    Quên mật khẩu?
-                  </Typography>
-                </Link>
-              </Grid>
-            </Grid>
           </form>
         </div>
       </Container>
@@ -120,19 +107,23 @@ const mapDispatchToProps = (dispatch) => ({
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-Login.propTypes = {
+NewPassword.propTypes = {
   classes: PropTypes.object,
   invalid: PropTypes.bool,
   submitting: PropTypes.bool,
   handleSubmit: PropTypes.func,
   authAction: PropTypes.shape({
-    loginRequest: PropTypes.func,
+    resetPasswordRequest: PropTypes.func,
   }),
 };
 
 const withReduxForm = reduxForm({
-  form: LOG_IN_FORM,
+  form: NEW_PASSWORD_FORM,
   validate,
 });
 
-export default compose(withConnect, withStyles(styles), withReduxForm)(Login);
+export default compose(
+  withConnect,
+  withStyles(styles),
+  withReduxForm
+)(NewPassword);
