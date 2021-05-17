@@ -123,3 +123,36 @@ export const resetPasswordRequest = (body, completion) => {
       });
   };
 };
+
+export const checkTokenResetPassword = () => ({
+  type: Auth.CHECK_TOKEN_RESET_PASSWORD,
+});
+
+export const checkTokenResetPasswordSuccess = (data) => ({
+  type: Auth.CHECK_TOKEN_RESET_PASSWORD_SUCCESS,
+  payload: data,
+});
+
+export const checkTokenResetPasswordFailed = (error) => ({
+  type: Auth.CHECK_TOKEN_RESET_PASSWORD_FAILED,
+  payload: error,
+});
+
+export const checkTokenResetPasswordRequest = (body, completion) => {
+  return (dispatch) => {
+    dispatch(checkTokenResetPassword());
+    apis
+      .checkTokenResetPassword(body)
+      .then((data) => {
+        console.log(data);
+        if (data.data.status === 1) {
+          dispatch(checkTokenResetPasswordSuccess(data.data.result));
+        } else {
+          completion(data);
+        }
+      })
+      .catch((error) => {
+        dispatch(checkTokenResetPasswordFailed(error));
+      });
+  };
+};

@@ -24,6 +24,16 @@ import { LOGIN } from "./../../constants/path";
 import queryString from "query-string";
 
 class NewPassword extends React.Component {
+  constructor(props) {
+    super(props);
+    const { history, authAction, location } = this.props;
+    const { token } = queryString.parse(location.search);
+    const { checkTokenResetPasswordRequest } = authAction;
+    checkTokenResetPasswordRequest(JSON.stringify({ token: token }), () => {
+      history.push(LOGIN);
+    });
+  }
+
   submitForm = (data) => {
     const { history, authAction, location } = this.props;
     const { email, token } = queryString.parse(location.search);
@@ -36,7 +46,7 @@ class NewPassword extends React.Component {
       token: token,
     });
 
-    resetPasswordRequest(body, (response) => {
+    resetPasswordRequest(body, () => {
       history.push(LOGIN);
     });
   };
@@ -114,6 +124,7 @@ NewPassword.propTypes = {
   handleSubmit: PropTypes.func,
   authAction: PropTypes.shape({
     resetPasswordRequest: PropTypes.func,
+    checkTokenResetPasswordRequest: PropTypes.func,
   }),
 };
 

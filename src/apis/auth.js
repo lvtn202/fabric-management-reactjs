@@ -17,6 +17,6 @@ export const resetPassword = (body) => {
 }
 
 export const checkTokenResetPassword = (body) => {
-    return RequestManager.post('/checkTokenResetPass', body, "application/json")
+    return RequestManager.post('/checkTokenResetPassword', body, "application/json")
 }
 
