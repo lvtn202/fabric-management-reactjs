@@ -1,5 +1,5 @@
 import React from "react";
-import * as Path from './constants/path';
+import * as Path from "./constants/path";
 import Home from "./pages/home";
 import Login from "./components/login";
 import DyePlant from "./pages/dye_plant";
@@ -21,7 +21,8 @@ import Payment from "./pages/payment_list";
 import PaymentCreation from "./pages/payment_creation";
 import Dashboard from "./pages/dashboard";
 import NotFound from "./pages/not_found";
-
+import ForgotPassword from "./pages/forgot_password";
+import NewPassword from "./pages/new_password";
 
 const routes = [
   {
@@ -132,6 +133,20 @@ const routes = [
     exact: false,
     main: ({ history, match }) => (
       <PaymentCreation history={history} match={match} />
+    ),
+  },
+  {
+    path: Path.FORGOT_PASSWORD,
+    exact: false,
+    main: ({ history, match }) => (
+      <ForgotPassword history={history} match={match} />
+    ),
+  },
+  {
+    path: Path.NEW_PASSWORD,
+    exact: false,
+    main: ({ history, match, location }) => (
+      <NewPassword history={history} match={match} location={location} />
     ),
   },
   {

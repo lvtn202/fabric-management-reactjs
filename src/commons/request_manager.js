@@ -54,8 +54,10 @@ class RequestManager {
     });
   }
 
-  put(url, body) {
-    return this.instance.put(`${API_ROOT}${url}`, body);
+  put(url, body, contentType = "application/x-www-form-urlencoded") {
+    return this.instance.put(`${API_ROOT}${url}`, body, {
+      headers: { "content-type": contentType },
+    });
   }
 
   delete(url) {
