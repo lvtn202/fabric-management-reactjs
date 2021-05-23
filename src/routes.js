@@ -1,7 +1,7 @@
 import React from "react";
 import * as Path from "./constants/path";
 import Home from "./pages/home";
-import Login from "./components/login";
+import Login from "./pages/login";
 import DyePlant from "./pages/dye_plant";
 import DyeBatch from "./pages/dye_batch";
 import DyeBatchDetail from "./pages/dye_batch_detail";
