@@ -8,25 +8,26 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
 import * as adminActions from "../../actions/admin";
 import validate from "./validate";
 import AppTextField from "../../components/form_helper/text_field";
 import AppRadioGroup from "../../components/form_helper/radio_field";
 import { SIGNUP_FORM } from "./../../constants/form_name";
-import { USER_LIST } from "./../../constants/path";
+import { DASHBOARD, USER_LIST } from "./../../constants/path";
 import { Field, reduxForm } from "redux-form";
+import { APP_ADMIN } from "../../constants/user_roles";
 
 class UserSignup extends React.Component {
   constructor(props) {
     super(props);
+    const auth = JSON.parse(window.localStorage.getItem("user"));
+    if (!auth.roles.includes(APP_ADMIN)) {
+      this.props.history.push(DASHBOARD);
+    }
     this.state = {
       sex: "female",
     };

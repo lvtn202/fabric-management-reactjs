@@ -8,8 +8,18 @@ import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import * as adminActions from "../../actions/admin";
 import DataGridTable from "./table";
+import { APP_ADMIN } from "../../constants/user_roles";
+import { DASHBOARD } from "../../constants/path";
 
 class UserList extends React.Component {
+  constructor(props) {
+    super(props);
+    const auth = JSON.parse(window.localStorage.getItem("user"));
+    if (!auth.roles.includes(APP_ADMIN)) {
+      this.props.history.push(DASHBOARD);
+    }
+  }
+
   componentDidMount() {
     const { adminActions } = this.props;
     const { getListUserRequest } = adminActions;

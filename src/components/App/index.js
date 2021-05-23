@@ -39,7 +39,6 @@ class App extends React.Component {
     const { loginSuccess } = authAction;
     const auth = JSON.parse(window.localStorage.getItem("user"));
     if (auth) {
-      console.log("app js");
       loginSuccess(auth);
     }
   }
