@@ -22,7 +22,6 @@ export const loginRequest = (body, completion) => {
     apis
       .login(body)
       .then((data) => {
-        console.log(data);
         if (data.data.status === 1) {
           dispatch(loginSuccess(data.data.result));
           dispatch({
@@ -62,7 +61,6 @@ export const sendMailResetPasswordRequest = (body, completion) => {
     apis
       .sendMailResetPassword(body)
       .then((data) => {
-        console.log(data);
         if (data.data.status === 1) {
           dispatch(sendMailResetPasswordSuccess(data.data.result));
           dispatch({
@@ -103,7 +101,6 @@ export const resetPasswordRequest = (body, completion) => {
     apis
       .resetPassword(body)
       .then((data) => {
-        console.log(data);
         if (data.data.status === 1) {
           dispatch(resetPasswordSuccess(data.data.result));
           dispatch({
@@ -144,7 +141,6 @@ export const checkTokenResetPasswordRequest = (body, completion) => {
     apis
       .checkTokenResetPassword(body)
       .then((data) => {
-        console.log(data);
         if (data.data.status === 1) {
           dispatch(checkTokenResetPasswordSuccess(data.data.result));
         } else {

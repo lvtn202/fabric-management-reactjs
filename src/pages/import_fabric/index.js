@@ -96,7 +96,6 @@ class ImportFabric extends React.Component {
 
   handleUpdateInfo = (infoFormValues) => {
     const { dyehouse, fabricType, color, orderId } = infoFormValues;
-    console.log(infoFormValues);
     this.setState({
       dyehouse,
       fabricType,

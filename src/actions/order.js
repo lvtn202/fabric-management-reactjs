@@ -122,7 +122,6 @@ export const createOrderRequest = (body, completion) => {
     apis
       .createOrder(body)
       .then((data) => {
-        console.log(data);
         if (data.data.status === 1) {
           dispatch(createOrderSuccess(data));
           dispatch({

@@ -38,7 +38,6 @@ class UserSignup extends React.Component {
   };
 
   submitForm = (data) => {
-    console.log(data);
     const { history, adminActions } = this.props;
     const { firstName, lastName, email, password, sex } = data;
     const { createUserRequest } = adminActions;

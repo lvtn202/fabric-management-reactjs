@@ -121,7 +121,6 @@ export const createImportRequest = (body, completion) => {
     apis
       .createImport(body)
       .then((data) => {
-        console.log(data);
         if (data.data.status === 1) {
           dispatch(createImportSuccess(data));
           dispatch({

@@ -56,7 +56,6 @@ export const createExportRequest = (body, completion) => {
     apis
       .createExport(body)
       .then((data) => {
-        console.log(data);
         if (data.data.status === 1) {
           dispatch(createExportSuccess(data));
           dispatch({

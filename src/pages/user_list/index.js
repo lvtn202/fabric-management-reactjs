@@ -27,7 +27,6 @@ class UserList extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
     return (
       <React.Fragment>
         <Typography variant="h5" gutterBottom>

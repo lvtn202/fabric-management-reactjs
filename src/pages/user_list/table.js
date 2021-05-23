@@ -9,8 +9,6 @@ import {
 } from "@material-ui/data-grid";
 import { Pagination } from "@material-ui/lab";
 import {
-  currencyFormat,
-  parseTimestamp,
   sexDescription,
 } from "../../commons/utils";
 

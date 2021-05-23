@@ -155,7 +155,6 @@ export const createRecallRequest = (body, completion) => {
     apis
       .createRecall(body)
       .then((data) => {
-        console.log(data);
         if (data.data.status === 1) {
           dispatch(createRecallSuccess(data));
           dispatch({

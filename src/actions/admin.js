@@ -57,7 +57,6 @@ export const createUserRequest = (body, completion) => {
     apis
       .signup(body)
       .then((data) => {
-        console.log(data);
         if (data.data.status === 1) {
           dispatch(createUserSuccess(data));
           dispatch({
@@ -98,7 +97,6 @@ export const createDyePlantRequest = (body, completion) => {
     apis
       .createDyeplant(body)
       .then((data) => {
-        console.log(data);
         if (data.data.status === 1) {
           dispatch(createDyePlantSuccess(data));
           dispatch({

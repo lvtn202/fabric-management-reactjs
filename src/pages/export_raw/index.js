@@ -238,7 +238,6 @@ class ExportRaw extends React.Component {
   }
 
   remove = (item) => {
-    console.log(item);
     this.setState((prev) => ({
       currentListRaws: prev.currentListRaws.filter((x) => x !== item),
     }));

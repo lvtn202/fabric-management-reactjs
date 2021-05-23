@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
 export default function Sidebar(props) {
   const classes = useStyles();
   const { userRole } = props;
-
+  console.log(window.location.pathname);
   return (
     <List
       component="nav"
@@ -50,6 +50,7 @@ export default function Sidebar(props) {
                 item.subNav.map((subItem, subIndex) => {
                   return (
                     <ListItem
+                      selected={subItem.path === window.location.pathname}
                       button
                       className={classes.nested}
                       component={Link}
