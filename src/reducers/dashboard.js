@@ -5,6 +5,9 @@ const defaultState = {
   recentImport: [],
   recentExport: [],
   statisticFabric: [],
+  listInforExportedFabric: [],
+  listInforCompletedFabricByType: [],
+  listInforCompletedFabricByDyehouse: [],
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -53,6 +56,39 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         statisticFabric: action.payload.data.result,
+      };
+    case Dashboard.FETCH_INFO_EXPORTED_FABRIC:
+    case Dashboard.FETCH_INFO_EXPORTED_FABRIC_FAILED:
+      return {
+        ...state,
+        listInforExportedFabric: [],
+      };
+    case Dashboard.FETCH_INFO_EXPORTED_FABRIC_SUCCESS:
+      return {
+        ...state,
+        listInforExportedFabric: action.payload.data.result,
+      };
+    case Dashboard.FETCH_COMPLETED_FABRIC_BY_TYPE:
+    case Dashboard.FETCH_COMPLETED_FABRIC_BY_TYPE_FAILED:
+      return {
+        ...state,
+        listInforCompletedFabricByType: [],
+      };
+    case Dashboard.FETCH_COMPLETED_FABRIC_BY_TYPE_SUCCESS:
+      return {
+        ...state,
+        listInforCompletedFabricByType: action.payload.data.result,
+      };
+    case Dashboard.FETCH_COMPLETED_FABRIC_BY_DYEPLANT:
+    case Dashboard.FETCH_COMPLETED_FABRIC_BY_DYEPLANT_FAILED:
+      return {
+        ...state,
+        listInforCompletedFabricByDyehouse: [],
+      };
+    case Dashboard.FETCH_COMPLETED_FABRIC_BY_DYEPLANT_SUCCESS:
+      return {
+        ...state,
+        listInforCompletedFabricByDyehouse: action.payload.data.result,
       };
     default:
       return state;

@@ -27,3 +27,31 @@ export const getStatisticFabric = (dyehouseId) => {
     `/getStatisticFabric?dyehouseId=${dyehouseId ?? -1}`
   );
 };
+
+export const getInforExportedFabric = () => {
+  return RequestManager.get(`/getInforExportedFabric`);
+};
+
+export const getInforCompletedFabricByType = (
+  fabricType,
+  startDate,
+  endDate
+) => {
+  return RequestManager.get(
+    `/getInforCompletedFabricByType?fabricType=${fabricType ?? ""}&startDate=${
+      startDate ?? ""
+    }&endDate=${endDate ?? ""}`
+  );
+};
+
+export const getInforCompletedFabricByDyehouse = (
+  dyehouseId,
+  startDate,
+  endDate
+) => {
+  return RequestManager.get(
+    `/getInforCompletedFabricByDyehouse?dyehouseId=${
+      dyehouseId ?? ""
+    }&startDate=${startDate ?? ""}&endDate=${endDate ?? ""}`
+  );
+};

@@ -134,3 +134,110 @@ export const getStatisticFabricRequest = () => {
       });
   };
 };
+
+// Get list exported fabric in dye plants
+export const getInforExportedFabric = () => ({
+  type: Dashboard.FETCH_INFO_EXPORTED_FABRIC,
+});
+
+export const getInforExportedFabricSuccess = (data) => ({
+  type: Dashboard.FETCH_INFO_EXPORTED_FABRIC_SUCCESS,
+  payload: data,
+});
+
+export const getInforExportedFabricFail = (error) => ({
+  type: Dashboard.FETCH_INFO_EXPORTED_FABRIC_FAILED,
+  payload: error,
+});
+
+export const getInforExportedFabricRequest = () => {
+  return (dispatch) => {
+    dispatch(getInforExportedFabric());
+    apis
+      .getInforExportedFabric()
+      .then((data) => {
+        if (data.data.status === 1) {
+          dispatch(getInforExportedFabricSuccess(data));
+        } else {
+          dispatch(showError(data.data.status_code, data.status));
+        }
+      })
+      .catch((error) => {
+        dispatch(getInforExportedFabricFail(error));
+      });
+  };
+};
+
+// Get list completed fabric in dye plants by type
+export const getInforCompletedFabricByType = () => ({
+  type: Dashboard.FETCH_COMPLETED_FABRIC_BY_TYPE,
+});
+
+export const getInforCompletedFabricByTypeSuccess = (data) => ({
+  type: Dashboard.FETCH_COMPLETED_FABRIC_BY_TYPE_SUCCESS,
+  payload: data,
+});
+
+export const getInforCompletedFabricByTypeFail = (error) => ({
+  type: Dashboard.FETCH_COMPLETED_FABRIC_BY_TYPE_FAILED,
+  payload: error,
+});
+
+export const getInforCompletedFabricByTypeRequest = (
+  fabricType,
+  startDate,
+  endDate
+) => {
+  return (dispatch) => {
+    dispatch(getInforCompletedFabricByType());
+    apis
+      .getInforCompletedFabricByType(fabricType, startDate, endDate)
+      .then((data) => {
+        if (data.data.status === 1) {
+          dispatch(getInforCompletedFabricByTypeSuccess(data));
+        } else {
+          dispatch(showError(data.data.status_code, data.status));
+        }
+      })
+      .catch((error) => {
+        dispatch(getInforCompletedFabricByTypeFail(error));
+      });
+  };
+};
+
+// Get list completed fabric in dye plants by dye plant
+export const getInforCompletedFabricByDyehouse = () => ({
+  type: Dashboard.FETCH_COMPLETED_FABRIC_BY_DYEPLANT,
+});
+
+export const getInforCompletedFabricByDyehouseSuccess = (data) => ({
+  type: Dashboard.FETCH_COMPLETED_FABRIC_BY_DYEPLANT_SUCCESS,
+  payload: data,
+});
+
+export const getInforCompletedFabricByDyehouseFail = (error) => ({
+  type: Dashboard.FETCH_COMPLETED_FABRIC_BY_DYEPLANT_FAILED,
+  payload: error,
+});
+
+export const getInforCompletedFabricByDyehouseRequest = (
+  dyehouseId,
+  startDate,
+  endDate
+) => {
+  return (dispatch) => {
+    dispatch(getInforCompletedFabricByDyehouse());
+    apis
+      .getInforCompletedFabricByDyehouse(dyehouseId, startDate, endDate)
+      .then((data) => {
+        if (data.data.status === 1) {
+          dispatch(getInforCompletedFabricByDyehouseSuccess(data));
+        } else {
+          dispatch(showError(data.data.status_code, data.status));
+        }
+      })
+      .catch((error) => {
+        dispatch(getInforCompletedFabricByDyehouseFail(error));
+      });
+  };
+};

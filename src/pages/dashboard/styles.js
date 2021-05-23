@@ -14,6 +14,13 @@ const styles = (theme) => ({
   fixedHeight: {
     height: 280,
   },
+  button: {
+    padding: theme.spacing(2),
+    margin: theme.spacing(2),
+  },
+  dataPicker: {
+    margin: theme.spacing(2),
+  },
 });
 
 export default styles;
