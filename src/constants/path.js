@@ -20,3 +20,6 @@ export const PAYMENT = "/payment";
 export const PAYMENT_CREATION = "/payment/create";
 export const FORGOT_PASSWORD = "/forgot-password";
 export const NEW_PASSWORD = "/new-password";
+export const USER_LIST = "/admin/user";
+export const CREATE_USER = "/admin/user/create";
+export const CREATE_DYE_PLANT = "/admin/dye-plant/create";

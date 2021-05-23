@@ -5,14 +5,15 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { SidebarData } from "./sidebar_data";
 import { Link } from "react-router-dom";
+import { APP_ADMIN } from "../../constants/user_roles";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     position: "relative",
     whiteSpace: "nowrap",
     width: 300,
-    height: '88vh',
-    overflow: 'auto',
+    height: "88vh",
+    overflow: "auto",
     backgroundColor: theme.palette.background.paper,
     borderRight: "rgba(0, 0, 0, 0.12) solid 1px",
   },
@@ -24,8 +25,9 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function NestedList() {
+export default function Sidebar(props) {
   const classes = useStyles();
+  const { userRole } = props;
 
   return (
     <List
@@ -35,29 +37,31 @@ export default function NestedList() {
     >
       {SidebarData.map((item, index) => {
         return (
-          <div key={index}>
-            <ListItem>
-              <ListItemText
-                primary={item.title}
-                disableTypography={true}
-                className={classes.topLevel}
-              />
-            </ListItem>
-            {item.subNav &&
-              item.subNav.map((subItem, subIndex) => {
-                return (
-                  <ListItem
-                    button
-                    className={classes.nested}
-                    component={Link}
-                    to={subItem.path}
-                    key={subIndex}
-                  >
-                    <ListItemText primary={subItem.title} />
-                  </ListItem>
-                );
-              })}
-          </div>
+          (userRole.includes(APP_ADMIN) || !item.admin) && (
+            <div key={index}>
+              <ListItem>
+                <ListItemText
+                  primary={item.title}
+                  disableTypography={true}
+                  className={classes.topLevel}
+                />
+              </ListItem>
+              {item.subNav &&
+                item.subNav.map((subItem, subIndex) => {
+                  return (
+                    <ListItem
+                      button
+                      className={classes.nested}
+                      component={Link}
+                      to={subItem.path}
+                      key={subIndex}
+                    >
+                      <ListItemText primary={subItem.title} />
+                    </ListItem>
+                  );
+                })}
+            </div>
+          )
         );
       })}
     </List>

@@ -1,6 +1,7 @@
 import { combineReducers } from "redux";
-import common from "./reducers/common";
+import admin from "./reducers/admin";
 import auth from "./reducers/auth";
+import common from "./reducers/common";
 import alert from "./reducers/alert";
 import modal from "./reducers/modal";
 import sidebar from "./reducers/sidebar";
@@ -16,6 +17,7 @@ import importSlip from "./reducers/import";
 import { reducer as formReducer } from "redux-form";
 
 export default combineReducers({
+  admin,
   auth,
   alert,
   common,
