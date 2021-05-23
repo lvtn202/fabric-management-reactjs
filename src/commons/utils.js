@@ -21,3 +21,14 @@ export const currencyFormat = (value) => {
     currency: "VND",
   }).format(value);
 };
+
+export const sexDescription = (value) => {
+  switch (value) {
+    case "male":
+      return "Nam";
+    case "female":
+      return "Nữ";
+    default:
+      return "N/A";
+  }
+};

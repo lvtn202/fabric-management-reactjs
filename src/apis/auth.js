@@ -4,10 +4,6 @@ export const login = (body) => {
     return RequestManager.post('/login', body, "application/json")
 }
 
-export const signup = (body) => {
-    return RequestManager.post('/signUp', body, "application/json")
-}
-
 export const sendMailResetPassword = (body) => {
     return RequestManager.post('/getEmailResetPassword', body, "application/json")
 }

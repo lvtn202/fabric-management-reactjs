@@ -7,7 +7,7 @@ const defaultState = {
   lastName: "",
   email: "",
   sex: "",
-  roles: "",
+  roles: [],
   token: "",
 };
 

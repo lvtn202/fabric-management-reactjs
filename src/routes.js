@@ -1,7 +1,7 @@
 import React from "react";
 import * as Path from "./constants/path";
 import Home from "./pages/home";
-import Login from "./components/login";
+import Login from "./pages/login";
 import DyePlant from "./pages/dye_plant";
 import DyeBatch from "./pages/dye_batch";
 import DyeBatchDetail from "./pages/dye_batch_detail";
@@ -23,6 +23,9 @@ import Dashboard from "./pages/dashboard";
 import NotFound from "./pages/not_found";
 import ForgotPassword from "./pages/forgot_password";
 import NewPassword from "./pages/new_password";
+import UserList from "./pages/user_list";
+import UserSignup from "./pages/user_signup";
+import DyePlantCreation from "./pages/dye_plant_creation";
 
 const routes = [
   {
@@ -148,6 +151,21 @@ const routes = [
     main: ({ history, match, location }) => (
       <NewPassword history={history} match={match} location={location} />
     ),
+  },
+  {
+    path: Path.USER_LIST,
+    exact: true,
+    main: ({ history }) => <UserList history={history} />,
+  },
+  {
+    path: Path.CREATE_USER,
+    exact: false,
+    main: ({ history }) => <UserSignup history={history} />,
+  },
+  {
+    path: Path.CREATE_DYE_PLANT,
+    exact: false,
+    main: ({ history }) => <DyePlantCreation history={history} />,
   },
   {
     path: "",

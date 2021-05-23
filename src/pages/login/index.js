@@ -36,7 +36,6 @@ class Login extends React.Component {
     });
 
     loginRequest(body, (response) => {
-      console.log(response.data.result);
       window.localStorage.setItem("user", JSON.stringify(response.data.result));
       this.props.onOpenSidebar();
       history.push(DASHBOARD);

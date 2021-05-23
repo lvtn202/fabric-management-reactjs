@@ -35,22 +35,12 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {};
-  }
-
-  static getDerivedStateFromProps(props) {
     const { authAction } = props;
     const { loginSuccess } = authAction;
     const auth = JSON.parse(window.localStorage.getItem("user"));
     if (auth) {
       loginSuccess(auth);
-    } else {
-      // props.onShowErrorMsg();
-      // setTimeout(() => {
-      //   history.push(LOGIN);
-      //   window.location.reload();
-      // }, 1000);
     }
-    return null;
   }
 
   onClickLogout = () => {
@@ -67,8 +57,10 @@ class App extends React.Component {
       showErrorMsg,
       successMsg,
       showSuccessMsg,
+      userRole,
     } = this.props;
-    var sideBar = isDisplaySideBar === true ? <Sidebar /> : "";
+    var sideBar =
+      isDisplaySideBar === true ? <Sidebar userRole={userRole} /> : "";
     return (
       <ThemeProvider theme={theme}>
         <AppBar position="sticky">
@@ -76,7 +68,9 @@ class App extends React.Component {
             <Typography variant="h6" className={classes.title}>
               Quản lí vải nhuộm
             </Typography>
-            <Typography>{`Xin chào ${this.props.firstName} ${this.props.lastName}`}</Typography>
+            <Typography>{`Xin chào ${this.props.firstName ?? ""} ${
+              this.props.lastName ?? ""
+            }`}</Typography>
             {isDisplaySideBar && (
               <IconButton
                 component={Link}
@@ -154,6 +148,7 @@ class App extends React.Component {
 const mapStateToProps = (state) => ({
   lastName: state.auth.lastName,
   firstName: state.auth.firstName,
+  userRole: state.auth.roles,
   isDisplaySideBar: state.sidebar,
   errorMsg: state.alert.errorMsg,
   successMsg: state.alert.successMsg,

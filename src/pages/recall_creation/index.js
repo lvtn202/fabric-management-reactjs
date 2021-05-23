@@ -332,8 +332,6 @@ class RecallCreation extends React.Component {
   }
 
   add() {
-    console.log(this.props.formValues);
-    console.log(this.state.currentFabric);
     const { returnLength, returnReason } = this.props.formValues;
     const { currentFabric } = this.state;
     if (Number(returnLength) <= Number(currentFabric.finishedLength)) {
@@ -376,7 +374,6 @@ class RecallCreation extends React.Component {
       returnDate: new Date().getTime(),
       fabrics: currentListRecalls,
     });
-    console.log(body);
     createRecallRequest(body, () => {
       history.push(RECALL);
     });

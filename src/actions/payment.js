@@ -90,7 +90,6 @@ export const createPaymentRequest = (body, completion) => {
     apis
       .createPayment(body)
       .then((data) => {
-        console.log(data);
         if (data.data.status === 1) {
           dispatch(createPaymentSuccess(data));
           dispatch({

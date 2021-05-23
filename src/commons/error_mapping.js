@@ -5,6 +5,8 @@ export const errorMapping = (error) => {
       return "Lỗi hệ thống, vui lòng thử lại sau";
     case "EMAIL_NOT_EXISTED":
       return "Email không tồn tại";
+    case "EMAIL_EXISTED":
+      return "Email đã tồn tại";
     case "WRONG_PASSWORD":
       return "Sai mật khẩu";
     case "ERROR_TOKEN":
