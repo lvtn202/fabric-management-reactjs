@@ -73,7 +73,7 @@ export default function DataGridDemo(props) {
       <DataGrid
         rows={data}
         columns={columns}
-        pageSize={5}
+        pageSize={8}
         pagination
         autoHeight
         onSelectionModelChange={(newSelection) =>

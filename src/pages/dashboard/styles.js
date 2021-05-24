@@ -12,7 +12,14 @@ const styles = (theme) => ({
     flexDirection: "column",
   },
   fixedHeight: {
-    height: 280,
+    height: 300,
+  },
+  button: {
+    padding: theme.spacing(2),
+    margin: theme.spacing(2),
+  },
+  dataPicker: {
+    margin: theme.spacing(2),
   },
 });
 

@@ -14,14 +14,18 @@ import * as dyePlantAction from "../../actions/dye_plant";
 import * as rawActions from "../../actions/raw";
 import * as orderActions from "../../actions/order";
 import { CREATE_ORDER_FORM } from "./../../constants/form_name";
-import { ORDER } from "./../../constants/path"
+import { ORDER } from "./../../constants/path";
 
 class OrderCreation extends React.Component {
   componentDidMount() {
-    const { dyePlantAction, rawActions } = this.props;
+    const { dyePlantAction, rawActions, match } = this.props;
+    if (match) {
+      var id = match.params.id;
+      console.log(id);
+    }
     const { getListDyePlantRequest } = dyePlantAction;
-    getListDyePlantRequest();
     const { getListFabricTypeRequest } = rawActions;
+    getListDyePlantRequest();
     getListFabricTypeRequest();
   }
 
