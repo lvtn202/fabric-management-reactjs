@@ -241,3 +241,38 @@ export const getInforCompletedFabricByDyehouseRequest = (
       });
   };
 };
+
+// Get list completed fabric in dye plants by dye plant
+export const getInforCompletedFabricByDyehouseRecentYear = () => ({
+  type: Dashboard.FETCH_COMPLETED_FABRIC_RECENT_YEAR,
+});
+
+export const getInforCompletedFabricByDyehouseRecentYearSuccess = (data) => ({
+  type: Dashboard.FETCH_COMPLETED_FABRIC_RECENT_YEAR_SUCCESS,
+  payload: data,
+});
+
+export const getInforCompletedFabricByDyehouseRecentYearFail = (error) => ({
+  type: Dashboard.FETCH_COMPLETED_FABRIC_RECENT_YEAR_FAILED,
+  payload: error,
+});
+
+export const getInforCompletedFabricByDyehouseRecentYearRequest = (
+  dyehouseId
+) => {
+  return (dispatch) => {
+    dispatch(getInforCompletedFabricByDyehouseRecentYear());
+    apis
+      .getInforCompletedFabricByDyehouseRecentYear(dyehouseId)
+      .then((data) => {
+        if (data.data.status === 1) {
+          dispatch(getInforCompletedFabricByDyehouseRecentYearSuccess(data));
+        } else {
+          dispatch(showError(data.data.status_code, data.status));
+        }
+      })
+      .catch((error) => {
+        dispatch(getInforCompletedFabricByDyehouseRecentYearFail(error));
+      });
+  };
+};

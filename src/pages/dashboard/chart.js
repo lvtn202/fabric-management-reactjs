@@ -1,6 +1,5 @@
 import React from "react";
 import { useTheme } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import {
   Line,
   XAxis,
@@ -15,15 +14,12 @@ import {
 
 export default function Chart(props) {
   const theme = useTheme();
-  const { statisticFabric } = props;
+  const { data } = props;
   return (
     <React.Fragment>
-      <Typography component="h2" variant="h6" color="primary" gutterBottom>
-        Hôm nay
-      </Typography>
       <ResponsiveContainer>
         <ComposedChart
-          data={statisticFabric}
+          data={data}
           margin={{
             top: 16,
             right: 16,
@@ -32,7 +28,7 @@ export default function Chart(props) {
           }}
         >
           <XAxis
-            dataKey="fabricType"
+            dataKey="time"
             scale="band"
             stroke={theme.palette.text.secondary}
           />
@@ -57,25 +53,11 @@ export default function Chart(props) {
           <Tooltip />
           <Legend />
           <Bar
-            name="Độ dài mộc"
-            yAxisId="left"
-            dataKey="rawLength"
-            barSize={20}
-            fill={theme.palette.success.light}
-          />
-          <Bar
             name="Độ dài thành phẩm"
             yAxisId="left"
             dataKey="completedLength"
             barSize={20}
             fill={theme.palette.info.light}
-          />
-          <Line
-            name="Số cây mộc"
-            yAxisId="right"
-            type="monotone"
-            dataKey="rawNumber"
-            stroke={theme.palette.primary.light}
           />
           <Line
             name="Số cây thành phẩm"

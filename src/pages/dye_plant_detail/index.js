@@ -135,7 +135,7 @@ class DyePlantDetail extends React.Component {
             <Button
               variant="contained"
               color="primary"
-              onClick={() => history.push(ORDER_CREATION)}
+              onClick={() => history.push(`${ORDER_CREATION}/${detailDyePlant.id}`)}
             >
               Tạo đơn đặt hàng
             </Button>
@@ -144,7 +144,7 @@ class DyePlantDetail extends React.Component {
             <Button
               variant="contained"
               color="primary"
-              onClick={() => history.push(PAYMENT_CREATION)}
+              onClick={() => history.push(`${PAYMENT_CREATION}/${detailDyePlant.id}`)}
             >
               Tạo thanh toán
             </Button>

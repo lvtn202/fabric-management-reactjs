@@ -9,7 +9,7 @@ import {
   OPEN_SIDEBAR,
   CLOSE_SIDEBAR,
   Auth,
-} from "./../../constants/action_types";
+} from "../../constants/action_types";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -21,8 +21,8 @@ import Container from "@material-ui/core/Container";
 import validate from "./validate";
 import AppTextField from "../../components/form_helper/text_field";
 import * as authAction from "../../actions/auth";
-import { LOG_IN_FORM } from "./../../constants/form_name";
-import { DASHBOARD, FORGOT_PASSWORD } from "./../../constants/path";
+import { LOG_IN_FORM } from "../../constants/form_name";
+import { DASHBOARD, FORGOT_PASSWORD } from "../../constants/path";
 
 class Login extends React.Component {
   submitForm = (data) => {

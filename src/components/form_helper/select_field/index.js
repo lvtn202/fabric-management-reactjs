@@ -43,7 +43,6 @@ const AppSelectField = ({
         name: "age",
         id: "age-native-simple",
       }}
-      value={input.value}
     >
       {children}
     </Select>

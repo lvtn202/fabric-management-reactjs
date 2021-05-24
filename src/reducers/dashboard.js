@@ -8,6 +8,7 @@ const defaultState = {
   listInforExportedFabric: [],
   listInforCompletedFabricByType: [],
   listInforCompletedFabricByDyehouse: [],
+  listInforCompletedFabricRecentYear: [],
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -89,6 +90,17 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         listInforCompletedFabricByDyehouse: action.payload.data.result,
+      };
+    case Dashboard.FETCH_COMPLETED_FABRIC_RECENT_YEAR:
+    case Dashboard.FETCH_COMPLETED_FABRIC_RECENT_YEAR_FAILED:
+      return {
+        ...state,
+        listInforCompletedFabricRecentYear: [],
+      };
+    case Dashboard.FETCH_COMPLETED_FABRIC_RECENT_YEAR_SUCCESS:
+      return {
+        ...state,
+        listInforCompletedFabricRecentYear: action.payload.data.result.data,
       };
     default:
       return state;

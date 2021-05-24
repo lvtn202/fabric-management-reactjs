@@ -35,6 +35,7 @@ class Dashboard extends React.Component {
       startDate: date.setMonth(date.getMonth() - 6),
       endDate: new Date().getTime(),
       dyeplantTab: 1,
+      dyeplantYearTab: 1,
       typeTab: "1045",
     };
   }
@@ -48,6 +49,7 @@ class Dashboard extends React.Component {
       getStatisticFabricRequest,
       getInforCompletedFabricByDyehouseRequest,
       getInforCompletedFabricByTypeRequest,
+      getInforCompletedFabricByDyehouseRecentYearRequest,
     } = dashboardActions;
     const { getListDyePlantRequest } = dyeplantActions;
     const { getListFabricTypeRequest } = rawActions;
@@ -67,7 +69,18 @@ class Dashboard extends React.Component {
       this.state.startDate,
       this.state.endDate
     );
+    getInforCompletedFabricByDyehouseRecentYearRequest(
+      this.state.dyeplantYearTab
+    );
   }
+
+  handleChangeDyeplantYearTab = (event, newValue) => {
+    const { dashboardActions } = this.props;
+    const { getInforCompletedFabricByDyehouseRecentYearRequest } =
+      dashboardActions;
+    getInforCompletedFabricByDyehouseRecentYearRequest(newValue);
+    this.setState({ dyeplantYearTab: newValue });
+  };
 
   handleChangeDyeplantTab = (event, newValue) => {
     const { dashboardActions } = this.props;
@@ -107,7 +120,7 @@ class Dashboard extends React.Component {
       this.state.startDate,
       this.state.endDate
     );
-  }
+  };
 
   render() {
     return (
@@ -127,25 +140,49 @@ class Dashboard extends React.Component {
       recentPayment,
       recentImport,
       recentExport,
-      statisticFabric,
       listDyePlant,
       listFabricType,
       listInforCompletedFabricByDyehouse,
       listInforCompletedFabricByType,
+      listInforCompletedFabricRecentYear,
     } = this.props;
     return (
       <React.Fragment>
         <Container maxWidth="lg" className={classes.container}>
           <Grid container spacing={3}>
             {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
-              <Paper className={`${classes.paper} ${classes.fixedHeight}`}>
-                <Chart statisticFabric={statisticFabric} />
+            <Grid item xs={12} md={8} lg={10}>
+              <Paper className={`${classes.paper}`}>
+                <Typography
+                  component="h2"
+                  variant="h6"
+                  color="primary"
+                  gutterBottom
+                >
+                  Thống kê sản lượng trong năm
+                </Typography>
+                <Tabs
+                  value={this.state.dyeplantYearTab}
+                  indicatorColor="primary"
+                  textColor="primary"
+                  variant="scrollable"
+                  scrollButtons="auto"
+                  onChange={this.handleChangeDyeplantYearTab}
+                  aria-label="tabs example"
+                >
+                  {listDyePlant.map((item) => (
+                    <Tab label={item.name} value={item.id} key={item.id} />
+                  ))}
+                </Tabs>
+                <div className={`${classes.paper} ${classes.fixedHeight}`}>
+                  <Chart data={listInforCompletedFabricRecentYear} />
+                </div>
               </Paper>
             </Grid>
+
             {/* Recent Payment */}
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={`${classes.paper} ${classes.fixedHeight}`}>
+            <Grid item xs={12} md={4} lg={2}>
+              <Paper className={`${classes.paper}`}>
                 <Payment money={recentPayment} history={this.props.history} />
               </Paper>
             </Grid>
@@ -159,56 +196,69 @@ class Dashboard extends React.Component {
                   color="primary"
                   gutterBottom
                 >
-                  Thống kê ở xưởng
+                  Thống kê vải thành phẩm
                 </Typography>
                 {this.renderDatePicker()}
-                <Tabs
-                  value={this.state.dyeplantTab}
-                  indicatorColor="primary"
-                  textColor="primary"
-                  variant="scrollable"
-                  scrollButtons="auto"
-                  onChange={this.handleChangeDyeplantTab}
-                  aria-label="tabs example"
-                >
-                  {listDyePlant.map((item) => (
-                    <Tab label={item.name} value={item.id} key={item.id} />
-                  ))}
-                </Tabs>
-                <div className={`${classes.paper} ${classes.fixedHeight}`}>
-                  <ChartDyeplant data={listInforCompletedFabricByDyehouse} />
-                </div>
-              </Paper>
-            </Grid>
-
-            {/* Fabric of type */}
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Typography
-                  component="h2"
-                  variant="h6"
-                  color="primary"
-                  gutterBottom
-                >
-                  Thống kê theo loại vải
-                </Typography>
-                {this.renderDatePicker()}
-                <Tabs
-                  value={this.state.typeTab}
-                  indicatorColor="primary"
-                  textColor="primary"
-                  variant="scrollable"
-                  scrollButtons="auto"
-                  onChange={this.handleChangeTypeTab}
-                  aria-label="tabs example"
-                >
-                  {listFabricType.map((item) => (
-                    <Tab label={item.type} value={item.type} key={item.id} />
-                  ))}
-                </Tabs>
-                <div className={`${classes.paper} ${classes.fixedHeight}`}>
-                  <ChartFabricType data={listInforCompletedFabricByType} />
-                </div>
+                <Grid container spacing={3}>
+                  <Grid item xs={6}>
+                    <Typography
+                      component="h2"
+                      variant="h6"
+                      color="primary"
+                      gutterBottom
+                    >
+                      Theo xưởng
+                    </Typography>
+                    <Tabs
+                      value={this.state.dyeplantTab}
+                      indicatorColor="primary"
+                      textColor="primary"
+                      variant="scrollable"
+                      scrollButtons="auto"
+                      onChange={this.handleChangeDyeplantTab}
+                      aria-label="tabs example"
+                    >
+                      {listDyePlant.map((item) => (
+                        <Tab label={item.name} value={item.id} key={item.id} />
+                      ))}
+                    </Tabs>
+                    <div className={`${classes.paper} ${classes.fixedHeight}`}>
+                      <ChartDyeplant
+                        data={listInforCompletedFabricByDyehouse}
+                      />
+                    </div>
+                  </Grid>
+                  <Grid item xs={6}>
+                    <Typography
+                      component="h2"
+                      variant="h6"
+                      color="primary"
+                      gutterBottom
+                    >
+                      Theo loại vải
+                    </Typography>
+                    <Tabs
+                      value={this.state.typeTab}
+                      indicatorColor="primary"
+                      textColor="primary"
+                      variant="scrollable"
+                      scrollButtons="auto"
+                      onChange={this.handleChangeTypeTab}
+                      aria-label="tabs example"
+                    >
+                      {listFabricType.map((item) => (
+                        <Tab
+                          label={item.type}
+                          value={item.type}
+                          key={item.id}
+                        />
+                      ))}
+                    </Tabs>
+                    <div className={`${classes.paper} ${classes.fixedHeight}`}>
+                      <ChartFabricType data={listInforCompletedFabricByType} />
+                    </div>
+                  </Grid>
+                </Grid>
               </Paper>
             </Grid>
 
@@ -242,14 +292,13 @@ class Dashboard extends React.Component {
     const { startDate, endDate } = this.state;
     return (
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <Grid container justify="start">
+        <Grid container justify="flex-start">
           <KeyboardDatePicker
             disableToolbar
             inputVariant="outlined"
             variant="inline"
             format="dd/MM/yyyy"
             margin="normal"
-            id="date-picker-inline"
             label="Từ ngày"
             value={startDate}
             onChange={(date) => this.setState({ startDate: date.getTime() })}
@@ -263,7 +312,6 @@ class Dashboard extends React.Component {
             inputVariant="outlined"
             format="dd/MM/yyyy"
             margin="normal"
-            id="date-picker-inline"
             label="Đến ngày"
             value={endDate}
             onChange={(date) => this.setState({ endDate: date.getTime() })}
@@ -296,6 +344,8 @@ const mapStateToProps = (state) => ({
     state.dashboard.listInforCompletedFabricByType,
   listInforCompletedFabricByDyehouse:
     state.dashboard.listInforCompletedFabricByDyehouse,
+    listInforCompletedFabricRecentYear:
+    state.dashboard.listInforCompletedFabricRecentYear,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -324,6 +374,7 @@ Dashboard.propTypes = {
     getInforExportedFabricRequest: PropTypes.func,
     getInforCompletedFabricByTypeRequest: PropTypes.func,
     getInforCompletedFabricByDyehouseRequest: PropTypes.func,
+    getInforCompletedFabricByDyehouseRecentYearRequest: PropTypes.func,
   }),
   dyeplantActions: PropTypes.shape({
     getListDyePlantRequest: PropTypes.func,

@@ -73,9 +73,11 @@ const routes = [
     main: ({ match }) => <OrderDetail match={match} />,
   },
   {
-    path: Path.ORDER_CREATION,
+    path: `${Path.ORDER_CREATION}/:id?`,
     exact: false,
-    main: ({ history }) => <OrderCreation history={history} />,
+    main: ({ history, match }) => (
+      <OrderCreation history={history} match={match} />
+    ),
   },
   {
     path: Path.DYE_BATCH,
@@ -132,7 +134,7 @@ const routes = [
     main: ({ history }) => <Payment history={history} />,
   },
   {
-    path: Path.PAYMENT_CREATION,
+    path: `${Path.PAYMENT_CREATION}/:id?`,
     exact: false,
     main: ({ history, match }) => (
       <PaymentCreation history={history} match={match} />

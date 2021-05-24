@@ -28,7 +28,6 @@ const useStyles = makeStyles((theme) => ({
 export default function Sidebar(props) {
   const classes = useStyles();
   const { userRole } = props;
-  console.log(window.location.pathname);
   return (
     <List
       component="nav"

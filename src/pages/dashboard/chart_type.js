@@ -1,76 +1,42 @@
 import React from "react";
-import { useTheme } from "@material-ui/core/styles";
-import Typography from "@material-ui/core/Typography";
 import {
-  Line,
-  XAxis,
-  YAxis,
-  Label,
   ResponsiveContainer,
-  ComposedChart,
-  Bar,
+  Cell,
   Tooltip,
+  PieChart,
+  Pie,
   Legend,
 } from "recharts";
 
+const COLORS = ["#0088FE", "#00C49F", "#FFBB28", "#FF8042", "#6495ED", "#C67171", "#00CD00"];
+
 export default function ChartFabricType(props) {
-  const theme = useTheme();
   const { data } = props;
+  data.map(function (e) {
+    e.completedLength = Number(e.completedLength);
+    e.name = e.dyehouseName;
+    return null;
+  });
   return (
     <React.Fragment>
-      <Typography component="h2" variant="h6" color="primary" gutterBottom>
-        Hôm nay
-      </Typography>
       <ResponsiveContainer>
-        <ComposedChart
-          data={data}
-          margin={{
-            top: 16,
-            right: 16,
-            bottom: 0,
-            left: 24,
-          }}
-        >
-          <XAxis
-            dataKey="dyehouseName"
-            scale="band"
-            stroke={theme.palette.text.secondary}
-          />
-          <YAxis yAxisId="left" stroke={theme.palette.text.secondary}>
-            <Label
-              angle={270}
-              position="left"
-              style={{ textAnchor: "middle", fill: theme.palette.text.primary }}
-            >
-              Số lượng (m)
-            </Label>
-          </YAxis>
-          <YAxis yAxisId="right" orientation="right">
-            <Label
-              angle={90}
-              position="right"
-              style={{ textAnchor: "middle", fill: theme.palette.text.primary }}
-            >
-              Số cây
-            </Label>
-          </YAxis>
+        <PieChart width={600} height={600}>
+          <Pie
+            dataKey="completedLength"
+            data={data}
+            fill="#8884d8"
+            // label={(entry) => `${entry.dyehouseName}: ${entry.completedLength}`}
+          >
+            {data.map((entry, index) => (
+              <Cell
+                key={`cell-${index}`}
+                fill={COLORS[index % COLORS.length]}
+              />
+            ))}
+          </Pie>
           <Tooltip />
           <Legend />
-          <Bar
-            name="Độ dài thành phẩm"
-            yAxisId="left"
-            dataKey="completedLength"
-            barSize={20}
-            fill={theme.palette.info.light}
-          />
-          <Line
-            name="Số cây thành phẩm"
-            yAxisId="right"
-            type="monotone"
-            dataKey="completedNumber"
-            stroke={theme.palette.error.light}
-          />
-        </ComposedChart>
+        </PieChart>
       </ResponsiveContainer>
     </React.Fragment>
   );

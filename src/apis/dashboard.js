@@ -55,3 +55,9 @@ export const getInforCompletedFabricByDyehouse = (
     }&startDate=${startDate ?? ""}&endDate=${endDate ?? ""}`
   );
 };
+
+export const getInforCompletedFabricByDyehouseRecentYear = (dyehouseId) => {
+  return RequestManager.get(
+    `/getInforCompletedFabricByDyehouseRecentYear?dyehouseId=${dyehouseId ?? ""}`
+  );
+};
