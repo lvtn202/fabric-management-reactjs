@@ -71,16 +71,16 @@ export const getListPaymentMethodRequest = () => {
 
 // Create payment
 export const createPayment = () => ({
-  type: Payment.FETCH_LIST_PAYMENT,
+  type: Payment.CREATE_PAYMENT,
 });
 
 export const createPaymentSuccess = (data) => ({
-  type: Payment.FETCH_LIST_PAYMENT_SUCCESS,
+  type: Payment.CREATE_PAYMENT_SUCCESS,
   payload: data,
 });
 
 export const createPaymentFail = (error) => ({
-  type: Payment.FETCH_LIST_PAYMENT_FAILED,
+  type: Payment.CREATE_PAYMENT_FAILED,
   payload: error,
 });
 

@@ -9,7 +9,7 @@ const defaultState = {
 export default (state = defaultState, action) => {
   switch (action.type) {
     case Payment.FETCH_LIST_PAYMENT:
-    case Payment.FETCH_LIST_PAYMENT_METHOD_FAILED:
+    case Payment.FETCH_LIST_PAYMENT_FAILED:
       return {
         ...state,
         listPayment: [],
@@ -20,7 +20,7 @@ export default (state = defaultState, action) => {
         listPayment: action.payload.data.result,
       };
     case Payment.FETCH_LIST_PAYMENT_METHOD:
-    case Payment.FETCH_LIST_PAYMENT_METHOD_METHOD_FAILED:
+    case Payment.FETCH_LIST_PAYMENT_METHOD_FAILED:
       return {
         ...state,
         listPaymentMethod: [],

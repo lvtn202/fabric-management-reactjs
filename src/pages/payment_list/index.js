@@ -8,7 +8,7 @@ import { bindActionCreators, compose } from "redux";
 import { withStyles } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
-class PaymentCreation extends React.Component {
+class Payment extends React.Component {
   componentDidMount() {
     const { paymentActions } = this.props;
     const { getListPaymentRequest } = paymentActions;
@@ -50,7 +50,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-PaymentCreation.propTypes = {
+Payment.propTypes = {
   classes: PropTypes.object,
   loading: PropTypes.bool,
   paymentActions: PropTypes.shape({
@@ -59,4 +59,4 @@ PaymentCreation.propTypes = {
   listPayment: PropTypes.array,
 };
 
-export default compose(withConnect, withStyles(styles))(PaymentCreation);
+export default compose(withConnect, withStyles(styles))(Payment);
