@@ -17,7 +17,7 @@ import { Field, reduxForm, getFormValues } from "redux-form";
 import { Button, Box, Grid, MenuItem } from "@material-ui/core";
 import { PAYMENT } from "./../../constants/path"
 
-class Payment extends React.Component {
+class PaymentCreation extends React.Component {
   componentDidMount() {
     const { paymentActions, dyePlantActions } = this.props;
     const { getListPaymentMethodRequest } = paymentActions;
@@ -233,7 +233,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
-Payment.propTypes = {
+PaymentCreation.propTypes = {
   classes: PropTypes.object,
   paymentActions: PropTypes.shape({
     getListPaymentMethodRequest: PropTypes.func,
@@ -251,4 +251,4 @@ const withReduxForm = reduxForm({
   validate,
 });
 
-export default compose(withConnect, withReduxForm, withStyles(styles))(Payment);
+export default compose(withConnect, withReduxForm, withStyles(styles))(PaymentCreation);
