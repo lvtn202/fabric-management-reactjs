@@ -19,6 +19,7 @@ import * as adminActions from "../../actions/admin";
 import { DYE_PLANT_FORM } from "./../../constants/form_name";
 import { DASHBOARD, DYE_PLANT } from "../../constants/path";
 import { APP_ADMIN } from "../../constants/user_roles";
+import { HIDE_LOADING, SHOW_LOADING } from "../../constants/action_types";
 
 class DyePlantCreation extends React.Component {
   constructor(props) {
@@ -27,6 +28,11 @@ class DyePlantCreation extends React.Component {
     if (!auth.roles.includes(APP_ADMIN)) {
       this.props.history.push(DASHBOARD);
     }
+  }
+
+  componentDidMount() {
+    this.props.showLoading();
+    this.props.hideLoading();
   }
 
   handleSubmitForm = (data) => {
@@ -59,8 +65,11 @@ class DyePlantCreation extends React.Component {
   renderPage() {
     const { classes, invalid, submitting, handleSubmit } = this.props;
     return (
-      <Container component="main" maxWidth="sm">
-        <form onSubmit={handleSubmit(this.handleSubmitForm)}>
+      <Container component="main" maxWidth="sm" className={classes.paper}>
+        <form
+          onSubmit={handleSubmit(this.handleSubmitForm)}
+          className={classes.form}
+        >
           <Grid container>
             <Grid item md={12}>
               <Field
@@ -117,6 +126,7 @@ class DyePlantCreation extends React.Component {
           <Grid item md={12}>
             <Box display="flex" flexDirection="row-reverse" mt={2}>
               <Button
+                className={classes.submit}
                 variant="contained"
                 color="primary"
                 type="submit"
@@ -136,6 +146,8 @@ const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
   adminActions: bindActionCreators(adminActions, dispatch),
+  showLoading: () => dispatch({ type: SHOW_LOADING }),
+  hideLoading: () => dispatch({ type: HIDE_LOADING }),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

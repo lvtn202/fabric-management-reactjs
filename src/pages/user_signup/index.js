@@ -20,6 +20,7 @@ import { SIGNUP_FORM } from "./../../constants/form_name";
 import { DASHBOARD, USER_LIST } from "./../../constants/path";
 import { Field, reduxForm } from "redux-form";
 import { APP_ADMIN } from "../../constants/user_roles";
+import { HIDE_LOADING, SHOW_LOADING } from "../../constants/action_types";
 
 class UserSignup extends React.Component {
   constructor(props) {
@@ -31,6 +32,11 @@ class UserSignup extends React.Component {
     this.state = {
       sex: "female",
     };
+  }
+
+  componentDidMount() {
+    this.props.showLoading();
+    this.props.hideLoading();
   }
 
   handleChangeSex = (event) => {
@@ -170,6 +176,8 @@ const mapStateToProps = (state) => ({});
 
 const mapDispatchToProps = (dispatch) => ({
   adminActions: bindActionCreators(adminActions, dispatch),
+  showLoading: () => dispatch({ type: SHOW_LOADING }),
+  hideLoading: () => dispatch({ type: HIDE_LOADING }),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

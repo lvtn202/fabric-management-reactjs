@@ -21,7 +21,6 @@ class OrderCreation extends React.Component {
     const { dyePlantAction, rawActions, match } = this.props;
     if (match) {
       var id = match.params.id;
-      console.log(id);
     }
     const { getListDyePlantRequest } = dyePlantAction;
     const { getListFabricTypeRequest } = rawActions;

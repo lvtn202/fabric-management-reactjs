@@ -8,9 +8,7 @@ import {
   GridFilterToolbarButton,
 } from "@material-ui/data-grid";
 import { Pagination } from "@material-ui/lab";
-import {
-  sexDescription,
-} from "../../commons/utils";
+import { sexDescription } from "../../commons/utils";
 
 const useStyles = makeStyles({
   root: {
@@ -33,9 +31,7 @@ const columns = [
     sortable: false,
     flex: 1,
     valueGetter: (params) =>
-      `${params.getValue("firstName") || ""} ${
-        params.getValue("lastName") || ""
-      }`,
+      `${params.row.firstName ?? ""} ${params.row.lastName ?? ""}`,
   },
 ];
 function CustomToolbar() {

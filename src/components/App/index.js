@@ -26,6 +26,7 @@ import MuiAlert from "@material-ui/lab/Alert";
 import styles from "./styles";
 import * as authAction from "../../actions/auth";
 import { errorMapping } from "../../commons/error_mapping";
+import { LOGIN } from "../../constants/path";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -74,7 +75,7 @@ class App extends React.Component {
             {isDisplaySideBar && (
               <IconButton
                 component={Link}
-                to="/login"
+                to={LOGIN}
                 edge="start"
                 className={classes.exitButton}
                 color="inherit"
@@ -93,7 +94,6 @@ class App extends React.Component {
         )}
         <ModalComponent />
         <div className={classes.wrapper}>
-          {/* <div className={classes.appBarSpacer} /> */}
           {sideBar}
           <div
             className={
