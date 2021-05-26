@@ -39,8 +39,8 @@ const columns = [
     sortable: false,
     width: 150,
     valueGetter: (params) =>
-      `${params.getValue("userFirstName") || ""} ${
-        params.getValue("userLastName") || ""
+      `${params.row.userFirstName ?? ""} ${
+        params.row.userLastName ?? ""
       }`,
   },
   { field: "recipientName", headerName: "Nhân viên nhận", width: 150 },

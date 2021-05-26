@@ -37,9 +37,7 @@ const columns = [
     sortable: false,
     flex: 1,
     valueGetter: (params) =>
-      `${params.getValue("firstName") || ""} ${
-        params.getValue("lastName") || ""
-      }`,
+      `${params.row.firstName ?? ""} ${params.row.lastName ?? ""}`,
   },
 ];
 function CustomToolbar() {

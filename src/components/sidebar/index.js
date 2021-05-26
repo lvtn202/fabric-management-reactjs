@@ -35,7 +35,6 @@ export default function Sidebar(props) {
       className={classes.root}
     >
       {SidebarData.map((item, index) => {
-        console.log(`${userRole.includes(APP_ADMIN)} ${item.admin}`)
         return (
           (userRole.includes(APP_ADMIN) || !item.admin) && (
             <div key={index}>

@@ -32,7 +32,7 @@ class Dashboard extends React.Component {
     super(props);
     let date = new Date();
     this.state = {
-      startDate: date.setMonth(date.getMonth() - 6),
+      startDate: date.setMonth(date.getMonth() - 12),
       endDate: new Date().getTime(),
       dyeplantTab: 1,
       dyeplantYearTab: 1,
@@ -292,41 +292,47 @@ class Dashboard extends React.Component {
     const { startDate, endDate } = this.state;
     return (
       <MuiPickersUtilsProvider utils={DateFnsUtils}>
-        <Grid container justify="flex-start">
-          <KeyboardDatePicker
-            disableToolbar
-            inputVariant="outlined"
-            variant="inline"
-            format="dd/MM/yyyy"
-            margin="normal"
-            label="Từ ngày"
-            value={startDate}
-            onChange={(date) => this.setState({ startDate: date.getTime() })}
-            KeyboardButtonProps={{
-              "aria-label": "change date",
-            }}
-          />
-          <KeyboardDatePicker
-            disableToolbar
-            variant="inline"
-            inputVariant="outlined"
-            format="dd/MM/yyyy"
-            margin="normal"
-            label="Đến ngày"
-            value={endDate}
-            onChange={(date) => this.setState({ endDate: date.getTime() })}
-            KeyboardButtonProps={{
-              "aria-label": "change date",
-            }}
-          />
-          <Button
-            color="primary"
-            className={classes.button}
-            variant="outlined"
-            onClick={this.handleChangeDate}
-          >
-            Lọc
-          </Button>
+        <Grid container spacing={3}>
+          <Grid item>
+            <KeyboardDatePicker
+              disableToolbar
+              inputVariant="outlined"
+              variant="inline"
+              format="dd/MM/yyyy"
+              margin="normal"
+              label="Từ ngày"
+              value={startDate}
+              onChange={(date) => this.setState({ startDate: date.getTime() })}
+              KeyboardButtonProps={{
+                "aria-label": "change date",
+              }}
+            />
+          </Grid>
+          <Grid item>
+            <KeyboardDatePicker
+              disableToolbar
+              variant="inline"
+              inputVariant="outlined"
+              format="dd/MM/yyyy"
+              margin="normal"
+              label="Đến ngày"
+              value={endDate}
+              onChange={(date) => this.setState({ endDate: date.getTime() })}
+              KeyboardButtonProps={{
+                "aria-label": "change date",
+              }}
+            />
+          </Grid>
+          <Grid item>
+            <Button
+              color="primary"
+              className={classes.button}
+              variant="outlined"
+              onClick={this.handleChangeDate}
+            >
+              Lọc
+            </Button>
+          </Grid>
         </Grid>
       </MuiPickersUtilsProvider>
     );
@@ -344,7 +350,7 @@ const mapStateToProps = (state) => ({
     state.dashboard.listInforCompletedFabricByType,
   listInforCompletedFabricByDyehouse:
     state.dashboard.listInforCompletedFabricByDyehouse,
-    listInforCompletedFabricRecentYear:
+  listInforCompletedFabricRecentYear:
     state.dashboard.listInforCompletedFabricRecentYear,
 });
 
