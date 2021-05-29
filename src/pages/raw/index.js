@@ -79,6 +79,13 @@ class Raw extends React.Component {
             </TableRow>
           </TableHead>
           <TableBody>
+            {!listRaw.length && (
+              <TableRow>
+                <TableCell colSpan={3} align="center">
+                  Không tìm thấy thông tin
+                </TableCell>
+              </TableRow>
+            )}
             {listRaw.map((row) => (
               <TableRow key={row.id} hover>
                 <TableCell align="center">{row.fabricType}</TableCell>
@@ -106,13 +113,18 @@ class Raw extends React.Component {
             </TableRow>
           </TableHead>
           <TableBody>
+            {!listRawAllPlant.length && (
+              <TableRow>
+                <TableCell colSpan={listFabricType.length + 1} align="center">
+                  Không tìm thấy thông tin
+                </TableCell>
+              </TableRow>
+            )}
             {listRawAllPlant.map((row) => (
               <TableRow
                 key={row.id}
                 hover
-                onClick={() =>
-                  history.push(`/dye-plant/${row.dyehouseId}/raw`)
-                }
+                onClick={() => history.push(`/dye-plant/${row.dyehouseId}/raw`)}
               >
                 <TableCell align="center">{row.dyehouseName}</TableCell>
                 {row.fabricTypes.map((item) => (

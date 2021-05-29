@@ -19,7 +19,7 @@ import TableRow from "@material-ui/core/TableRow";
 import SearchIcon from "@material-ui/icons/Search";
 import * as dyePlantAction from "../../actions/dye_plant";
 import { currencyFormat } from "./../../commons/utils";
-import { PAYMENT_CREATION } from "./../../constants/path"
+import { PAYMENT_CREATION } from "./../../constants/path";
 
 class Debt extends React.Component {
   constructor(props) {
@@ -102,6 +102,13 @@ class Debt extends React.Component {
                 </TableRow>
               </TableHead>
               <TableBody>
+                {!listDyePlant.length && (
+                  <TableRow>
+                    <TableCell colSpan={3} align="center">
+                      Không tìm thấy thông tin
+                    </TableCell>
+                  </TableRow>
+                )}
                 {listDyePlant
                   .filter((item) => Number(item.debt) > 0)
                   .map((row) => (

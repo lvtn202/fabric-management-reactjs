@@ -135,7 +135,9 @@ class DyePlantDetail extends React.Component {
             <Button
               variant="contained"
               color="primary"
-              onClick={() => history.push(`${ORDER_CREATION}/${detailDyePlant.id}`)}
+              onClick={() =>
+                history.push(`${ORDER_CREATION}/${detailDyePlant.id}`)
+              }
             >
               Tạo đơn đặt hàng
             </Button>
@@ -144,7 +146,9 @@ class DyePlantDetail extends React.Component {
             <Button
               variant="contained"
               color="primary"
-              onClick={() => history.push(`${PAYMENT_CREATION}/${detailDyePlant.id}`)}
+              onClick={() =>
+                history.push(`${PAYMENT_CREATION}/${detailDyePlant.id}`)
+              }
             >
               Tạo thanh toán
             </Button>
@@ -185,6 +189,13 @@ class DyePlantDetail extends React.Component {
             </TableRow>
           </TableHead>
           <TableBody>
+            {!listOrder.length && (
+              <TableRow>
+                <TableCell colSpan={7} align="center">
+                  Không tìm thấy thông tin
+                </TableCell>
+              </TableRow>
+            )}
             {listOrder.map((row) => (
               <TableRow
                 key={row.id}

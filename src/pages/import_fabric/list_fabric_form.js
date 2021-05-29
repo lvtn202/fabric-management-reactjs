@@ -41,10 +41,8 @@ class ListFabricForm extends React.Component {
     const { importActions, infoValues } = this.props;
     const { dyehouse, fabricType, color } = infoValues;
 
-    const {
-      getDyeingPriceRequest,
-      getListExportedFabricRequest,
-    } = importActions;
+    const { getDyeingPriceRequest, getListExportedFabricRequest } =
+      importActions;
     getDyeingPriceRequest(fabricType, color);
     getListExportedFabricRequest(dyehouse.id, fabricType);
   }
@@ -249,6 +247,13 @@ class ListFabricForm extends React.Component {
                   </TableRow>
                 </TableHead>
                 <TableBody>
+                  {!currentListFabrics.length && (
+                    <TableRow>
+                      <TableCell colSpan={5} align="center">
+                        Không tìm thấy thông tin
+                      </TableCell>
+                    </TableRow>
+                  )}
                   {currentListFabrics.map((row, index) => (
                     <TableRow key={index} hover>
                       <TableCell align="center" component="th" scope="row">
@@ -258,8 +263,9 @@ class ListFabricForm extends React.Component {
                       <TableCell align="center">{row.finishedLength}</TableCell>
                       <TableCell align="center">
                         {`${(
-                          (row.rawLength - row.finishedLength) /
-                          row.rawLength * 100
+                          ((row.rawLength - row.finishedLength) /
+                            row.rawLength) *
+                          100
                         ).toLocaleString(undefined, {
                           maximumFractionDigits: 2,
                         })}%`}
