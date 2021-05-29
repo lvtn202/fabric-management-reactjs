@@ -78,6 +78,13 @@ class DyePlantRaw extends React.Component {
               </TableRow>
             </TableHead>
             <TableBody>
+              {!listRaw.length && (
+                <TableRow>
+                  <TableCell colSpan={3} align="center">
+                    Không tìm thấy thông tin
+                  </TableCell>
+                </TableRow>
+              )}
               {listRaw.map((row) => (
                 <TableRow key={row.id} hover>
                   <TableCell align="center">{row.fabricType}</TableCell>
@@ -153,6 +160,13 @@ class DyePlantRaw extends React.Component {
               </TableRow>
             </TableHead>
             <TableBody>
+              {!listFabric.length && (
+                <TableRow>
+                  <TableCell colSpan={3} align="center">
+                    Không tìm thấy thông tin
+                  </TableCell>
+                </TableRow>
+              )}
               {listFabric.map((row) => (
                 <TableRow key={row.id} hover>
                   <TableCell align="center">{row.fabricType}</TableCell>

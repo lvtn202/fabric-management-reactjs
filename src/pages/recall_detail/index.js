@@ -21,10 +21,8 @@ import { currencyFormat, parseTimestamp } from "../../commons/utils";
 class RecallList extends React.Component {
   componentDidMount() {
     const { recallActions, match } = this.props;
-    const {
-      getListFabricRecallRequest,
-      getDetailRecallRequest,
-    } = recallActions;
+    const { getListFabricRecallRequest, getDetailRecallRequest } =
+      recallActions;
     if (match) {
       var id = match.params.id;
       getListFabricRecallRequest(id);
@@ -109,6 +107,13 @@ class RecallList extends React.Component {
             </TableRow>
           </TableHead>
           <TableBody>
+            {!listFabricRecall.length && (
+              <TableRow>
+                <TableCell colSpan={7} align="center">
+                  Không tìm thấy thông tin
+                </TableCell>
+              </TableRow>
+            )}
             {listFabricRecall.map((row) => (
               <TableRow key={row.id} hover>
                 <TableCell align="center">{row.returnId}</TableCell>
@@ -135,7 +140,8 @@ class RecallList extends React.Component {
               <TableCell align="center">Tổng trả</TableCell>
               <TableCell align="center">
                 {listFabricRecall.reduce(
-                  (total, current, index) => total + Number(current.returnLength),
+                  (total, current, index) =>
+                    total + Number(current.returnLength),
                   0
                 )}
                 &nbsp;(m)

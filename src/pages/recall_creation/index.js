@@ -30,7 +30,7 @@ import TableRow from "@material-ui/core/TableRow";
 import AppTextField from "../../components/form_helper/text_field";
 import { currencyFormat } from "../../commons/utils";
 import DeleteIcon from "@material-ui/icons/Delete";
-import { RECALL } from "./../../constants/path"
+import { RECALL } from "./../../constants/path";
 
 class RecallCreation extends React.Component {
   constructor(props) {
@@ -76,11 +76,8 @@ class RecallCreation extends React.Component {
       formValues,
       listFabricOfDyeplant,
     } = this.props;
-    const {
-      currentListFabrics,
-      currentFabric,
-      currentListRecalls,
-    } = this.state;
+    const { currentListFabrics, currentFabric, currentListRecalls } =
+      this.state;
     const { getListFabricDyeplantRequest } = recallActions;
     return (
       <React.Fragment>
@@ -272,6 +269,13 @@ class RecallCreation extends React.Component {
                   </TableRow>
                 </TableHead>
                 <TableBody>
+                  {!currentListRecalls.length && (
+                    <TableRow>
+                      <TableCell colSpan={7} align="center">
+                        Không tìm thấy thông tin
+                      </TableCell>
+                    </TableRow>
+                  )}
                   {currentListRecalls.map((row, index) => (
                     <TableRow key={index} hover>
                       <TableCell align="center" component="th" scope="row">

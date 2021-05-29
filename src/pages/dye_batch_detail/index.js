@@ -22,10 +22,8 @@ class DyeBatchDetail extends React.Component {
   componentDidMount() {
     var { match } = this.props;
     const { dyeBatchAction } = this.props;
-    const {
-      getDetailDyeBatchRequest,
-      getListFabricDyeBatchRequest,
-    } = dyeBatchAction;
+    const { getDetailDyeBatchRequest, getListFabricDyeBatchRequest } =
+      dyeBatchAction;
     if (match) {
       var id = match.params.id;
       getDetailDyeBatchRequest(id);
@@ -150,6 +148,13 @@ class DyeBatchDetail extends React.Component {
             </TableRow>
           </TableHead>
           <TableBody>
+            {!listFabricDyeBatch.length && (
+              <TableRow>
+                <TableCell colSpan={3} align="center">
+                  Không tìm thấy thông tin
+                </TableCell>
+              </TableRow>
+            )}
             {listFabricDyeBatch.map((row) => (
               <TableRow key={row.id} hover>
                 <TableCell align="center">{row.id}</TableCell>
@@ -170,7 +175,8 @@ class DyeBatchDetail extends React.Component {
                 {listFabricDyeBatch.reduce(
                   (total, current, index) => total + current.rawLength,
                   0
-                )}&nbsp;(m)
+                )}
+                &nbsp;(m)
               </TableCell>
             </TableRow>
             <TableRow>
@@ -179,7 +185,8 @@ class DyeBatchDetail extends React.Component {
                 {listFabricDyeBatch.reduce(
                   (total, current, index) => total + current.finishedLength,
                   0
-                )}&nbsp;(m)
+                )}
+                &nbsp;(m)
               </TableCell>
             </TableRow>
             <TableRow>

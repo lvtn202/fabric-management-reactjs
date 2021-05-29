@@ -136,6 +136,13 @@ class OrderDetail extends React.Component {
             </TableRow>
           </TableHead>
           <TableBody>
+            {!listImport.length && (
+              <TableRow>
+                <TableCell colSpan={3} align="center">
+                  Không tìm thấy thông tin
+                </TableCell>
+              </TableRow>
+            )}
             {listImport.map((row) => (
               <TableRow
                 key={row.id}

@@ -28,7 +28,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import { RAW } from "./../../constants/path"
+import { RAW } from "./../../constants/path";
 
 class ExportRaw extends React.Component {
   constructor(props) {
@@ -180,6 +180,13 @@ class ExportRaw extends React.Component {
                 </TableRow>
               </TableHead>
               <TableBody>
+                {!currentListRaws.length && (
+                  <TableRow>
+                    <TableCell colSpan={3} align="center">
+                      Không tìm thấy thông tin
+                    </TableCell>
+                  </TableRow>
+                )}
                 {currentListRaws.map((row, index) => (
                   <TableRow key={index} hover>
                     <TableCell align="center" component="th" scope="row">
