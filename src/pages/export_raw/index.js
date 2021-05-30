@@ -263,9 +263,10 @@ class ExportRaw extends React.Component {
       createDate: new Date().getTime(),
       listRaw: finalListRaw,
     });
-    createExportRequest(body, () => {
-      history.push(RAW);
-    });
+    if (dyeplantId != null)
+      createExportRequest(body, () => {
+        history.push(RAW);
+      });
   };
 }
 

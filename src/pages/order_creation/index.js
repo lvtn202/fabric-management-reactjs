@@ -21,10 +21,11 @@ class OrderCreation extends React.Component {
     super(props);
     const { orderActions, match } = this.props;
     const { updateCreateOrder } = orderActions;
-    if (match) {
+    if (match.params.id != null) {
       var id = Number(match.params.id);
-      console.log(id);
       updateCreateOrder(id);
+    } else {
+      updateCreateOrder();
     }
   }
 
