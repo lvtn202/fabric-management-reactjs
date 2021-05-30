@@ -31,7 +31,7 @@ class PaymentCreation extends React.Component {
           )
         );
       } else {
-        updateCreatePayment(0)
+        updateCreatePayment('')
       }
     });
     getListPaymentMethodRequest();
