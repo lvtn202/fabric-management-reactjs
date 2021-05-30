@@ -86,8 +86,8 @@ class Raw extends React.Component {
                 </TableCell>
               </TableRow>
             )}
-            {listRaw.map((row) => (
-              <TableRow key={row.id} hover>
+            {listRaw.map((row, index) => (
+              <TableRow key={index} hover>
                 <TableCell align="center">{row.fabricType}</TableCell>
                 <TableCell align="center">{row.rawNumber}</TableCell>
                 <TableCell align="center">{row.rawLength}</TableCell>
@@ -107,8 +107,8 @@ class Raw extends React.Component {
           <TableHead>
             <TableRow>
               <TableCell align="center">Xưởng</TableCell>
-              {listFabricType.map((row) => (
-                <TableCell align="center">{row.type}</TableCell>
+              {listFabricType.map((row, index) => (
+                <TableCell key={index} align="center">{row.type}</TableCell>
               ))}
             </TableRow>
           </TableHead>
@@ -127,8 +127,8 @@ class Raw extends React.Component {
                 onClick={() => history.push(`/dye-plant/${row.dyehouseId}/raw`)}
               >
                 <TableCell align="center">{row.dyehouseName}</TableCell>
-                {row.fabricTypes.map((item) => (
-                  <TableCell align="center">{item.rawLength}</TableCell>
+                {row.fabricTypes.map((item, index) => (
+                  <TableCell key={index} align="center">{item.rawLength}</TableCell>
                 ))}
               </TableRow>
             ))}
