@@ -17,11 +17,19 @@ import { CREATE_ORDER_FORM } from "./../../constants/form_name";
 import { ORDER } from "./../../constants/path";
 
 class OrderCreation extends React.Component {
-  componentDidMount() {
-    const { dyePlantAction, rawActions, match } = this.props;
+  constructor(props) {
+    super(props);
+    const { orderActions, match } = this.props;
+    const { updateCreateOrder } = orderActions;
     if (match) {
-      // var id = match.params.id;
+      var id = Number(match.params.id);
+      console.log(id);
+      updateCreateOrder(id);
     }
+  }
+
+  componentDidMount() {
+    const { dyePlantAction, rawActions } = this.props;
     const { getListDyePlantRequest } = dyePlantAction;
     const { getListFabricTypeRequest } = rawActions;
     getListDyePlantRequest();
@@ -178,6 +186,7 @@ const mapStateToProps = (state) => ({
   listDyePlant: state.dyeplant.listDyePlant,
   listFabricType: state.raw.listFabricType,
   userId: state.auth.id,
+  initialValues: state.order.createOrder,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -191,6 +200,7 @@ const withConnect = connect(mapStateToProps, mapDispatchToProps);
 OrderCreation.propTypes = {
   classes: PropTypes.object,
   formValues: PropTypes.object,
+  initialValues: PropTypes.object,
   invalid: PropTypes.bool,
   submitting: PropTypes.bool,
   handleSubmit: PropTypes.func,
@@ -210,6 +220,7 @@ OrderCreation.propTypes = {
 const withReduxForm = reduxForm({
   form: CREATE_ORDER_FORM,
   validate,
+  enableReinitialize: true,
 });
 
 export default compose(

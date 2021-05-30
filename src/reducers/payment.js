@@ -3,6 +3,7 @@ import { Payment } from "./../constants/action_types";
 const defaultState = {
   listPayment: [],
   listPaymentMethod: [],
+  createPayment: {},
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -29,6 +30,11 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         listPaymentMethod: action.payload.data.result,
+      };
+    case Payment.UPDATE_CREATE_PAYMENT:
+      return {
+        ...state,
+        createPayment: { dyehouse: action.payload },
       };
     default:
       return state;

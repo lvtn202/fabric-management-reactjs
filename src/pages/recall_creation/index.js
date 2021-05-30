@@ -161,7 +161,7 @@ class RecallCreation extends React.Component {
               <Box fontWeight="fontWeightMedium">Màu</Box>
             </Grid>
             <Grid item xs>
-              <Box fontWeight="normal">{currentFabric?.colorName ?? ""}</Box>
+              <Box fontWeight="normal">{currentFabric?.colorName ?? "None"}</Box>
             </Grid>
           </Grid>
           <Grid
@@ -175,7 +175,7 @@ class RecallCreation extends React.Component {
             </Grid>
             <Grid item xs>
               <Box fontWeight="normal">
-                {currentFabric?.finishedLength ?? ""}
+                {currentFabric?.finishedLength ?? "0"}
               </Box>
             </Grid>
           </Grid>
