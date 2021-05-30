@@ -42,8 +42,11 @@ class Debt extends React.Component {
     this.props.dyePlantAction.getListDyePlantRequest(this.state.keyword);
   };
 
-  handleClick = (event, id) => {
-    this.props.history.push(PAYMENT_CREATION);
+  handleClick = (event, row) => {
+    this.props.history.push({
+      pathname: `${PAYMENT_CREATION}/${row.id}`,
+      state: { detailDyePlant: row },
+    });
   };
 
   render() {
@@ -127,7 +130,7 @@ class Debt extends React.Component {
                         <Button
                           color="primary"
                           variant="outlined"
-                          onClick={(event) => this.handleClick(event, row.id)}
+                          onClick={(event) => this.handleClick(event, row)}
                         >
                           Thanh toán
                         </Button>
