@@ -41,19 +41,26 @@ class PaymentCreation extends React.Component {
     const { createPaymentRequest } = paymentActions;
     const { dyehouse, paymentMethod, bankName, money, recipientName } =
       formValues;
-    let body = JSON.stringify({
-      userId: userId,
-      dyehouseId: listDyePlant[dyehouse].id,
-      paymentMethodId: paymentMethod.paymentMethodId,
-      money,
-      recipientName,
-      bankName,
-      createDate: new Date().getTime(),
-    });
+    if (
+      dyehouse != null &&
+      paymentMethod != null &&
+      money != null &&
+      recipientName != null
+    ) {
+      let body = JSON.stringify({
+        userId: userId,
+        dyehouseId: listDyePlant[dyehouse].id,
+        paymentMethodId: paymentMethod?.paymentMethodId,
+        money,
+        recipientName,
+        bankName: bankName ?? "",
+        createDate: new Date().getTime(),
+      });
 
-    createPaymentRequest(body, () => {
-      history.push(PAYMENT);
-    });
+      createPaymentRequest(body, () => {
+        history.push(PAYMENT);
+      });
+    } else return;
   };
 
   render() {
@@ -149,7 +156,6 @@ class PaymentCreation extends React.Component {
             </Grid>
             <Grid item xs>
               <Field
-                required
                 className={classes.selectField}
                 name="bankName"
                 label="Tên ngân hàng"
