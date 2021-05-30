@@ -136,8 +136,8 @@ const routes = [
   {
     path: `${Path.PAYMENT_CREATION}/:id?`,
     exact: false,
-    main: ({ history, match }) => (
-      <PaymentCreation history={history} match={match} />
+    main: ({ history, match, location }) => (
+      <PaymentCreation history={history} match={match} location={location} />
     ),
   },
   {

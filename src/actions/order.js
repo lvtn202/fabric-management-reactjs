@@ -102,6 +102,9 @@ export const getDetailOrderRequest = (id) => {
 };
 
 // CREATE ORDER
+export const updateCreateOrder = (dyeplantId) => (dispatch) =>
+  dispatch({ type: Order.UPDATE_CREATE_ORDER, payload: dyeplantId });
+
 export const createOrder = () => ({
   type: Order.CREATE_ORDER,
 });

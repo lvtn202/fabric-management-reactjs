@@ -39,10 +39,10 @@ const AppSelectField = ({
       {...input}
       {...custom}
       label={label}
-      inputProps={{
-        name: "age",
-        id: "age-native-simple",
-      }}
+      // inputProps={{
+      //   name: "age",
+      //   id: "age-native-simple",
+      // }}
     >
       {children}
     </Select>

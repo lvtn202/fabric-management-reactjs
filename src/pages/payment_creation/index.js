@@ -15,31 +15,35 @@ import AppTextField from "../../components/form_helper/text_field";
 import { currencyFormat } from "../../commons/utils";
 import { Field, reduxForm, getFormValues } from "redux-form";
 import { Button, Box, Grid, MenuItem } from "@material-ui/core";
-import { PAYMENT } from "./../../constants/path"
+import { PAYMENT } from "./../../constants/path";
 
 class PaymentCreation extends React.Component {
   componentDidMount() {
-    const { paymentActions, dyePlantActions } = this.props;
-    const { getListPaymentMethodRequest } = paymentActions;
+    const { paymentActions, dyePlantActions, location, listDyePlant } =
+      this.props;
+    const { getListPaymentMethodRequest, updateCreatePayment } = paymentActions;
     const { getListDyePlantRequest } = dyePlantActions;
-    getListDyePlantRequest();
+    getListDyePlantRequest(null, () => {
+      if (location && location.state) {
+        updateCreatePayment(
+          listDyePlant.findIndex(
+            (e) => e.id === location.state.detailDyePlant.id
+          )
+        );
+      }
+    });
     getListPaymentMethodRequest();
   }
 
   handleSubmitForm = (data) => {
-    const { formValues, history, userId, paymentActions } = this.props;
+    const { formValues, history, userId, paymentActions, listDyePlant } =
+      this.props;
     const { createPaymentRequest } = paymentActions;
-    const {
-      dyehouse,
-      paymentMethod,
-      bankName,
-      money,
-      recipientName,
-    } = formValues;
-
+    const { dyehouse, paymentMethod, bankName, money, recipientName } =
+      formValues;
     let body = JSON.stringify({
       userId: userId,
-      dyehouseId: dyehouse.id,
+      dyehouseId: listDyePlant[dyehouse].id,
       paymentMethodId: paymentMethod.paymentMethodId,
       money,
       recipientName,
@@ -76,7 +80,6 @@ class PaymentCreation extends React.Component {
       listDyePlant,
       listPaymentMethod,
     } = this.props;
-
     return (
       <React.Fragment>
         <form
@@ -95,7 +98,7 @@ class PaymentCreation extends React.Component {
                 label="Chọn xưởng nhuộm"
               >
                 {listDyePlant.map((item, index) => (
-                  <MenuItem key={index} value={item}>
+                  <MenuItem key={index} value={index}>
                     {item.name}
                   </MenuItem>
                 ))}
@@ -114,7 +117,8 @@ class PaymentCreation extends React.Component {
             </Grid>
             <Grid item xs>
               <Box fontWeight="normal">
-                {currencyFormat(formValues?.dyehouse?.debt ?? "")}
+                {formValues &&
+                  currencyFormat(listDyePlant[formValues.dyehouse]?.debt ?? "")}
               </Box>
             </Grid>
           </Grid>
@@ -206,7 +210,8 @@ class PaymentCreation extends React.Component {
                 disabled={
                   invalid ||
                   submitting ||
-                  Number(formValues?.dyehouse?.debt) < Number(formValues?.money)
+                  Number(listDyePlant[formValues?.dyehouse]?.debt) <
+                    Number(formValues?.money)
                 }
               >
                 Tạo
@@ -224,6 +229,7 @@ const mapStateToProps = (state) => ({
   listPaymentMethod: state.payment.listPaymentMethod,
   formValues: getFormValues(PAYMENT_FORM)(state),
   userId: state.auth.id,
+  initialValues: state.payment.createPayment,
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -235,9 +241,11 @@ const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 PaymentCreation.propTypes = {
   classes: PropTypes.object,
+  initialValues: PropTypes.object,
   paymentActions: PropTypes.shape({
     getListPaymentMethodRequest: PropTypes.func,
     createPaymentRequest: PropTypes.func,
+    updateCreatePayment: PropTypes.func,
   }),
   listPaymentMethod: PropTypes.array,
   dyePlantActions: PropTypes.shape({
@@ -249,6 +257,11 @@ PaymentCreation.propTypes = {
 const withReduxForm = reduxForm({
   form: PAYMENT_FORM,
   validate,
+  enableReinitialize: true,
 });
 
-export default compose(withConnect, withReduxForm, withStyles(styles))(PaymentCreation);
+export default compose(
+  withConnect,
+  withReduxForm,
+  withStyles(styles)
+)(PaymentCreation);

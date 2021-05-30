@@ -147,7 +147,10 @@ class DyePlantDetail extends React.Component {
               variant="contained"
               color="primary"
               onClick={() =>
-                history.push(`${PAYMENT_CREATION}/${detailDyePlant.id}`)
+                history.push({
+                  pathname: `${PAYMENT_CREATION}/${detailDyePlant.id}`,
+                  state: { detailDyePlant: detailDyePlant },
+                })
               }
             >
               Tạo thanh toán

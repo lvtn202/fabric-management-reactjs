@@ -18,7 +18,7 @@ export const getListDyePlantFail = (error) => ({
   payload: error,
 });
 
-export const getListDyePlantRequest = (keyword) => {
+export const getListDyePlantRequest = (keyword, completion) => {
   return (dispatch) => {
     dispatch(getListDyePlant());
     apis
@@ -26,6 +26,7 @@ export const getListDyePlantRequest = (keyword) => {
       .then((data) => {
         if (data.data.status === 1) {
           dispatch(getListDyePlantSuccess(data));
+          if (completion) completion();
         } else {
           dispatch(showError(data.data.status_code, data.status));
         }

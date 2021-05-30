@@ -70,6 +70,9 @@ export const getListPaymentMethodRequest = () => {
 };
 
 // Create payment
+export const updateCreatePayment = (dyehouse) => (dispatch) =>
+  dispatch({ type: Payment.UPDATE_CREATE_PAYMENT, payload: dyehouse });
+
 export const createPayment = () => ({
   type: Payment.CREATE_PAYMENT,
 });
