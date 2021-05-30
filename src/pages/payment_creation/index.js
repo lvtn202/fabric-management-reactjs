@@ -30,6 +30,8 @@ class PaymentCreation extends React.Component {
             (e) => e.id === location.state.detailDyePlant.id
           )
         );
+      } else {
+        updateCreatePayment(0)
       }
     });
     getListPaymentMethodRequest();

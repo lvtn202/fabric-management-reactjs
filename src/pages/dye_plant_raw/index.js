@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 import styles from "./styles";
 import { bindActionCreators, compose } from "redux";
 import * as rawActions from "../../actions/raw";
+import * as dyeplantActions from "../../actions/dye_plant";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
@@ -34,11 +35,14 @@ class DyePlantRaw extends React.Component {
   }
 
   componentDidMount() {
-    const { rawActions, detailDyePlant } = this.props;
+    const { rawActions, dyeplantActions, match } = this.props;
     const { startDate, endDate } = this.state;
+    const { getDetailDyePlantRequest } = dyeplantActions;
     const { getListRawRequest, getListFabricRequest } = rawActions;
-    getListRawRequest(detailDyePlant.id);
-    getListFabricRequest(detailDyePlant.id, startDate, endDate);
+    const id = match.params.id;
+    getDetailDyePlantRequest(id);
+    getListRawRequest(id);
+    getListFabricRequest(id, startDate, endDate);
   }
 
   render() {
@@ -190,6 +194,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   rawActions: bindActionCreators(rawActions, dispatch),
+  dyeplantActions: bindActionCreators(dyeplantActions, dispatch),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);
@@ -202,6 +207,9 @@ DyePlantRaw.propTypes = {
   rawActions: PropTypes.shape({
     getListRawRequest: PropTypes.func,
     getListFabricRequest: PropTypes.func,
+  }),
+  dyeplantActions: PropTypes.shape({
+    getDetailDyePlantRequest: PropTypes.func,
   }),
 };
 
