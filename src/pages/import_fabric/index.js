@@ -80,10 +80,9 @@ class ImportFabric extends React.Component {
     }
   }
 
-  handleUpdateFabrics = (driver, fabrics) => {
-    if (fabrics.length && driver !== "") {
+  handleUpdateFabrics = (fabrics) => {
+    if (fabrics.length) {
       this.setState({
-        driver,
         fabrics,
         disableFinish: false,
       });
@@ -95,8 +94,9 @@ class ImportFabric extends React.Component {
   };
 
   handleUpdateInfo = (infoFormValues) => {
-    const { dyehouse, fabricType, color, orderId } = infoFormValues;
+    const { driver, dyehouse, fabricType, color, orderId } = infoFormValues;
     this.setState({
+      driver,
       dyehouse,
       fabricType,
       color,

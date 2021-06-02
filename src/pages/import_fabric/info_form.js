@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import styles from "./styles";
 import AppSelectField from "../../components/form_helper/select_field";
+import AppTextField from "../../components/form_helper/text_field";
 import * as dyePlantAction from "../../actions/dye_plant";
 import * as rawActions from "../../actions/raw";
 import * as orderActions from "../../actions/order";
@@ -37,6 +38,7 @@ class InfoForm extends React.Component {
   updateInfo = () => {
     const { formValues } = this.props;
     if (
+      formValues?.driver &&
       formValues?.dyehouse &&
       formValues?.fabricType &&
       formValues?.color &&
@@ -59,6 +61,22 @@ class InfoForm extends React.Component {
     return (
       <React.Fragment>
         <form className={classes.root} onSubmit={handleSubmit(this.submitForm)}>
+          <Grid container spacing={3} alignItems="center">
+            <Grid item xs={2}>
+              <Box fontWeight="fontWeightMedium">Tài xế giao hàng:</Box>
+            </Grid>
+            <Grid item xs>
+              <Field
+                required
+                className={classes.selectField}
+                name="driver"
+                label="Tài xế"
+                id="driver"
+                onChange={(ev) => this.setState({ driver: ev.target.value })}
+                component={AppTextField}
+              />
+            </Grid>
+          </Grid>
           <Grid container spacing={3} alignItems="center">
             <Grid item xs={2}>
               <Box fontWeight="fontWeightMedium">Xưởng nhuộm</Box>
