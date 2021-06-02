@@ -7,7 +7,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import { parseTimestamp } from "../../commons/utils";
+import { currencyFormat, parseTimestamp } from "../../commons/utils";
 import { DYE_BATCH } from "./../../constants/path"
 
 const useStyles = makeStyles((theme) => ({
@@ -43,9 +43,9 @@ export default function Import(props) {
               <TableCell>{row.dyeBatchs[0].dyehouseName}</TableCell>
               <TableCell>{parseTimestamp(row.createDate)}</TableCell>
               <TableCell align="center">{row.fabricLength}</TableCell>
-              <TableCell align="right">{row.fabricLength}</TableCell>
-              <TableCell>{row.fabricLength}</TableCell>
-              <TableCell>{row.fabricLength}</TableCell>
+              <TableCell align="right">{currencyFormat(row.money)}</TableCell>
+              <TableCell>{row.dyeBatchs[0].fabricType}</TableCell>
+              <TableCell>{row.dyeBatchs[0].color}</TableCell>
             </TableRow>
           ))}
         </TableBody>
