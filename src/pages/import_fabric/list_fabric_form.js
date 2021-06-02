@@ -33,7 +33,6 @@ class ListFabricForm extends React.Component {
     this.state = {
       currentListFabrics: [],
       currentFabric: {},
-      driver: "",
     };
   }
 
@@ -47,22 +46,22 @@ class ListFabricForm extends React.Component {
     getListExportedFabricRequest(dyehouse.id, fabricType);
   }
 
-  submitForm = () => {};
-
   add() {
-    if (Object.keys(this.state.currentFabric).length !== 0) {
+    const { currentFabric } = this.state;
+    console.log(currentFabric);
+    if (
+      currentFabric &&
+      Object.keys(currentFabric).length !== 0 &&
+      Number(currentFabric.finishedLength) > 0 &&
+      Number(currentFabric.finishedLength) <= Number(currentFabric.rawLength)
+    ) {
       this.setState(
         (prev) => ({
-          currentListFabrics: [
-            ...prev.currentListFabrics,
-            this.state.currentFabric,
-          ],
+          currentListFabrics: [...prev.currentListFabrics, currentFabric],
           currentFabric: {},
         }),
         () => this.updateFabrics()
       );
-    } else {
-      this.updateFabrics();
     }
   }
 
@@ -76,25 +75,20 @@ class ListFabricForm extends React.Component {
   };
 
   updateFabrics = () => {
-    const { currentListFabrics, driver } = this.state;
-    const { handleUpdateFabrics } = this.props;
-    handleUpdateFabrics(driver, currentListFabrics);
+    const { currentListFabrics } = this.state;
+    const { handleUpdateFabrics, reset } = this.props;
+    reset();
+    handleUpdateFabrics(currentListFabrics);
   };
 
   render() {
     const { currentListFabrics } = this.state;
-    const {
-      classes,
-      handleSubmit,
-      infoValues,
-      listExportedFabric,
-      dyeingPrice,
-    } = this.props;
+    const { classes, infoValues, listExportedFabric, dyeingPrice } = this.props;
     const { dyehouse, fabricType, color } = infoValues;
 
     return (
       <React.Fragment>
-        <form className={classes.root} onSubmit={handleSubmit(this.submitForm)}>
+        <form className={classes.root}>
           <Grid container spacing={3} alignItems="center">
             <Grid item xs={2}>
               <Box fontWeight="fontWeightMedium">Xưởng nhuộm:</Box>
@@ -149,23 +143,6 @@ class ListFabricForm extends React.Component {
             className={classes.grid}
           >
             <Grid item xs={2}>
-              <Box fontWeight="fontWeightMedium">Tài xế giao hàng:</Box>
-            </Grid>
-            <Grid item xs>
-              <Field
-                required
-                className={classes.selectField}
-                name="driver"
-                label="Tài xế"
-                id="driver"
-                onChange={(ev) => this.setState({ driver: ev.target.value })}
-                component={AppTextField}
-              />
-            </Grid>
-          </Grid>
-
-          <Grid container spacing={3} alignItems="center">
-            <Grid item xs={2}>
               <Box fontWeight="fontWeightMedium">Mã cây vải</Box>
             </Grid>
             <Grid item xs>
@@ -177,7 +154,8 @@ class ListFabricForm extends React.Component {
                   this.setState({ currentFabric: newValue });
                 }}
                 options={listExportedFabric.filter(
-                  (x) => !currentListFabrics.includes(x)
+                  (x) =>
+                    currentListFabrics.findIndex((y) => x.id === y.id) === -1
                 )}
                 style={{ width: "80%" }}
                 getOptionLabel={(option) => option.id.toString()}
@@ -191,7 +169,27 @@ class ListFabricForm extends React.Component {
               />
             </Grid>
           </Grid>
-          <Grid container spacing={3} alignItems="center">
+          <Grid
+            container
+            spacing={3}
+            alignItems="center"
+            className={classes.grid}
+          >
+            <Grid item xs={2}>
+              <Box fontWeight="fontWeightMedium">Độ dài mộc:</Box>
+            </Grid>
+            <Grid item xs>
+              <Box fontWeight="normal">
+                {`${this.state.currentFabric.rawLength ?? 0} m`}
+              </Box>
+            </Grid>
+          </Grid>
+          <Grid
+            container
+            spacing={3}
+            alignItems="center"
+            className={classes.grid}
+          >
             <Grid item xs={2}>
               <Box fontWeight="fontWeightMedium">Độ dài thành phẩm:</Box>
             </Grid>

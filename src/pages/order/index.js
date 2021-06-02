@@ -54,26 +54,6 @@ class Order extends React.Component {
         <div className={classes.tableContainer}>
           <DataGridTable data={listOrder} history={history} />
         </div>
-
-        {/* <Paper
-          component="form"
-          className={classes.root}
-          onSubmit={handleSearch}
-        >
-          <InputBase
-            className={classes.input}
-            placeholder="Tìm tên xưởng, loại vải"
-            inputProps={{ "aria-label": "search order" }}
-            onChange={(ev) => this.setState({ keyword: ev.target.value })}
-          />
-          <IconButton
-            type="submit"
-            className={classes.iconButton}
-            aria-label="search"
-          >
-            <SearchIcon />
-          </IconButton>
-        </Paper> */}
       </React.Fragment>
     );
   }
