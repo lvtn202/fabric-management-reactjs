@@ -73,7 +73,6 @@ class RecallCreation extends React.Component {
       listDyePlant,
       handleSubmit,
       recallActions,
-      formValues,
       listFabricOfDyeplant,
     } = this.props;
     const { currentListFabrics, currentFabric, currentListRecalls } =
@@ -110,9 +109,8 @@ class RecallCreation extends React.Component {
                 name="dyehouseId"
                 component={AppSelectField}
                 label="Chọn xưởng nhuộm"
-                onChange={() => {
-                  if (formValues.dyehouseId)
-                    getListFabricDyeplantRequest(formValues.dyehouseId);
+                onChange={(ev) => {
+                    getListFabricDyeplantRequest(ev.target.value);
                 }}
               >
                 {listDyePlant.map((item, index) => (
