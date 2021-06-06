@@ -15,7 +15,6 @@ const styles = (theme) => ({
   tableContainer: {
     margin: theme.spacing(2),
     maxHeight: 440,
-    maxWidth: "80%",
   },
   layout: {
     width: "auto",
