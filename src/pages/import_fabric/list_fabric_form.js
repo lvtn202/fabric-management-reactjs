@@ -89,24 +89,17 @@ class ListFabricForm extends React.Component {
     return (
       <React.Fragment>
         <form className={classes.root}>
-          <Grid container spacing={3} alignItems="center">
+          <Grid container spacing={3}>
             <Grid item xs={2}>
               <Box fontWeight="fontWeightMedium">Xưởng nhuộm:</Box>
             </Grid>
-            <Grid item xs>
+            <Grid item xs={4}>
               <Box fontWeight="normal">{dyehouse.name}</Box>
             </Grid>
-          </Grid>
-          <Grid
-            container
-            spacing={3}
-            alignItems="center"
-            className={classes.grid}
-          >
             <Grid item xs={2}>
               <Box fontWeight="fontWeightMedium">Loại vải:</Box>
             </Grid>
-            <Grid item xs>
+            <Grid item xs={4}>
               <Box fontWeight="normal">{fabricType}</Box>
             </Grid>
           </Grid>
@@ -119,20 +112,13 @@ class ListFabricForm extends React.Component {
             <Grid item xs={2}>
               <Box fontWeight="fontWeightMedium">Màu:</Box>
             </Grid>
-            <Grid item xs>
+            <Grid item xs={4}>
               <Box fontWeight="normal">{color}</Box>
             </Grid>
-          </Grid>
-          <Grid
-            container
-            spacing={3}
-            alignItems="center"
-            className={classes.grid}
-          >
             <Grid item xs={2}>
               <Box fontWeight="fontWeightMedium">Đơn giá:</Box>
             </Grid>
-            <Grid item xs>
+            <Grid item xs={4}>
               <Box fontWeight="normal">{currencyFormat(dyeingPrice)}</Box>
             </Grid>
           </Grid>
@@ -145,8 +131,9 @@ class ListFabricForm extends React.Component {
             <Grid item xs={2}>
               <Box fontWeight="fontWeightMedium">Mã cây vải</Box>
             </Grid>
-            <Grid item xs>
+            <Grid item xs={4}>
               <Autocomplete
+                fullWidth
                 id="rawId"
                 name="rawId"
                 clearOnBlur={true}
@@ -168,17 +155,10 @@ class ListFabricForm extends React.Component {
                 )}
               />
             </Grid>
-          </Grid>
-          <Grid
-            container
-            spacing={3}
-            alignItems="center"
-            className={classes.grid}
-          >
             <Grid item xs={2}>
               <Box fontWeight="fontWeightMedium">Độ dài mộc:</Box>
             </Grid>
-            <Grid item xs>
+            <Grid item xs={4}>
               <Box fontWeight="normal">
                 {`${this.state.currentFabric.rawLength ?? 0} m`}
               </Box>
@@ -193,10 +173,10 @@ class ListFabricForm extends React.Component {
             <Grid item xs={2}>
               <Box fontWeight="fontWeightMedium">Độ dài thành phẩm:</Box>
             </Grid>
-            <Grid item xs>
+            <Grid item xs={8}>
               <Field
                 required
-                className={classes.selectField}
+                fullWidth
                 name="length"
                 label="Độ dài thành phẩm"
                 type="number"
@@ -212,14 +192,11 @@ class ListFabricForm extends React.Component {
                 component={AppTextField}
               />
             </Grid>
-          </Grid>
-
-          <Grid container spacing={3} justify="center">
-            <Box m={1}>
+            <Grid item xs>
               <Button variant="contained" color="primary" onClick={this.add}>
                 Thêm
               </Button>
-            </Box>
+            </Grid>
           </Grid>
 
           <Grid container spacing={3} alignItems="center" justify="center">

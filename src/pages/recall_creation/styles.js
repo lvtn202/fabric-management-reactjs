@@ -5,6 +5,7 @@ const styles = (theme) => ({
   },
   grid: {
     marginTop: theme.spacing(2),
+    marginBottom: theme.spacing(2),
   },
   selectField: {
     width: "80%",
