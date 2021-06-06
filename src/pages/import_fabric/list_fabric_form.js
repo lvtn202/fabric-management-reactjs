@@ -133,6 +133,7 @@ class ListFabricForm extends React.Component {
             </Grid>
             <Grid item xs={4}>
               <Autocomplete
+                fullWidth
                 id="rawId"
                 name="rawId"
                 clearOnBlur={true}
@@ -175,7 +176,7 @@ class ListFabricForm extends React.Component {
             <Grid item xs={8}>
               <Field
                 required
-                className={classes.selectField}
+                fullWidth
                 name="length"
                 label="Độ dài thành phẩm"
                 type="number"

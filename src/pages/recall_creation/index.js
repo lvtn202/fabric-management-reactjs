@@ -164,37 +164,24 @@ class RecallCreation extends React.Component {
             <Grid item xs={2}>
               <Box fontWeight="fontWeightMedium">Màu</Box>
             </Grid>
-            <Grid item xs>
+            <Grid item xs={2}>
               <Box fontWeight="normal">
                 {currentFabric?.colorName ?? "None"}
               </Box>
             </Grid>
-          </Grid>
-          <Grid
-            container
-            spacing={3}
-            alignItems="center"
-            className={classes.grid}
-          >
+
             <Grid item xs={2}>
               <Box fontWeight="fontWeightMedium">Độ dài thành phẩm</Box>
             </Grid>
-            <Grid item xs>
+            <Grid item xs={2}>
               <Box fontWeight="normal">
                 {currentFabric?.finishedLength ?? "0"}
               </Box>
             </Grid>
-          </Grid>
-          <Grid
-            container
-            spacing={3}
-            alignItems="center"
-            className={classes.grid}
-          >
             <Grid item xs={2}>
               <Box fontWeight="fontWeightMedium">Đơn giá</Box>
             </Grid>
-            <Grid item xs>
+            <Grid item xs={2}>
               <Box fontWeight="normal">
                 {currencyFormat(currentFabric?.price ?? "")}
               </Box>
