@@ -92,6 +92,11 @@ class OrderCreation extends React.Component {
               component={AppSelectField}
               label="Chọn xưởng nhuộm"
             >
+              {!listDyePlant.length && (
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+              )}
               {listDyePlant.map((item, index) => (
                 <MenuItem key={index} value={item.id}>
                   {item.name}
@@ -111,6 +116,11 @@ class OrderCreation extends React.Component {
               component={AppSelectField}
               label="Chọn loại vải"
             >
+              {!listFabricType.length && (
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+              )}
               {listFabricType.map((item, index) => (
                 <MenuItem key={index} value={item.type}>
                   {item.type}
@@ -130,6 +140,9 @@ class OrderCreation extends React.Component {
               component={AppSelectField}
               label="Chọn màu"
             >
+              <MenuItem value="">
+                <em>None</em>
+              </MenuItem>
               {listFabricType
                 .find((item) => item.type === formValues?.fabricType)
                 ?.colors.map((item, index) => (

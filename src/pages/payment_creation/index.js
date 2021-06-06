@@ -31,7 +31,7 @@ class PaymentCreation extends React.Component {
           )
         );
       } else {
-        updateCreatePayment('')
+        updateCreatePayment("");
       }
     });
     getListPaymentMethodRequest();
@@ -106,6 +106,11 @@ class PaymentCreation extends React.Component {
                 component={AppSelectField}
                 label="Chọn xưởng nhuộm"
               >
+                {!listDyePlant.length && (
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                )}
                 {listDyePlant.map((item, index) => (
                   <MenuItem key={index} value={index}>
                     {item.name}
@@ -127,7 +132,9 @@ class PaymentCreation extends React.Component {
             <Grid item xs>
               <Box fontWeight="normal">
                 {formValues &&
-                  currencyFormat(listDyePlant[formValues.dyehouse]?.debt ?? "")}
+                  currencyFormat(
+                    listDyePlant[formValues?.dyehouse]?.debt ?? ""
+                  )}
               </Box>
             </Grid>
           </Grid>
@@ -143,6 +150,11 @@ class PaymentCreation extends React.Component {
                 component={AppSelectField}
                 label="Chọn phương thức thanh toán"
               >
+                {!listPaymentMethod.length && (
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                )}
                 {listPaymentMethod.map((item, index) => (
                   <MenuItem key={index} value={item}>
                     {item.name}
