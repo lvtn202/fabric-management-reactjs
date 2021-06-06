@@ -89,6 +89,11 @@ class InfoForm extends React.Component {
                 label="Chọn xưởng nhuộm"
                 onBlur={this.getListOrder}
               >
+                {!listDyePlant.length && (
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                )}
                 {listDyePlant.map((item, index) => (
                   <MenuItem key={index} value={item}>
                     {item.name}
@@ -109,6 +114,11 @@ class InfoForm extends React.Component {
                 label="Chọn loại vải"
                 onBlur={this.getListOrder}
               >
+                {!listFabricType.length && (
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                )}
                 {listFabricType.map((item, index) => (
                   <MenuItem key={index} value={item.type}>
                     {item.type}
@@ -129,6 +139,9 @@ class InfoForm extends React.Component {
                 label="Chọn màu"
                 onBlur={this.getListOrder}
               >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
                 {listFabricType
                   .find((item) => item.type === formValues?.fabricType)
                   ?.colors.map((item, index) => (
@@ -151,6 +164,9 @@ class InfoForm extends React.Component {
                 label="Đơn đặt hàng"
                 onChange={this.updateInfo()}
               >
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
                 {listOrder.map((item, index) => (
                   <MenuItem key={index} value={item.id}>
                     {item.id}

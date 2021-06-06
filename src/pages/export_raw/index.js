@@ -72,7 +72,6 @@ class ExportRaw extends React.Component {
       listDyePlant,
       listFabricType,
       handleSubmit,
-      formValues,
       exportActions,
       listRawExport,
     } = this.props;
@@ -104,6 +103,11 @@ class ExportRaw extends React.Component {
               component={AppSelectField}
               label="Chọn xưởng nhuộm"
             >
+              {!listDyePlant.length && (
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+              )}
               {listDyePlant.map((item, index) => (
                 <MenuItem key={index} value={item.id}>
                   {item.name}
@@ -122,8 +126,13 @@ class ExportRaw extends React.Component {
               name="fabricType"
               component={AppSelectField}
               label="Chọn loại vải"
-              onBlur={() => getListRawExportRequest(formValues.fabricType)}
+              onBlur={(ev) => getListRawExportRequest(ev.target.value)}
             >
+              {!listFabricType.length && (
+                <MenuItem value="">
+                  <em>None</em>
+                </MenuItem>
+              )}
               {listFabricType.map((item, index) => (
                 <MenuItem key={index} value={item.type}>
                   {item.type}
@@ -144,9 +153,8 @@ class ExportRaw extends React.Component {
               onChange={(event, newValue) => {
                 this.setState({ currentRaw: newValue });
               }}
-              options={listRawExport.filter(
-                (x) => !currentListRaws.includes(x)
-              )}
+              getOptionDisabled={(option) => currentListRaws.includes(option)}
+              options={listRawExport}
               style={{ width: "80%" }}
               getOptionLabel={(option) => option.id.toString()}
               renderInput={(params) => (

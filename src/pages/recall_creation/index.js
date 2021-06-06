@@ -110,9 +110,14 @@ class RecallCreation extends React.Component {
                 component={AppSelectField}
                 label="Chọn xưởng nhuộm"
                 onChange={(ev) => {
-                    getListFabricDyeplantRequest(ev.target.value);
+                  getListFabricDyeplantRequest(ev.target.value);
                 }}
               >
+                {!listDyePlant.length && (
+                  <MenuItem value="">
+                    <em>None</em>
+                  </MenuItem>
+                )}
                 {listDyePlant.map((item, index) => (
                   <MenuItem key={index} value={item.id}>
                     {item.name}
@@ -133,9 +138,10 @@ class RecallCreation extends React.Component {
                 onChange={(event, newValue) => {
                   this.setState({ currentFabric: newValue });
                 }}
-                options={listFabricOfDyeplant.filter(
-                  (x) => !currentListFabrics.includes(x)
-                )}
+                getOptionDisabled={(option) =>
+                  currentListFabrics.includes(option)
+                }
+                options={listFabricOfDyeplant}
                 style={{ width: "80%" }}
                 getOptionLabel={(option) => option.id.toString()}
                 renderInput={(params) => (
@@ -159,7 +165,9 @@ class RecallCreation extends React.Component {
               <Box fontWeight="fontWeightMedium">Màu</Box>
             </Grid>
             <Grid item xs>
-              <Box fontWeight="normal">{currentFabric?.colorName ?? "None"}</Box>
+              <Box fontWeight="normal">
+                {currentFabric?.colorName ?? "None"}
+              </Box>
             </Grid>
           </Grid>
           <Grid

@@ -153,10 +153,10 @@ class ListFabricForm extends React.Component {
                 onChange={(event, newValue) => {
                   this.setState({ currentFabric: newValue });
                 }}
-                options={listExportedFabric.filter(
-                  (x) =>
-                    currentListFabrics.findIndex((y) => x.id === y.id) === -1
-                )}
+                getOptionDisabled={(option) =>
+                  currentListFabrics.findIndex((y) => option.id === y.id) > -1
+                }
+                options={listExportedFabric}
                 style={{ width: "80%" }}
                 getOptionLabel={(option) => option.id.toString()}
                 renderInput={(params) => (
