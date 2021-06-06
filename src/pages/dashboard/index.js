@@ -149,7 +149,7 @@ class Dashboard extends React.Component {
     return (
       <React.Fragment>
         <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
+          <Grid container spacing={1}>
             {/* Chart */}
             <Grid item xs={12} md={8} lg={10}>
               <Paper className={`${classes.paper}`}>

@@ -58,7 +58,6 @@ class PaymentCreation extends React.Component {
         bankName: bankName ?? "",
         createDate: new Date().getTime(),
       });
-
       createPaymentRequest(body, () => {
         history.push(PAYMENT);
       });
@@ -228,6 +227,7 @@ class PaymentCreation extends React.Component {
                 color="primary"
                 type="submit"
                 disabled={
+                  pristine ||
                   invalid ||
                   submitting ||
                   Number(listDyePlant[formValues?.dyehouse]?.debt) <

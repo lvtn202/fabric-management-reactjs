@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withStyles } from "@material-ui/styles";
 import PropTypes from "prop-types";
 import styles from "./styles";
+import validate from "./validate";
 import { bindActionCreators, compose } from "redux";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import { Field, reduxForm, getFormValues } from "redux-form";
@@ -166,7 +167,15 @@ class ExportRaw extends React.Component {
 
         <Grid container spacing={3} justify="center">
           <Box m={1}>
-            <Button variant="contained" color="primary" onClick={this.add}>
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={this.add}
+              disabled={
+                this.state.currentRaw == null ||
+                Object.keys(this.state.currentRaw).length === 0
+              }
+            >
               Thêm
             </Button>
           </Box>
@@ -315,6 +324,7 @@ ExportRaw.propTypes = {
 
 const withReduxForm = reduxForm({
   form: CREATE_EXPORT_FORM,
+  validate,
 });
 
 export default compose(
