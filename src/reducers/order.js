@@ -34,6 +34,17 @@ export default (state = defaultState, action) => {
         ...state,
         detailOrder: action.payload.data.result,
       };
+    case Order.COMPLETE_ORDER:
+    case Order.COMPLETE_ORDER_FAILED:
+      return {
+        ...state,
+        detailOrder: {},
+      };
+    case Order.COMPLETE_ORDER_SUCCESS:
+      return {
+        ...state,
+        detailOrder: action.payload.data.result,
+      };
     case Order.CREATE_ORDER:
     case Order.CREATE_ORDER_FAILED:
       return {

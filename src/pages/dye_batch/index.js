@@ -28,7 +28,7 @@ class DyeBatch extends React.Component {
     return (
       <React.Fragment>
         <Typography variant="h5" gutterBottom>
-          Danh sách lô nhuộm (Phiếu nhập)
+          Danh sách phiếu nhập
         </Typography>
         <Divider />
 

@@ -70,7 +70,7 @@ const routes = [
   {
     path: Path.ORDER_DETAIL,
     exact: false,
-    main: ({ match }) => <OrderDetail match={match} />,
+    main: ({ match, history }) => <OrderDetail match={match} history={history} />,
   },
   {
     path: `${Path.ORDER_CREATION}/:id?`,
@@ -82,7 +82,7 @@ const routes = [
   {
     path: Path.DYE_BATCH,
     exact: true,
-    main: () => <DyeBatch />,
+    main: ({history}) => <DyeBatch history={history} />,
   },
   {
     path: Path.DYE_BATCH_DETAIL,

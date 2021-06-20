@@ -173,7 +173,7 @@ class DyeBatchDetail extends React.Component {
               <TableCell align="center">Tổng mộc</TableCell>
               <TableCell align="center">
                 {listFabricDyeBatch.reduce(
-                  (total, current, index) => total + current.rawLength,
+                  (total, current, index) => total + Number(current.rawLength),
                   0
                 )}
                 &nbsp;(m)
@@ -183,7 +183,7 @@ class DyeBatchDetail extends React.Component {
               <TableCell align="center">Tổng thành phẩm</TableCell>
               <TableCell align="center">
                 {listFabricDyeBatch.reduce(
-                  (total, current, index) => total + current.finishedLength,
+                  (total, current, index) => total + Number(current.finishedLength),
                   0
                 )}
                 &nbsp;(m)
@@ -194,7 +194,7 @@ class DyeBatchDetail extends React.Component {
               <TableCell align="center">
                 {currencyFormat(
                   listFabricDyeBatch.reduce(
-                    (total, current, index) => total + current.finishedLength,
+                    (total, current, index) => total + Number(current.finishedLength),
                     0
                   ) * detailDyeBatch.price
                 )}

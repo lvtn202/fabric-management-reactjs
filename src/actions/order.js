@@ -143,3 +143,43 @@ export const createOrderRequest = (body, completion) => {
       });
   };
 };
+
+// Make order complete
+export const completeOrder = () => ({
+  type: Order.COMPLETE_ORDER,
+});
+
+export const completeOrderSuccess = (data) => ({
+  type: Order.COMPLETE_ORDER_SUCCESS,
+  payload: data,
+});
+
+export const completeOrderFailed = (error) => ({
+  type: Order.COMPLETE_ORDER_FAILED,
+  payload: error,
+});
+
+export const completeOrderRequest = (body, completion) => {
+  return (dispatch) => {
+    dispatch(completeOrder());
+    apis
+      .completeOrder(body)
+      .then((data) => {
+        if (data.data.status === 1) {
+          dispatch(completeOrderSuccess(data));
+          dispatch({
+            type: Alert.SHOW_SUCCESS_MESSAGE,
+            payload: {
+              successMsg: "Cập nhật trạng thái thành công",
+            },
+          });
+          completion();
+        } else {
+          dispatch(showError(data.data.status_code, data.status));
+        }
+      })
+      .catch((error) => {
+        dispatch(completeOrderFailed(error));
+      });
+  };
+};

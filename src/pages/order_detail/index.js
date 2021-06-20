@@ -7,6 +7,8 @@ import { bindActionCreators, compose } from "redux";
 import { parseTimestamp } from "../../commons/utils";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+import Tooltip from "@material-ui/core/Tooltip";
+import Button from "@material-ui/core/Button";
 import Box from "@material-ui/core/Box";
 import Divider from "@material-ui/core/Divider";
 import Paper from "@material-ui/core/Paper";
@@ -18,6 +20,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import * as importAction from "../../actions/import";
 import * as orderAction from "../../actions/order";
+import { statusDescription } from "../../constants/order_status_type";
 
 class OrderDetail extends React.Component {
   componentDidMount() {
@@ -33,23 +36,27 @@ class OrderDetail extends React.Component {
     }
   }
 
+  onCompleteOrder = () => {
+    const { orderAction, match } = this.props;
+    const { completeOrderRequest } = orderAction;
+    var id = match.params.id;
+    let body = JSON.stringify({
+      orderId: id,
+    });
+    completeOrderRequest(body, () => {});
+  };
+
   render() {
     const { classes } = this.props;
-
     return (
       <React.Fragment>
         <Typography variant="h5">Đơn đặt hàng</Typography>
-
         <Divider />
-
         {this.renderInfo()}
-
         <Divider className={classes.divider} />
-
         <Typography className={classes.typography} variant="h6" gutterBottom>
           {`Danh sách hàng đã nhập`}
         </Typography>
-
         {this.renderTable()}
       </React.Fragment>
     );
@@ -63,18 +70,41 @@ class OrderDetail extends React.Component {
           <Grid item xs={2}>
             <Box fontWeight="fontWeightMedium">Xưởng nhuộm:</Box>
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={4}>
             <Box fontWeight="normal" ml={1}>
               {detailOrder.dyehouseName ?? ""}
             </Box>
           </Grid>
 
           <Grid item xs={2}>
+            <Box fontWeight="fontWeightMedium">Trạng thái:</Box>
+          </Grid>
+          <Grid item xs={4}>
+            <Box fontWeight="normal" ml={1}>
+              {statusDescription(detailOrder.status ?? "")}
+            </Box>
+          </Grid>
+
+          <Grid item xs={2}>
             <Box fontWeight="fontWeightMedium">Loại vải:</Box>
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={4}>
             <Box fontWeight="normal" ml={1}>
               {detailOrder.fabricType ?? ""}
+            </Box>
+          </Grid>
+
+          <Grid item xs={6}>
+            <Box fontWeight="normal" ml={1}>
+              <Tooltip title="Hoàn thành đơn đặt hàng này">
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.onCompleteOrder}
+                >
+                  Hoàn thành đơn hàng
+                </Button>
+              </Tooltip>
             </Box>
           </Grid>
 
@@ -121,9 +151,9 @@ class OrderDetail extends React.Component {
   };
 
   renderTable = () => {
-    const { classes, listImport } = this.props;
+    const { classes, listImport, history } = this.props;
     const handleClick = (event, id) => {
-      // history.push(`/order/${id}`);
+      history.push(`/dye-batch/${id}`);
     };
     return (
       <TableContainer component={Paper} className={classes.tableContainer}>
@@ -167,6 +197,7 @@ OrderDetail.propTypes = {
   classes: PropTypes.object,
   orderAction: PropTypes.shape({
     getDetailOrderRequest: PropTypes.func,
+    completeOrderRequest: PropTypes.func,
   }),
   detailOrder: PropTypes.object,
   importAction: PropTypes.shape({
