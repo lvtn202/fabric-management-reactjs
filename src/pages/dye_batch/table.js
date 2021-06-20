@@ -59,7 +59,7 @@ function CustomPagination() {
 }
 
 export default function DataGridDemo(props) {
-  const { data } = props;
+  const { data, history } = props;
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
@@ -68,9 +68,9 @@ export default function DataGridDemo(props) {
         pageSize={8}
         pagination
         autoHeight
-        // onSelectionModelChange={(newSelection) =>
-        //   history.push(`/order/detail/${newSelection.selectionModel[0]}`)
-        // }
+        onSelectionModelChange={(newSelection) =>
+          history.push(`/dye-batch/${newSelection.selectionModel[0]}`)
+        }
         components={{
           Toolbar: CustomToolbar,
           Pagination: CustomPagination,

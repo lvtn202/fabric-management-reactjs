@@ -19,3 +19,7 @@ export const getDetail = (id) => {
 export const createOrder = (body) => {
     return RequestManager.post('/createOrder', body, "application/json")
 }
+
+export const completeOrder = (body) => {
+    return RequestManager.post('/completedOrder', body, "application/json")
+}
