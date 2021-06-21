@@ -101,6 +101,7 @@ class OrderDetail extends React.Component {
                   variant="contained"
                   color="primary"
                   onClick={this.onCompleteOrder}
+                  disabled={detailOrder.status !== "IN_PROGRESS"}
                 >
                   Hoàn thành đơn hàng
                 </Button>
