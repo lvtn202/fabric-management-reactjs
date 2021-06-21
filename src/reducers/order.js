@@ -38,7 +38,6 @@ export default (state = defaultState, action) => {
     case Order.COMPLETE_ORDER_FAILED:
       return {
         ...state,
-        detailOrder: {},
       };
     case Order.COMPLETE_ORDER_SUCCESS:
       return {
