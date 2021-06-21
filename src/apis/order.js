@@ -21,5 +21,5 @@ export const createOrder = (body) => {
 }
 
 export const completeOrder = (body) => {
-    return RequestManager.post('/completedOrder', body, "application/json")
+    return RequestManager.post('/completeOrder', body, "application/json")
 }
