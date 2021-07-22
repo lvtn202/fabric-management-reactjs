@@ -11,7 +11,7 @@ import AppSelectField from "../../components/form_helper/select_field";
 import * as dyePlantAction from "../../actions/dye_plant";
 import * as rawActions from "../../actions/raw";
 import * as exportActions from "../../actions/export";
-import { parseTimestamp } from "../../commons/utils";
+import { numberFormat, parseTimestamp } from "../../commons/utils";
 import { CREATE_EXPORT_FORM } from "./../../constants/form_name";
 import DeleteIcon from "@material-ui/icons/Delete";
 import Typography from "@material-ui/core/Typography";
@@ -209,7 +209,7 @@ class ExportRaw extends React.Component {
                     <TableCell align="center" component="th" scope="row">
                       {row.id}
                     </TableCell>
-                    <TableCell align="center">{row.rawLength}</TableCell>
+                    <TableCell align="center">{numberFormat(row.rawLength)}</TableCell>
                     <TableCell align="center">
                       <IconButton
                         aria-label="delete"

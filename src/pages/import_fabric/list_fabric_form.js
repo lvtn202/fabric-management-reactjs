@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import PropTypes from "prop-types";
 import styles from "./styles";
 import AppTextField from "../../components/form_helper/text_field";
-import { currencyFormat } from "../../commons/utils";
+import { currencyFormat, numberFormat } from "../../commons/utils";
 import { bindActionCreators, compose } from "redux";
 import { Field, reduxForm, getFormValues } from "redux-form";
 import { LIST_FABRIC_FORM } from "./../../constants/form_name";
@@ -48,7 +48,6 @@ class ListFabricForm extends React.Component {
 
   add() {
     const { currentFabric } = this.state;
-    console.log(currentFabric);
     if (
       currentFabric &&
       Object.keys(currentFabric).length !== 0 &&
@@ -160,7 +159,7 @@ class ListFabricForm extends React.Component {
             </Grid>
             <Grid item xs={4}>
               <Box fontWeight="normal">
-                {`${this.state.currentFabric.rawLength ?? 0} m`}
+                {`${numberFormat(this.state.currentFabric?.rawLength ?? 0)} m`}
               </Box>
             </Grid>
           </Grid>
@@ -234,8 +233,8 @@ class ListFabricForm extends React.Component {
                       <TableCell align="center" component="th" scope="row">
                         {row.id}
                       </TableCell>
-                      <TableCell align="center">{row.rawLength}</TableCell>
-                      <TableCell align="center">{row.finishedLength}</TableCell>
+                      <TableCell align="center">{numberFormat(row.rawLength)}</TableCell>
+                      <TableCell align="center">{numberFormat(row.finishedLength)}</TableCell>
                       <TableCell align="center">
                         {`${(
                           ((row.rawLength - row.finishedLength) /

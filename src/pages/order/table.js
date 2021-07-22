@@ -8,7 +8,7 @@ import {
   GridFilterToolbarButton,
 } from "@material-ui/data-grid";
 import { Pagination } from "@material-ui/lab";
-import { parseTimestamp } from "../../commons/utils";
+import { parseTimestamp, numberFormat } from "../../commons/utils";
 import { statusDescription } from "../../constants/order_status_type";
 
 const useStyles = makeStyles({
@@ -33,8 +33,15 @@ const columns = [
     headerName: "Độ dài đặt hàng (m)",
     flex: 1,
     type: "number",
+    valueFormatter: ({ value }) => numberFormat(value),
   },
-  { field: "doneLength", headerName: "Đã nhận (m)", flex: 1, type: "number" },
+  {
+    field: "doneLength",
+    headerName: "Đã nhận (m)",
+    flex: 1,
+    type: "number",
+    valueFormatter: ({ value }) => numberFormat(value),
+  },
   {
     field: "status",
     headerName: "Trạng thái",

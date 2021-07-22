@@ -8,7 +8,7 @@ import {
   GridFilterToolbarButton,
 } from "@material-ui/data-grid";
 import { Pagination } from "@material-ui/lab";
-import { parseTimestamp } from "../../commons/utils";
+import { parseTimestamp, numberFormat } from "../../commons/utils";
 
 const useStyles = makeStyles({
   root: {
@@ -31,6 +31,7 @@ const columns = [
     headerName: "Tổng thành phẩm (m)",
     flex: 1,
     type: "number",
+    valueFormatter: ({ value }) => numberFormat(value),
   },
   { field: "color", headerName: "Màu", flex: 1 },
 ];

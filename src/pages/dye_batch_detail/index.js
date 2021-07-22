@@ -15,7 +15,11 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import { currencyFormat, parseTimestamp } from "../../commons/utils";
+import {
+  currencyFormat,
+  numberFormat,
+  parseTimestamp,
+} from "../../commons/utils";
 import * as dyeBatchAction from "../../actions/dye_batch";
 
 class DyeBatchDetail extends React.Component {
@@ -50,9 +54,9 @@ class DyeBatchDetail extends React.Component {
   }
 
   renderInfo() {
-    const { classes, detailDyeBatch } = this.props;
+    const { detailDyeBatch } = this.props;
     return (
-      <React.Fragment className={classes.grid}>
+      <React.Fragment>
         <Grid container spacing={2}>
           <Grid item xs={2}>
             <Box display="flex" mt={2}>
@@ -159,22 +163,29 @@ class DyeBatchDetail extends React.Component {
               <TableRow key={row.id} hover>
                 <TableCell align="center">{row.id}</TableCell>
                 <TableCell align="center" component="th" scope="row">
-                  {row.rawLength}
+                  {numberFormat(row.rawLength)}
                 </TableCell>
-                <TableCell align="center">{row.finishedLength}</TableCell>
+                <TableCell align="center">
+                  {numberFormat(row.finishedLength)}
+                </TableCell>
               </TableRow>
             ))}
             <TableRow>
               <TableCell rowSpan={4} />
               <TableCell align="center">Tổng cây vải</TableCell>
-              <TableCell align="center">{listFabricDyeBatch.length}</TableCell>
+              <TableCell align="center">
+                {numberFormat(listFabricDyeBatch.length, 0)}
+              </TableCell>
             </TableRow>
             <TableRow>
               <TableCell align="center">Tổng mộc</TableCell>
               <TableCell align="center">
-                {listFabricDyeBatch.reduce(
-                  (total, current, index) => total + Number(current.rawLength),
-                  0
+                {numberFormat(
+                  listFabricDyeBatch.reduce(
+                    (total, current, index) =>
+                      total + Number(current.rawLength),
+                    0
+                  )
                 )}
                 &nbsp;(m)
               </TableCell>
@@ -182,9 +193,12 @@ class DyeBatchDetail extends React.Component {
             <TableRow>
               <TableCell align="center">Tổng thành phẩm</TableCell>
               <TableCell align="center">
-                {listFabricDyeBatch.reduce(
-                  (total, current, index) => total + Number(current.finishedLength),
-                  0
+                {numberFormat(
+                  listFabricDyeBatch.reduce(
+                    (total, current, index) =>
+                      total + Number(current.finishedLength),
+                    0
+                  )
                 )}
                 &nbsp;(m)
               </TableCell>
@@ -194,7 +208,8 @@ class DyeBatchDetail extends React.Component {
               <TableCell align="center">
                 {currencyFormat(
                   listFabricDyeBatch.reduce(
-                    (total, current, index) => total + Number(current.finishedLength),
+                    (total, current, index) =>
+                      total + Number(current.finishedLength),
                     0
                   ) * detailDyeBatch.price
                 )}

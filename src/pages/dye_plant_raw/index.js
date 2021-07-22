@@ -23,6 +23,7 @@ import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker,
 } from "@material-ui/pickers";
+import { numberFormat } from "../../commons/utils";
 
 class DyePlantRaw extends React.Component {
   constructor(props) {
@@ -92,8 +93,8 @@ class DyePlantRaw extends React.Component {
               {listRaw.map((row) => (
                 <TableRow key={row.id} hover>
                   <TableCell align="center">{row.fabricType}</TableCell>
-                  <TableCell align="center">{row.rawNumber}</TableCell>
-                  <TableCell align="center">{row.rawLength}</TableCell>
+                  <TableCell align="center">{numberFormat(row.rawNumber, 0)}</TableCell>
+                  <TableCell align="center">{numberFormat(row.rawLength)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>
@@ -174,8 +175,8 @@ class DyePlantRaw extends React.Component {
               {listFabric.map((row) => (
                 <TableRow key={row.id} hover>
                   <TableCell align="center">{row.fabricType}</TableCell>
-                  <TableCell align="center">{row.doneNumber}</TableCell>
-                  <TableCell align="center">{row.doneLength}</TableCell>
+                  <TableCell align="center">{numberFormat(row.doneNumber, 0)}</TableCell>
+                  <TableCell align="center">{numberFormat(row.doneLength)}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

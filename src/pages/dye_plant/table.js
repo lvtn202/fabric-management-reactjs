@@ -8,7 +8,7 @@ import {
   GridFilterToolbarButton,
 } from "@material-ui/data-grid";
 import { Pagination } from "@material-ui/lab";
-import { currencyFormat } from "../../commons/utils";
+import { currencyFormat, numberFormat } from "../../commons/utils";
 
 const useStyles = makeStyles({
   root: {
@@ -26,7 +26,13 @@ const columns = [
     type: "number",
     valueFormatter: ({ value }) => currencyFormat(value),
   },
-  { field: "inStock", headerName: "Mộc tồn (m)", flex: 1, type: "number" },
+  {
+    field: "inStock",
+    headerName: "Mộc tồn (m)",
+    flex: 1,
+    type: "number",
+    valueFormatter: ({ value }) => numberFormat(value),
+  },
 ];
 function CustomToolbar() {
   return (
@@ -63,7 +69,9 @@ export default function DataGridTable(props) {
         pagination
         autoHeight
         onSelectionModelChange={(newSelection) =>
-          history.push(`/dye-plant/${data[newSelection.selectionModel[0] - 1].id}`)
+          history.push(
+            `/dye-plant/${data[newSelection.selectionModel[0] - 1].id}`
+          )
         }
         components={{
           Toolbar: CustomToolbar,

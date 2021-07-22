@@ -16,6 +16,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import { numberFormat } from "../../commons/utils";
 
 class Raw extends React.Component {
   constructor(props) {
@@ -89,8 +90,8 @@ class Raw extends React.Component {
             {listRaw.map((row, index) => (
               <TableRow key={index} hover>
                 <TableCell align="center">{row.fabricType}</TableCell>
-                <TableCell align="center">{row.rawNumber}</TableCell>
-                <TableCell align="center">{row.rawLength}</TableCell>
+                <TableCell align="center">{numberFormat(row.rawNumber,0)}</TableCell>
+                <TableCell align="center">{numberFormat(row.rawLength)}</TableCell>
               </TableRow>
             ))}
           </TableBody>
@@ -128,7 +129,7 @@ class Raw extends React.Component {
               >
                 <TableCell align="center">{row.dyehouseName}</TableCell>
                 {row.fabricTypes.map((item, index) => (
-                  <TableCell key={index} align="center">{item.rawLength}</TableCell>
+                  <TableCell key={index} align="center">{numberFormat(item.rawLength)}</TableCell>
                 ))}
               </TableRow>
             ))}
