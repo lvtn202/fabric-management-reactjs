@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import styles from "./styles";
 import PropTypes from "prop-types";
 import { bindActionCreators, compose } from "redux";
-import { parseTimestamp } from "../../commons/utils";
+import { numberFormat, parseTimestamp } from "../../commons/utils";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import Tooltip from "@material-ui/core/Tooltip";
@@ -123,7 +123,7 @@ class OrderDetail extends React.Component {
           </Grid>
           <Grid item xs={10}>
             <Box fontWeight="normal" ml={1}>
-              {`${detailOrder.orderLength ?? ""} (m)`}
+              {`${numberFormat(detailOrder.orderLength ?? "")} (m)`}
             </Box>
           </Grid>
 
@@ -181,7 +181,7 @@ class OrderDetail extends React.Component {
                 hover
               >
                 <TableCell align="center">{row.id}</TableCell>
-                <TableCell align="center">{row.fabricLength}</TableCell>
+                <TableCell align="center">{numberFormat(row.fabricLength)}</TableCell>
                 <TableCell align="center" component="th" scope="row">
                   {parseTimestamp(row.createDate)}
                 </TableCell>

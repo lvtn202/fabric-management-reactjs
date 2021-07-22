@@ -16,7 +16,11 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import { currencyFormat, parseTimestamp } from "../../commons/utils";
+import {
+  currencyFormat,
+  numberFormat,
+  parseTimestamp,
+} from "../../commons/utils";
 
 class RecallList extends React.Component {
   componentDidMount() {
@@ -114,13 +118,17 @@ class RecallList extends React.Component {
                 </TableCell>
               </TableRow>
             )}
-            {listFabricRecall.map((row) => (
-              <TableRow key={row.id} hover>
+            {listFabricRecall.map((row, index) => (
+              <TableRow key={index} hover>
                 <TableCell align="center">{row.returnId}</TableCell>
                 <TableCell align="center">{row.color}</TableCell>
                 <TableCell align="center">{row.fabricType}</TableCell>
-                <TableCell align="center">{row.doneLength}</TableCell>
-                <TableCell align="center">{row.returnLength}</TableCell>
+                <TableCell align="center">
+                  {numberFormat(row.doneLength)}
+                </TableCell>
+                <TableCell align="center">
+                  {numberFormat(row.returnLength)}
+                </TableCell>
                 <TableCell align="center">
                   {currencyFormat(row.money)}
                 </TableCell>
@@ -134,15 +142,19 @@ class RecallList extends React.Component {
               <TableCell rowSpan={3} />
               <TableCell rowSpan={3} />
               <TableCell align="center">Tổng cây vải</TableCell>
-              <TableCell align="center">{listFabricRecall.length}</TableCell>
+              <TableCell align="center">
+                {numberFormat(listFabricRecall.length, 0)}
+              </TableCell>
             </TableRow>
             <TableRow>
               <TableCell align="center">Tổng trả</TableCell>
               <TableCell align="center">
-                {listFabricRecall.reduce(
-                  (total, current, index) =>
-                    total + Number(current.returnLength),
-                  0
+                {numberFormat(
+                  listFabricRecall.reduce(
+                    (total, current, index) =>
+                      total + Number(current.returnLength),
+                    0
+                  )
                 )}
                 &nbsp;(m)
               </TableCell>

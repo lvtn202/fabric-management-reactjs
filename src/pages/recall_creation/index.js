@@ -28,7 +28,7 @@ import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import AppTextField from "../../components/form_helper/text_field";
-import { currencyFormat } from "../../commons/utils";
+import { currencyFormat, numberFormat } from "../../commons/utils";
 import DeleteIcon from "@material-ui/icons/Delete";
 import { RECALL } from "./../../constants/path";
 
@@ -175,7 +175,7 @@ class RecallCreation extends React.Component {
             </Grid>
             <Grid item xs={2}>
               <Box fontWeight="normal">
-                {currentFabric?.finishedLength ?? "0"}
+                {numberFormat(currentFabric?.finishedLength ?? "0")}
               </Box>
             </Grid>
             <Grid item xs={2}>
@@ -275,8 +275,8 @@ class RecallCreation extends React.Component {
                         {row.fabricId}
                       </TableCell>
                       <TableCell align="center">{row.colorName}</TableCell>
-                      <TableCell align="center">{row.finishedLength}</TableCell>
-                      <TableCell align="center">{row.returnLength}</TableCell>
+                      <TableCell align="center">{numberFormat(row.finishedLength)}</TableCell>
+                      <TableCell align="center">{numberFormat(row.returnLength)}</TableCell>
                       <TableCell align="center">
                         {currencyFormat(row.money)}
                       </TableCell>

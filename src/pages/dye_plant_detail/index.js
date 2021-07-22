@@ -5,7 +5,7 @@ import styles from "./styles";
 import PropTypes from "prop-types";
 import { bindActionCreators, compose } from "redux";
 import { statusDescription } from "../../constants/order_status_type";
-import { parseTimestamp, currencyFormat } from "../../commons/utils";
+import { parseTimestamp, currencyFormat, numberFormat } from "../../commons/utils";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
@@ -211,8 +211,8 @@ class DyePlantDetail extends React.Component {
                 </TableCell>
                 <TableCell align="center">{row.type}</TableCell>
                 <TableCell align="center">{row.color}</TableCell>
-                <TableCell align="center">{row.orderLength}</TableCell>
-                <TableCell align="center">{row.doneLength}</TableCell>
+                <TableCell align="center">{numberFormat(row.orderLength)}</TableCell>
+                <TableCell align="center">{numberFormat(row.doneLength)}</TableCell>
                 <TableCell align="center">
                   {statusDescription(row.status)}
                 </TableCell>

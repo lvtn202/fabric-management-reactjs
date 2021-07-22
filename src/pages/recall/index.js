@@ -54,7 +54,6 @@ class RecallList extends React.Component {
 }
 
 const mapStateToProps = (state) => ({
-  loading: state.common.loading,
   listRecall: state.recall.listRecall,
 });
 
@@ -66,7 +65,6 @@ const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 RecallList.propTypes = {
   classes: PropTypes.object,
-  loading: PropTypes.object,
   listRecall: PropTypes.array,
   recallActions: PropTypes.shape({
     getListRecallRequest: PropTypes.func,

@@ -22,6 +22,13 @@ export const currencyFormat = (value) => {
   }).format(value);
 };
 
+export const numberFormat = (value, minimumFractionDigits = 1, maximumFractionDigits = 1) => {
+  return new Intl.NumberFormat("en-US", {
+    minimumFractionDigits,
+    maximumFractionDigits,
+  }).format(value);
+};
+
 export const sexDescription = (value) => {
   switch (value) {
     case "male":
