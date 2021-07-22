@@ -44,6 +44,16 @@ export default (state = defaultState, action) => {
         ...state,
         detailOrder: action.payload.data.result,
       };
+    case Order.CANCEL_ORDER:
+    case Order.CANCEL_ORDER_FAILED:
+      return {
+        ...state,
+      };
+    case Order.CANCEL_ORDER_SUCCESS:
+      return {
+        ...state,
+        detailOrder: action.payload.data.result,
+      };
     case Order.CREATE_ORDER:
     case Order.CREATE_ORDER_FAILED:
       return {

@@ -23,3 +23,7 @@ export const createOrder = (body) => {
 export const completeOrder = (body) => {
     return RequestManager.post('/completeOrder', body, "application/json")
 }
+
+export const cancelOrder = (body) => {
+    return RequestManager.post('/cancelOrder', body, "application/json")
+}

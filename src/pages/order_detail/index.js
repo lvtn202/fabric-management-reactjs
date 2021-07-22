@@ -46,6 +46,16 @@ class OrderDetail extends React.Component {
     completeOrderRequest(body, () => {});
   };
 
+  onCancelOrder = () => {
+    const { orderAction, match } = this.props;
+    const { cancelOrderRequest } = orderAction;
+    var id = match.params.id;
+    let body = JSON.stringify({
+      orderId: id,
+    });
+    cancelOrderRequest(body, () => {});
+  };
+
   render() {
     const { classes } = this.props;
     return (
@@ -112,9 +122,23 @@ class OrderDetail extends React.Component {
           <Grid item xs={2}>
             <Box fontWeight="fontWeightMedium">Màu:</Box>
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={4}>
             <Box fontWeight="normal" ml={1}>
               {detailOrder.color ?? ""}
+            </Box>
+          </Grid>
+          <Grid item xs={6}>
+            <Box fontWeight="normal" ml={1}>
+              <Tooltip title="Hủy đơn đặt hàng này">
+                <Button
+                  variant="contained"
+                  color="secondary"
+                  onClick={this.onCancelOrder}
+                  disabled={detailOrder.status !== "CREATED"}
+                >
+                  Hủy đơn hàng
+                </Button>
+              </Tooltip>
             </Box>
           </Grid>
 
@@ -199,6 +223,7 @@ OrderDetail.propTypes = {
   orderAction: PropTypes.shape({
     getDetailOrderRequest: PropTypes.func,
     completeOrderRequest: PropTypes.func,
+    cancelOrderRequest: PropTypes.func,
   }),
   detailOrder: PropTypes.object,
   importAction: PropTypes.shape({
