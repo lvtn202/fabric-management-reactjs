@@ -76,10 +76,10 @@ class OrderDetail extends React.Component {
             </Box>
           </Grid>
 
-          <Grid item xs={2}>
+          <Grid item xs={1}>
             <Box fontWeight="fontWeightMedium">Trạng thái:</Box>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={5}>
             <Box fontWeight="normal" ml={1}>
               {statusDescription(detailOrder.status ?? "")}
             </Box>
