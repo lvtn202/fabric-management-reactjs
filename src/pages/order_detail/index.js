@@ -18,11 +18,23 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
 import * as importAction from "../../actions/import";
 import * as orderAction from "../../actions/order";
 import { statusDescription } from "../../constants/order_status_type";
 
 class OrderDetail extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      openDialog: false,
+      message: "",
+    };
+  }
+
   componentDidMount() {
     var { match } = this.props;
     const { orderAction, importAction } = this.props;
@@ -37,6 +49,7 @@ class OrderDetail extends React.Component {
   }
 
   onCompleteOrder = () => {
+    this.onCloseDialog();
     const { orderAction, match } = this.props;
     const { completeOrderRequest } = orderAction;
     var id = match.params.id;
@@ -46,12 +59,45 @@ class OrderDetail extends React.Component {
     completeOrderRequest(body, () => {});
   };
 
+  onCancelOrder = () => {
+    this.onCloseDialog();
+    const { orderAction, match } = this.props;
+    const { cancelOrderRequest } = orderAction;
+    var id = match.params.id;
+    let body = JSON.stringify({
+      orderId: id,
+    });
+    cancelOrderRequest( body, () => {});
+  };
+
+  onClickCancel = () => {
+    this.setState({
+      openDialog: true,
+      message: "Bạn có muốn hủy đơn hàng này?",
+    });
+  };
+
+  onClickComplete = () => {
+    this.setState({
+      openDialog: true,
+      message: "Bạn có muốn hoàn thành đơn hàng này?",
+    });
+  };
+
+  onCloseDialog = () => {
+    this.setState({
+      openDialog: false,
+      message: "",
+    });
+  };
+
   render() {
     const { classes } = this.props;
     return (
       <React.Fragment>
         <Typography variant="h5">Đơn đặt hàng</Typography>
         <Divider />
+        {this.renderDialog()}
         {this.renderInfo()}
         <Divider className={classes.divider} />
         <Typography className={classes.typography} variant="h6" gutterBottom>
@@ -61,6 +107,26 @@ class OrderDetail extends React.Component {
       </React.Fragment>
     );
   }
+
+  renderDialog = () => {
+    return (
+      <Dialog open={this.state.openDialog}>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {this.state.message}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.onCloseDialog} color="primary">
+            Không
+          </Button>
+          <Button onClick={this.onCancelOrder} color="primary" autoFocus>
+            Có
+          </Button>
+        </DialogActions>
+      </Dialog>
+    );
+  };
 
   renderInfo = () => {
     const { detailOrder, classes } = this.props;
@@ -76,10 +142,10 @@ class OrderDetail extends React.Component {
             </Box>
           </Grid>
 
-          <Grid item xs={2}>
+          <Grid item xs={1}>
             <Box fontWeight="fontWeightMedium">Trạng thái:</Box>
           </Grid>
-          <Grid item xs={4}>
+          <Grid item xs={5}>
             <Box fontWeight="normal" ml={1}>
               {statusDescription(detailOrder.status ?? "")}
             </Box>
@@ -97,14 +163,16 @@ class OrderDetail extends React.Component {
           <Grid item xs={6}>
             <Box fontWeight="normal" ml={1}>
               <Tooltip title="Hoàn thành đơn đặt hàng này">
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={this.onCompleteOrder}
-                  disabled={detailOrder.status !== "IN_PROGRESS"}
-                >
-                  Hoàn thành đơn hàng
-                </Button>
+                <span>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={this.onCompleteOrder}
+                    disabled={detailOrder.status !== "IN_PROGRESS"}
+                  >
+                    Hoàn thành đơn hàng
+                  </Button>
+                </span>
               </Tooltip>
             </Box>
           </Grid>
@@ -112,9 +180,25 @@ class OrderDetail extends React.Component {
           <Grid item xs={2}>
             <Box fontWeight="fontWeightMedium">Màu:</Box>
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={4}>
             <Box fontWeight="normal" ml={1}>
               {detailOrder.color ?? ""}
+            </Box>
+          </Grid>
+          <Grid item xs={6}>
+            <Box fontWeight="normal" ml={1}>
+              <Tooltip title="Hủy đơn đặt hàng này">
+                <span>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={this.onClickCancel}
+                    disabled={detailOrder.status !== "CREATED"}
+                  >
+                    Hủy đơn hàng
+                  </Button>
+                </span>
+              </Tooltip>
             </Box>
           </Grid>
 
@@ -181,7 +265,9 @@ class OrderDetail extends React.Component {
                 hover
               >
                 <TableCell align="center">{row.id}</TableCell>
-                <TableCell align="center">{numberFormat(row.fabricLength)}</TableCell>
+                <TableCell align="center">
+                  {numberFormat(row.fabricLength)}
+                </TableCell>
                 <TableCell align="center" component="th" scope="row">
                   {parseTimestamp(row.createDate)}
                 </TableCell>
@@ -199,6 +285,7 @@ OrderDetail.propTypes = {
   orderAction: PropTypes.shape({
     getDetailOrderRequest: PropTypes.func,
     completeOrderRequest: PropTypes.func,
+    cancelOrderRequest: PropTypes.func,
   }),
   detailOrder: PropTypes.object,
   importAction: PropTypes.shape({

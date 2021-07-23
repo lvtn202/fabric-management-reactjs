@@ -46,7 +46,7 @@ const columns = [
     field: "status",
     headerName: "Trạng thái",
     flex: 1,
-    valueFormatter: ({ value }) => statusDescription(value),
+    renderCell: ({ value }) => statusDescription(value),
   },
 ];
 function CustomToolbar() {

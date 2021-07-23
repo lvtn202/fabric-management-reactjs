@@ -183,3 +183,43 @@ export const completeOrderRequest = (body, completion) => {
       });
   };
 };
+
+// Make order cancel
+export const cancelOrder = () => ({
+  type: Order.CANCEL_ORDER,
+});
+
+export const cancelOrderSuccess = (data) => ({
+  type: Order.CANCEL_ORDER_SUCCESS,
+  payload: data,
+});
+
+export const cancelOrderFailed = (error) => ({
+  type: Order.CANCEL_ORDER_FAILED,
+  payload: error,
+});
+
+export const cancelOrderRequest = (body, completion) => {
+  return (dispatch) => {
+    dispatch(cancelOrder());
+    apis
+      .cancelOrder(body)
+      .then((data) => {
+        if (data.data.status === 1) {
+          dispatch(cancelOrderSuccess(data));
+          dispatch({
+            type: Alert.SHOW_SUCCESS_MESSAGE,
+            payload: {
+              successMsg: "Hủy đơn hàng thành công",
+            },
+          });
+          completion();
+        } else {
+          dispatch(showError(data.data.status_code, data.status));
+        }
+      })
+      .catch((error) => {
+        dispatch(cancelOrderFailed(error));
+      });
+  };
+};
