@@ -36,6 +36,39 @@ export const getListPaymentRequest = (dyehouseId) => {
   };
 };
 
+// Get detail payment
+export const getPaymentDetail = () => ({
+  type: Payment.FETCH_DETAIL_PAYMENT,
+});
+
+export const getPaymentDetailSuccess = (data) => ({
+  type: Payment.FETCH_DETAIL_PAYMENT_SUCCESS,
+  payload: data,
+});
+
+export const getPaymentDetailFail = (error) => ({
+  type: Payment.FETCH_DETAIL_PAYMENT_FAILED,
+  payload: error,
+});
+
+export const getPaymentDetailRequest = (paymentId) => {
+  return (dispatch) => {
+    dispatch(getPaymentDetail());
+    apis
+      .getPaymentDetail(paymentId)
+      .then((data) => {
+        if (data.data.status === 1) {
+          dispatch(getPaymentDetailSuccess(data));
+        } else {
+          dispatch(showError(data.data.status_code, data.status));
+        }
+      })
+      .catch((error) => {
+        dispatch(getPaymentDetailFail(error));
+      });
+  };
+};
+
 // Get list payment method
 export const getListPaymentMethod = () => ({
   type: Payment.FETCH_LIST_PAYMENT_METHOD,

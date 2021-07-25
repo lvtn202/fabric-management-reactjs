@@ -39,9 +39,7 @@ const columns = [
     sortable: false,
     width: 150,
     valueGetter: (params) =>
-      `${params.row.userFirstName ?? ""} ${
-        params.row.userLastName ?? ""
-      }`,
+      `${params.row.userFirstName ?? ""} ${params.row.userLastName ?? ""}`,
   },
   { field: "recipientName", headerName: "Nhân viên nhận", width: 150 },
 ];
@@ -70,7 +68,7 @@ function CustomPagination() {
 }
 
 export default function DataGridDemo(props) {
-  const { data } = props;
+  const { data, history } = props;
   return (
     <div style={{ height: 400, width: "100%" }}>
       <DataGrid
@@ -80,9 +78,9 @@ export default function DataGridDemo(props) {
         pageSize={8}
         pagination
         autoHeight
-        // onSelectionModelChange={(newSelection) =>
-        //   history.push(`/order/detail/${newSelection.selectionModel[0]}`)
-        // }
+        onSelectionModelChange={(newSelection) =>
+          history.push(`/payment/${newSelection.selectionModel[0]}`)
+        }
         components={{
           Toolbar: CustomToolbar,
           Pagination: CustomPagination,

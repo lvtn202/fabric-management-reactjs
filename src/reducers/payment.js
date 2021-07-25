@@ -4,6 +4,7 @@ const defaultState = {
   listPayment: [],
   listPaymentMethod: [],
   createPayment: {},
+  paymentDetail: {},
 };
 
 // eslint-disable-next-line import/no-anonymous-default-export
@@ -19,6 +20,17 @@ export default (state = defaultState, action) => {
       return {
         ...state,
         listPayment: action.payload.data.result,
+      };
+    case Payment.FETCH_DETAIL_PAYMENT:
+    case Payment.FETCH_DETAIL_PAYMENT_FAILED:
+      return {
+        ...state,
+        paymentDetail: {},
+      };
+    case Payment.FETCH_DETAIL_PAYMENT_SUCCESS:
+      return {
+        ...state,
+        paymentDetail: action.payload.data.result,
       };
     case Payment.FETCH_LIST_PAYMENT_METHOD:
     case Payment.FETCH_LIST_PAYMENT_METHOD_FAILED:
