@@ -55,7 +55,7 @@ class PaymentCreation extends React.Component {
         paymentMethodId: paymentMethod?.paymentMethodId,
         money,
         recipientName,
-        bankName: bankName ?? "",
+        bankName: paymentMethod?.paymentMethodId === 1 ? "" : bankName ?? "",
         createDate: new Date().getTime(),
       });
       createPaymentRequest(body, () => {

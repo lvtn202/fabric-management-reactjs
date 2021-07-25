@@ -6,6 +6,7 @@ import alert from "./reducers/alert";
 import modal from "./reducers/modal";
 import sidebar from "./reducers/sidebar";
 import dyeplant from "./reducers/dye_plant";
+import debt from "./reducers/debt";
 import dyebatch from "./reducers/dye_batch";
 import raw from "./reducers/raw";
 import exportRaw from "./reducers/export";
@@ -27,6 +28,7 @@ export default combineReducers({
   dyebatch,
   recall,
   dyeplant,
+  debt,
   raw,
   payment,
   order,

@@ -19,7 +19,7 @@ import TableRow from "@material-ui/core/TableRow";
 import SearchIcon from "@material-ui/icons/Search";
 import * as dyePlantAction from "../../actions/dye_plant";
 import { currencyFormat } from "./../../commons/utils";
-import { PAYMENT_CREATION } from "./../../constants/path";
+import { DEBT, PAYMENT_CREATION } from "./../../constants/path";
 
 class Debt extends React.Component {
   constructor(props) {
@@ -27,7 +27,7 @@ class Debt extends React.Component {
     this.state = {
       keyword: "",
     };
-    this.handleClick = this.handleClick.bind(this);
+    this.handleClickPayment = this.handleClickPayment.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
   }
 
@@ -42,9 +42,16 @@ class Debt extends React.Component {
     this.props.dyePlantAction.getListDyePlantRequest(this.state.keyword);
   };
 
-  handleClick = (event, row) => {
+  handleClickPayment = (event, row) => {
     this.props.history.push({
       pathname: `${PAYMENT_CREATION}/${row.id}`,
+      state: { detailDyePlant: row },
+    });
+  };
+
+  handleClickCell = (event, row) => {
+    this.props.history.push({
+      pathname: `${DEBT}/${row.id}`,
       state: { detailDyePlant: row },
     });
   };
@@ -117,7 +124,7 @@ class Debt extends React.Component {
                   .map((row) => (
                     <TableRow
                       key={row.id}
-                      // onClick={(event) => this.handleClick(event, row.id)}
+                      onClick={(event) => this.handleClickCell(event, row)}
                       hover
                     >
                       <TableCell align="center" component="th" scope="row">
@@ -130,7 +137,7 @@ class Debt extends React.Component {
                         <Button
                           color="primary"
                           variant="outlined"
-                          onClick={(event) => this.handleClick(event, row)}
+                          onClick={(event) => this.handleClickPayment(event, row)}
                         >
                           Thanh toán
                         </Button>

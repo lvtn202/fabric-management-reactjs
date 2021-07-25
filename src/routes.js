@@ -17,6 +17,7 @@ import OrderDetail from "./pages/order_detail";
 import ExportRaw from "./pages/export_raw";
 import ImportFabric from "./pages/import_fabric";
 import Debt from "./pages/debt";
+import DebtDetail from "./pages/debt_detail";
 import Payment from "./pages/payment_list";
 import PaymentCreation from "./pages/payment_creation";
 import Dashboard from "./pages/dashboard";
@@ -125,8 +126,13 @@ const routes = [
   },
   {
     path: Path.DEBT,
-    exact: false,
+    exact: true,
     main: ({ history }) => <Debt history={history} />,
+  },
+  {
+    path: Path.DEBT_DETAIL,
+    exact: false,
+    main: ({ history, match, location }) => <DebtDetail history={history} match={match} location={location} />,
   },
   {
     path: Path.PAYMENT,

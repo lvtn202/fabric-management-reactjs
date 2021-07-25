@@ -7,6 +7,8 @@ import { withStyles } from "@material-ui/styles";
 import Typography from "@material-ui/core/Typography";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
+import { Link } from "react-router-dom";
+import Grid from "@material-ui/core/Grid";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import { Field, reduxForm } from "redux-form";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
@@ -78,6 +80,15 @@ class ForgotPassword extends React.Component {
               >
                 Gửi
               </Button>
+              <Grid container>
+                <Grid item xs>
+                  <Link to={LOGIN}>
+                    <Typography variant="button" color="primary">
+                      Đăng nhập
+                    </Typography>
+                  </Link>
+                </Grid>
+              </Grid>
             </form>
           </div>
         </Container>
