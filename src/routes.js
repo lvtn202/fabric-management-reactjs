@@ -19,6 +19,7 @@ import ImportFabric from "./pages/import_fabric";
 import Debt from "./pages/debt";
 import DebtDetail from "./pages/debt_detail";
 import Payment from "./pages/payment_list";
+import PaymentDetail from "./pages/payment_detail";
 import PaymentCreation from "./pages/payment_creation";
 import Dashboard from "./pages/dashboard";
 import NotFound from "./pages/not_found";
@@ -71,7 +72,9 @@ const routes = [
   {
     path: Path.ORDER_DETAIL,
     exact: false,
-    main: ({ match, history }) => <OrderDetail match={match} history={history} />,
+    main: ({ match, history }) => (
+      <OrderDetail match={match} history={history} />
+    ),
   },
   {
     path: `${Path.ORDER_CREATION}/:id?`,
@@ -83,7 +86,7 @@ const routes = [
   {
     path: Path.DYE_BATCH,
     exact: true,
-    main: ({history}) => <DyeBatch history={history} />,
+    main: ({ history }) => <DyeBatch history={history} />,
   },
   {
     path: Path.DYE_BATCH_DETAIL,
@@ -132,12 +135,21 @@ const routes = [
   {
     path: Path.DEBT_DETAIL,
     exact: false,
-    main: ({ history, match, location }) => <DebtDetail history={history} match={match} location={location} />,
+    main: ({ history, match, location }) => (
+      <DebtDetail history={history} match={match} location={location} />
+    ),
   },
   {
     path: Path.PAYMENT,
     exact: true,
     main: ({ history }) => <Payment history={history} />,
+  },
+  {
+    path: Path.PAYMENT_DETAIL,
+    exact: false,
+    main: ({ history, match }) => (
+      <PaymentDetail history={history} match={match} />
+    ),
   },
   {
     path: `${Path.PAYMENT_CREATION}/:id?`,

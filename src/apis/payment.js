@@ -6,6 +6,10 @@ export const getListPayment = (dyehouseId) => {
   );
 };
 
+export const getPaymentDetail = (paymentId) => {
+  return RequestManager.get(`/detailPayment?paymentId=${paymentId ?? -1}`);
+};
+
 export const getListPaymentMethod = () => {
   return RequestManager.get(`/listPaymentMethod`);
 };

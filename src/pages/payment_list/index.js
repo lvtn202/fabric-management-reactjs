@@ -28,11 +28,11 @@ class Payment extends React.Component {
   }
 
   renderPage() {
-    const { classes, listPayment } = this.props;
+    const { classes, listPayment, history } = this.props;
     return (
       <React.Fragment>
         <div className={classes.tableContainer}>
-          <DataGridTable data={listPayment} />
+          <DataGridTable data={listPayment} history={history} />
         </div>
       </React.Fragment>
     );
