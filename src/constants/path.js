@@ -16,6 +16,7 @@ export const RECALL = "/recall";
 export const RECALL_CREATION = "/recall/create";
 export const RECALL_DETAIL = "/recall/:id";
 export const DEBT = "/debt";
+export const DEBT_DETAIL = "/debt/:id";
 export const PAYMENT = "/payment";
 export const PAYMENT_CREATION = "/payment/create";
 export const FORGOT_PASSWORD = "/forgot-password";

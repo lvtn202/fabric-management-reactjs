@@ -5,7 +5,7 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
-import { parseTimestamp } from "../../commons/utils";
+import { numberFormat, parseTimestamp } from "../../commons/utils";
 
 export default function Export(props) {
   const { recentExport } = props;
@@ -31,7 +31,7 @@ export default function Export(props) {
               <TableCell>{row.dyehouse}</TableCell>
               <TableCell>{parseTimestamp(row.createDate)}</TableCell>
               <TableCell>{row.fabricType}</TableCell>
-              <TableCell align="center">{row.fabricLength}</TableCell>
+              <TableCell align="center">{numberFormat(row.fabricLength)}</TableCell>
             </TableRow>
           ))}
         </TableBody>
