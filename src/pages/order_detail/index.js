@@ -25,6 +25,8 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import * as importAction from "../../actions/import";
 import * as orderAction from "../../actions/order";
 import { statusDescription } from "../../constants/order_status_type";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { MyDocument } from "./pdf";
 
 class OrderDetail extends React.Component {
   constructor(props) {
@@ -67,7 +69,7 @@ class OrderDetail extends React.Component {
     let body = JSON.stringify({
       orderId: id,
     });
-    cancelOrderRequest( body, () => {});
+    cancelOrderRequest(body, () => {});
   };
 
   onClickCancel = () => {
@@ -205,10 +207,30 @@ class OrderDetail extends React.Component {
           <Grid item xs={2}>
             <Box fontWeight="fontWeightMedium">Số lượng đặt:</Box>
           </Grid>
-          <Grid item xs={10}>
+          <Grid item xs={4}>
             <Box fontWeight="normal" ml={1}>
               {`${numberFormat(detailOrder.orderLength ?? "")} (m)`}
             </Box>
+          </Grid>
+          <Grid item xs={6}>
+            <PDFDownloadLink
+              document={<MyDocument detailOrder={detailOrder} />}
+              fileName={`order${detailOrder.id}.pdf`}
+              style={{
+                textDecoration: "none",
+                padding: "10px",
+                marginLeft: "8px",
+                color: "#fff",
+                backgroundColor: "#3f51b5",
+                borderRadius: "4px",
+                fontFamily: ["Roboto", "Helvetica", "Arial", "sans-serif"],
+                textTransform: "uppercase",
+              }}
+            >
+              {({ blob, url, loading, error }) =>
+                loading ? "Đang tải..." : "Tải hóa đơn"
+              }
+            </PDFDownloadLink>
           </Grid>
 
           <Grid item xs={2}>
