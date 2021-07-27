@@ -223,7 +223,7 @@ class OrderDetail extends React.Component {
                 color: "#fff",
                 backgroundColor: "#3f51b5",
                 borderRadius: "4px",
-                fontFamily: ["Roboto", "Helvetica", "Arial", "sans-serif"],
+                // fontFamily: ["Roboto", "Helvetica", "Arial", "sans-serif"],
                 textTransform: "uppercase",
               }}
             >

@@ -2,8 +2,7 @@ import { StyleSheet, Font } from "@react-pdf/renderer";
 
 Font.register({
   family: "Roboto",
-  src:
-    "https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-light-webfont.ttf"
+  src: "https://cdnjs.cloudflare.com/ajax/libs/ink/3.1.10/fonts/Roboto/roboto-light-webfont.ttf",
 });
 
 const styles = StyleSheet.create({
@@ -16,6 +15,7 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: "center",
     fontFamily: "Roboto",
+    fontWeight: "bold",
   },
   author: {
     fontSize: 12,
@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     fontFamily: "Roboto",
   },
   text: {
-    margin: 12,
+    margin: 6,
     fontSize: 14,
     textAlign: "justify",
     fontFamily: "Roboto",
