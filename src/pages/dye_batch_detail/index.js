@@ -149,6 +149,7 @@ class DyeBatchDetail extends React.Component {
               <TableCell align="center">Mã cây vải</TableCell>
               <TableCell align="center">Độ dài mộc&nbsp;(m)</TableCell>
               <TableCell align="center">Độ dài thành phẩm&nbsp;(m)</TableCell>
+              <TableCell align="center">Độ hao hụt</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -167,6 +168,14 @@ class DyeBatchDetail extends React.Component {
                 </TableCell>
                 <TableCell align="center">
                   {numberFormat(row.finishedLength)}
+                </TableCell>
+                <TableCell align="center">
+                  {`${(
+                    ((row.rawLength - row.finishedLength) / row.rawLength) *
+                    100
+                  ).toLocaleString(undefined, {
+                    maximumFractionDigits: 2,
+                  })}%`}
                 </TableCell>
               </TableRow>
             ))}
