@@ -79,7 +79,7 @@ export default function DataGridDemo(props) {
         pagination
         autoHeight
         onSelectionModelChange={(newSelection) =>
-          history.push(`/payment/${newSelection.selectionModel[0]}`)
+          history.push(`/payment-detail/${newSelection.selectionModel[0]}`)
         }
         components={{
           Toolbar: CustomToolbar,
