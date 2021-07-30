@@ -119,31 +119,34 @@ class Debt extends React.Component {
                     </TableCell>
                   </TableRow>
                 )}
-                {listDyePlant
-                  .filter((item) => Number(item.debt) > 0)
-                  .map((row) => (
-                    <TableRow
-                      key={row.id}
+                {listDyePlant.map((row) => (
+                  <TableRow key={row.id} hover>
+                    <TableCell
+                      align="center"
+                      component="th"
+                      scope="row"
                       onClick={(event) => this.handleClickCell(event, row)}
-                      hover
                     >
-                      <TableCell align="center" component="th" scope="row">
-                        {row.name}
-                      </TableCell>
-                      <TableCell align="center">
-                        {currencyFormat(row.debt)}
-                      </TableCell>
-                      <TableCell align="center">
-                        <Button
-                          color="primary"
-                          variant="outlined"
-                          onClick={(event) => this.handleClickPayment(event, row)}
-                        >
-                          Thanh toán
-                        </Button>
-                      </TableCell>
-                    </TableRow>
-                  ))}
+                      {row.name}
+                    </TableCell>
+                    <TableCell
+                      align="center"
+                      onClick={(event) => this.handleClickCell(event, row)}
+                    >
+                      {currencyFormat(row.debt)}
+                    </TableCell>
+                    <TableCell align="center">
+                      <Button
+                        color="primary"
+                        variant="outlined"
+                        id="btnPayment"
+                        onClick={(event) => this.handleClickPayment(event, row)}
+                      >
+                        Thanh toán
+                      </Button>
+                    </TableCell>
+                  </TableRow>
+                ))}
               </TableBody>
             </Table>
           </TableContainer>

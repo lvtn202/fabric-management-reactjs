@@ -18,10 +18,17 @@ const useStyles = makeStyles({
 
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
-  { field: "name", headerName: "Tên xưởng", flex: 1 },
+  {
+    field: "name",
+    headerName: "Tên xưởng",
+    flex: 1,
+    align: "center",
+    headerAlign: "center",
+  },
   {
     field: "debt",
     headerName: "Công nợ",
+    headerAlign: "center",
     flex: 1,
     type: "number",
     valueFormatter: ({ value }) => currencyFormat(value),
@@ -30,6 +37,7 @@ const columns = [
     field: "inStock",
     headerName: "Mộc tồn (m)",
     flex: 1,
+    headerAlign: "center",
     type: "number",
     valueFormatter: ({ value }) => numberFormat(value),
   },

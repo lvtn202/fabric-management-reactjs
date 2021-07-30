@@ -9,7 +9,7 @@ import {
 } from "@material-ui/data-grid";
 import { Pagination } from "@material-ui/lab";
 import { parseTimestamp } from "../../commons/utils";
-import { DYE_BATCH, PAYMENT, RECALL } from "../../constants/path";
+import { DYE_BATCH, RECALL } from "../../constants/path";
 import { debtDescription, formatAmount } from "../../constants/debt_type";
 
 const useStyles = makeStyles({
@@ -79,7 +79,7 @@ function onSelectRow(row, history) {
       path = RECALL;
       break;
     case 3:
-      path = PAYMENT;
+      path = "/payment-detail";
       break;
     default:
       break;
