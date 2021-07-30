@@ -18,22 +18,34 @@ const useStyles = makeStyles({
 
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
-  { field: "dyehouseName", headerName: "Xưởng", flex: 1 },
+  {
+    field: "dyehouseName",
+    headerName: "Xưởng",
+    flex: 1,
+    headerAlign: "center",
+    align: "center",
+  },
   {
     field: "money",
     headerName: "Tổng tiền (VNĐ)",
     flex: 1,
+    headerAlign: "center",
+    align: "right",
     valueFormatter: ({ value }) => currencyFormat(value),
   },
   {
     field: "returnDate",
     headerName: "Ngày tạo",
     flex: 1,
+    headerAlign: "center",
+    align: "center",
     valueFormatter: ({ value }) => parseTimestamp(value),
   },
   {
     field: "employee",
     headerName: "Nhân viên tạo",
+    headerAlign: "center",
+    align: "center",
     sortable: false,
     flex: 1,
     valueGetter: (params) =>

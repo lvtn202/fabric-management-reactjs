@@ -57,7 +57,7 @@ class DebtDetail extends React.Component {
         {this.renderInfo()}
 
         <div className={classes.tableContainer}>
-          <DataGridTable data={detailDebt?.transactions ?? []} history={history} />
+          <DataGridTable data={detailDebt?.transactions?.reverse() ?? []} history={history} />
         </div>
       </React.Fragment>
     );

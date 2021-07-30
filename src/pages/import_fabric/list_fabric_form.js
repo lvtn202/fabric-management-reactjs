@@ -9,6 +9,7 @@ import { Field, reduxForm, getFormValues } from "redux-form";
 import { LIST_FABRIC_FORM } from "./../../constants/form_name";
 import { withStyles } from "@material-ui/styles";
 import * as importActions from "../../actions/import";
+import { Alert } from "./../../constants/action_types";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -51,16 +52,21 @@ class ListFabricForm extends React.Component {
     if (
       currentFabric &&
       Object.keys(currentFabric).length !== 0 &&
-      Number(currentFabric.finishedLength) > 0 &&
-      Number(currentFabric.finishedLength) <= Number(currentFabric.rawLength)
+      Number(currentFabric.finishedLength) > 0
     ) {
-      this.setState(
-        (prev) => ({
-          currentListFabrics: [...prev.currentListFabrics, currentFabric],
-          currentFabric: {},
-        }),
-        () => this.updateFabrics()
-      );
+      if (
+        Number(currentFabric.finishedLength) <= Number(currentFabric.rawLength)
+      ) {
+        this.setState(
+          (prev) => ({
+            currentListFabrics: [...prev.currentListFabrics, currentFabric],
+            currentFabric: {},
+          }),
+          () => this.updateFabrics()
+        );
+      } else {
+        this.props.onShowErrorMsg();
+      }
     }
   }
 
@@ -233,8 +239,12 @@ class ListFabricForm extends React.Component {
                       <TableCell align="center" component="th" scope="row">
                         {row.id}
                       </TableCell>
-                      <TableCell align="center">{numberFormat(row.rawLength)}</TableCell>
-                      <TableCell align="center">{numberFormat(row.finishedLength)}</TableCell>
+                      <TableCell align="center">
+                        {numberFormat(row.rawLength)}
+                      </TableCell>
+                      <TableCell align="center">
+                        {numberFormat(row.finishedLength)}
+                      </TableCell>
                       <TableCell align="center">
                         {`${(
                           ((row.rawLength - row.finishedLength) /
@@ -273,6 +283,13 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   importActions: bindActionCreators(importActions, dispatch),
+  onShowErrorMsg: () =>
+    dispatch({
+      type: Alert.SHOW_ERROR_MESSAGE,
+      payload: {
+        errorMsg: "Độ dài thành phẩm phải nhỏ hơn độ dài mộc",
+      },
+    }),
 });
 
 const withConnect = connect(mapStateToProps, mapDispatchToProps);

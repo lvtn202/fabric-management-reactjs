@@ -18,22 +18,43 @@ const useStyles = makeStyles({
 
 const columns = [
   { field: "id", headerName: "ID", width: 70 },
-  { field: "dyehouseName", headerName: "Xưởng", flex: 1 },
+  {
+    field: "dyehouseName",
+    headerName: "Xưởng",
+    flex: 1,
+    headerAlign: "center",
+    align: "center",
+  },
   {
     field: "dyeDate",
     headerName: "Ngày nhuộm",
     flex: 1,
+    headerAlign: "center",
+    align: "center",
     valueFormatter: ({ value }) => parseTimestamp(value),
   },
-  { field: "fabricType", headerName: "Loại vải", flex: 1 },
+  {
+    field: "fabricType",
+    headerName: "Loại vải",
+    flex: 1,
+    headerAlign: "center",
+    align: "center",
+  },
   {
     field: "fabricLength",
     headerName: "Tổng thành phẩm (m)",
     flex: 1,
+    headerAlign: "center",
     type: "number",
     valueFormatter: ({ value }) => numberFormat(value),
   },
-  { field: "color", headerName: "Màu", flex: 1 },
+  {
+    field: "color",
+    headerName: "Màu",
+    flex: 1,
+    headerAlign: "center",
+    align: "center",
+  },
 ];
 function CustomToolbar() {
   return (
