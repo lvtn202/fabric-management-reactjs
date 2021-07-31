@@ -116,7 +116,7 @@ class DyePlantRaw extends React.Component {
     return (
       <React.Fragment>
         <Typography variant="h6" id="tableTitle">
-          Số lượng đã làm
+          Số lượng vải thành phẩm đã nhuộm
         </Typography>
         <MuiPickersUtilsProvider utils={DateFnsUtils}>
           <Grid container justify="space-around">

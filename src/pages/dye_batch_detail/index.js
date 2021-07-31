@@ -181,8 +181,9 @@ class DyeBatchDetail extends React.Component {
             ))}
             <TableRow>
               <TableCell rowSpan={4} />
+              <TableCell rowSpan={4} />
               <TableCell align="center">Tổng cây vải</TableCell>
-              <TableCell align="center">
+              <TableCell align="center" >
                 {numberFormat(listFabricDyeBatch.length, 0)}
               </TableCell>
             </TableRow>

@@ -26,7 +26,7 @@ class UserSignup extends React.Component {
   constructor(props) {
     super(props);
     const auth = JSON.parse(window.localStorage.getItem("user"));
-    if (!auth.roles.includes(APP_ADMIN)) {
+    if (!auth?.roles.includes(APP_ADMIN)) {
       this.props.history.push(DASHBOARD);
     }
     this.state = {
