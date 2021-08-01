@@ -30,6 +30,7 @@ class OrderDetail extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      action: 1, // 1: complete, 2: cancel
       openDialog: false,
       message: "",
     };
@@ -72,6 +73,7 @@ class OrderDetail extends React.Component {
 
   onClickCancel = () => {
     this.setState({
+      action: 2,
       openDialog: true,
       message: "Bạn có muốn hủy đơn hàng này?",
     });
@@ -79,6 +81,7 @@ class OrderDetail extends React.Component {
 
   onClickComplete = () => {
     this.setState({
+      action: 1,
       openDialog: true,
       message: "Bạn có muốn hoàn thành đơn hàng này?",
     });
@@ -120,7 +123,7 @@ class OrderDetail extends React.Component {
           <Button onClick={this.onCloseDialog} color="primary">
             Không
           </Button>
-          <Button onClick={this.onCancelOrder} color="primary" autoFocus>
+          <Button onClick={this.state.action === 1 ? this.onCompleteOrder : this.onCancelOrder} color="primary" autoFocus>
             Có
           </Button>
         </DialogActions>
@@ -167,7 +170,7 @@ class OrderDetail extends React.Component {
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={this.onCompleteOrder}
+                    onClick={this.onClickComplete}
                     disabled={detailOrder.status !== "IN_PROGRESS"}
                   >
                     Hoàn thành đơn hàng
