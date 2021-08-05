@@ -136,7 +136,7 @@ class ExportRaw extends React.Component {
               )}
               {listFabricType.map((item, index) => (
                 <MenuItem key={index} value={item.type}>
-                  {item.type}
+                  {`${item.type} - ${item.name}`}
                 </MenuItem>
               ))}
             </Field>

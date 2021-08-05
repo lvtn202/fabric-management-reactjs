@@ -173,6 +173,9 @@ class PaymentCreation extends React.Component {
                 name="bankName"
                 label="Tên ngân hàng"
                 id="bankName"
+                disabled={
+                  this.props.formValues?.paymentMethod?.paymentMethodId === 1
+                }
                 component={AppTextField}
               />
             </Grid>
