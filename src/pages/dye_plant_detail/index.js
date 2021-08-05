@@ -5,7 +5,11 @@ import styles from "./styles";
 import PropTypes from "prop-types";
 import { bindActionCreators, compose } from "redux";
 import { statusDescription } from "../../constants/order_status_type";
-import { parseTimestamp, currencyFormat, numberFormat } from "../../commons/utils";
+import {
+  parseTimestamp,
+  currencyFormat,
+  numberFormat,
+} from "../../commons/utils";
 import Typography from "@material-ui/core/Typography";
 import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
@@ -18,11 +22,13 @@ import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
+import Tooltip from "@material-ui/core/Tooltip";
 import DyePlantForm from "./dye_plant_form";
 import * as dyePlantAction from "../../actions/dye_plant";
 import * as orderAction from "../../actions/order";
 import * as modalActions from "../../actions/modal";
 import { PAYMENT_CREATION, ORDER_CREATION } from "./../../constants/path";
+import { APP_ADMIN } from "../../constants/user_roles";
 
 class DyePlantDetail extends React.Component {
   componentDidMount() {
@@ -123,13 +129,18 @@ class DyePlantDetail extends React.Component {
       <div>
         <Grid container className={classes.grid}>
           <Grid item xs={6} sm={3}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={this.openModal}
-            >
-              Chỉnh sửa thông tin
-            </Button>
+            <Tooltip title="Tính năng chỉ dành cho Quản lí">
+              <span>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.openModal}
+                  disabled={!this.props.userRole?.includes(APP_ADMIN)}
+                >
+                  Chỉnh sửa thông tin
+                </Button>
+              </span>
+            </Tooltip>
           </Grid>
           <Grid item xs={6} sm={3}>
             <Button
@@ -211,8 +222,12 @@ class DyePlantDetail extends React.Component {
                 </TableCell>
                 <TableCell align="center">{row.type}</TableCell>
                 <TableCell align="center">{row.color}</TableCell>
-                <TableCell align="center">{numberFormat(row.orderLength)}</TableCell>
-                <TableCell align="center">{numberFormat(row.doneLength)}</TableCell>
+                <TableCell align="center">
+                  {numberFormat(row.orderLength)}
+                </TableCell>
+                <TableCell align="center">
+                  {numberFormat(row.doneLength)}
+                </TableCell>
                 <TableCell align="center">
                   {statusDescription(row.status)}
                 </TableCell>
@@ -228,6 +243,7 @@ class DyePlantDetail extends React.Component {
 const mapStateToProps = (state) => ({
   detailDyePlant: state.dyeplant.detailDyePlant,
   listOrder: state.order.listOrder,
+  userRole: state.auth.roles,
 });
 
 const mapDispatchToProps = (dispatch) => ({

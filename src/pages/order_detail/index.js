@@ -25,6 +25,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import * as importAction from "../../actions/import";
 import * as orderAction from "../../actions/order";
 import { statusDescription } from "../../constants/order_status_type";
+import { APP_ADMIN } from "../../constants/user_roles";
 
 class OrderDetail extends React.Component {
   constructor(props) {
@@ -68,7 +69,7 @@ class OrderDetail extends React.Component {
     let body = JSON.stringify({
       orderId: id,
     });
-    cancelOrderRequest( body, () => {});
+    cancelOrderRequest(body, () => {});
   };
 
   onClickCancel = () => {
@@ -123,7 +124,15 @@ class OrderDetail extends React.Component {
           <Button onClick={this.onCloseDialog} color="primary">
             Không
           </Button>
-          <Button onClick={this.state.action === 1 ? this.onCompleteOrder : this.onCancelOrder} color="primary" autoFocus>
+          <Button
+            onClick={
+              this.state.action === 1
+                ? this.onCompleteOrder
+                : this.onCancelOrder
+            }
+            color="primary"
+            autoFocus
+          >
             Có
           </Button>
         </DialogActions>
@@ -165,13 +174,16 @@ class OrderDetail extends React.Component {
 
           <Grid item xs={6}>
             <Box fontWeight="normal" ml={1}>
-              <Tooltip title="Hoàn thành đơn đặt hàng này">
+              <Tooltip title="Tính năng chỉ dành cho Quản lí">
                 <span>
                   <Button
                     variant="contained"
                     color="primary"
                     onClick={this.onClickComplete}
-                    disabled={detailOrder.status !== "IN_PROGRESS"}
+                    disabled={
+                      detailOrder.status !== "IN_PROGRESS" ||
+                      !this.props.userRole?.includes(APP_ADMIN)
+                    }
                   >
                     Hoàn thành đơn hàng
                   </Button>
@@ -190,13 +202,16 @@ class OrderDetail extends React.Component {
           </Grid>
           <Grid item xs={6}>
             <Box fontWeight="normal" ml={1}>
-              <Tooltip title="Hủy đơn đặt hàng này">
+              <Tooltip title="Tính năng chỉ dành cho Quản lí">
                 <span>
                   <Button
                     variant="contained"
                     color="secondary"
                     onClick={this.onClickCancel}
-                    disabled={detailOrder.status !== "CREATED"}
+                    disabled={
+                      detailOrder.status !== "CREATED" ||
+                      !this.props.userRole?.includes(APP_ADMIN)
+                    }
                   >
                     Hủy đơn hàng
                   </Button>
@@ -300,6 +315,7 @@ OrderDetail.propTypes = {
 const mapStateToProps = (state) => ({
   detailOrder: state.order.detailOrder,
   listImport: state.importSlip.listImport,
+  userRole: state.auth.roles,
 });
 
 const mapDispatchToProps = (dispatch) => ({
