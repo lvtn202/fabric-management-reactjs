@@ -178,10 +178,11 @@ class ListFabricForm extends React.Component {
             <Grid item xs={2}>
               <Box fontWeight="fontWeightMedium">Độ dài thành phẩm:</Box>
             </Grid>
-            <Grid item xs={8}>
+            <Grid item xs={4}>
               <Field
                 required
                 fullWidth
+                style={{ width: "80%" }}
                 name="length"
                 label="Độ dài thành phẩm"
                 type="number"
@@ -201,6 +202,26 @@ class ListFabricForm extends React.Component {
               <Button variant="contained" color="primary" onClick={this.add}>
                 Thêm
               </Button>
+            </Grid>
+          </Grid>
+
+          <Grid container spacing={3} justify="left">
+            <Grid item xs={2}>
+              <Box mt={1} fontWeight="fontWeightMedium">
+                Tổng độ dài
+              </Box>
+            </Grid>
+            <Grid item xs={3}>
+              <Box mt={1} mb={1}>
+                {numberFormat(
+                  currentListFabrics.reduce(
+                    (total, current, index) =>
+                      total + Number(current.finishedLength),
+                    0
+                  )
+                )}
+                &nbsp;(m)
+              </Box>
             </Grid>
           </Grid>
 
