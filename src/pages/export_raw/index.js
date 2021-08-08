@@ -166,19 +166,37 @@ class ExportRaw extends React.Component {
         </Grid>
 
         <Grid container spacing={3} justify="center">
-          <Box m={1}>
-            <Button
-              variant="contained"
-              color="primary"
-              onClick={this.add}
-              disabled={
-                this.state.currentRaw == null ||
-                Object.keys(this.state.currentRaw).length === 0
-              }
-            >
-              Thêm
-            </Button>
-          </Box>
+          <Grid item xs={2}>
+            <Box mt={1} fontWeight="fontWeightMedium">
+              Tổng độ dài
+            </Box>
+          </Grid>
+          <Grid item xs={3}>
+            <Box mt={1}>
+              {numberFormat(
+                currentListRaws.reduce(
+                  (total, current, index) => total + Number(current.rawLength),
+                  0
+                )
+              )}
+              &nbsp;(m)
+            </Box>
+          </Grid>
+          <Grid item xs>
+            <Box m={1}>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={this.add}
+                disabled={
+                  this.state.currentRaw == null ||
+                  Object.keys(this.state.currentRaw).length === 0
+                }
+              >
+                Thêm
+              </Button>
+            </Box>
+          </Grid>
         </Grid>
 
         <Grid container spacing={3} alignItems="center" justify="center">
@@ -209,7 +227,9 @@ class ExportRaw extends React.Component {
                     <TableCell align="center" component="th" scope="row">
                       {row.id}
                     </TableCell>
-                    <TableCell align="center">{numberFormat(row.rawLength)}</TableCell>
+                    <TableCell align="center">
+                      {numberFormat(row.rawLength)}
+                    </TableCell>
                     <TableCell align="center">
                       <IconButton
                         aria-label="delete"
